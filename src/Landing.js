@@ -1,12 +1,16 @@
 import axios from "axios";
 import React from "react";
+
 import ReadAllSpecies from "./components/ReadAllSpecies";
 import CreateSpecies from "./components/CreateSpecies";
 import UpdateSpecies from "./components/UpdateSpecies";
 import ReadSingleSpecies from "./components/ReadSingleSpecies";
+
 import ReadAllDistribution from "./components/ReadAllDistribution";
+
 import MdSearchFilter from "./components/MdSearchFilter";
 import SmSearchFilter from "./components/SmSearchFilter";
+
 import CreateUserProfile from  "./components/CreateUserProfile";
 import ReadUserProfile from "./components/ReadUserProfile";
 
@@ -17,7 +21,9 @@ export default class Landing extends React.Component {
         activePage: 'main',
         showMdSearchFilter: true,
         species: [],
-        distribution: []
+        distribution: [],
+        conservation: [],
+        orchidColours: []
     }
 
     renderPage() {
@@ -63,18 +69,23 @@ export default class Landing extends React.Component {
 
     async componentDidMount() {
         let speciesResponse = await axios.get(this.BASE_API_URL + "/orchid_species");
-        let distributionResponse = await axios.get(this.BASE_API_URL + "/distribution")
+        let distributionResponse = await axios.get(this.BASE_API_URL + "/distribution");
+        let conservationResponse = await axios.get(this.BASE_API_URL + "/conservation");
+        let coloursResponse = await axios.get('orchidColours.json');
+
 
         this.setState({
             species: speciesResponse.data,
-            distribution: distributionResponse.data
+            distribution: distributionResponse.data,
+            conservation: conservationResponse.data,
+            orchidColours: coloursResponse.data
         })
     }
 
     render() {
         return (
             <React.Fragment>
-                <div className="container border border-danger">
+                <div className="container-fluid border border-danger">
                     {/* MAIN NAV BAR */}
                     <ul className="nav d-flex border border-warning">
                         <li className="nav-item me-auto">
@@ -125,15 +136,19 @@ export default class Landing extends React.Component {
                             <button className="btn" 
                                     type="button" 
                                     data-bs-toggle="offcanvas" 
-                                    data-bs-target="#offcanvasWithBothOptions" 
+                                    data-bs-target="#XsSmSearchFilter" 
                                     aria-controls="offcanvasWithBothOptions"
                                     >
-                                        Search (XS-SM)
+                                        Filter (XS-SM)
                             </button>
                         </li>
                     </ul>
-                    {/* OFFCANVAS SEARCH FILTER FOR <MD */}
-                    <SmSearchFilter/>
+                    {/* OFFCANVAS FILTER FOR <MD */}
+                    <SmSearchFilter  
+                        distribution = {this.state.distribution}
+                        conservation = {this.state.conservation}
+                        orchidColours = {this.state.orchidColours}
+                    />
                     {/* VIEW OPTIONS */}
                     <ul className="nav nav-pills justify-content-center">
                         <li className="nav-item">
@@ -162,7 +177,19 @@ export default class Landing extends React.Component {
                             </a>
                         </li>
                     </ul>
-                    {/* SEARCH AND FILTER FOR >=MD */}
+                    {/* SEARCH INPUT */}
+                    <div className="input-group rounded">
+                        <input type="search" 
+                                className="form-control rounded" 
+                                placeholder="Search" 
+                                aria-label="Search" 
+                                aria-describedby="search-addon" />
+                        <button className="input-group-text border-0" 
+                                id="search-addon">
+                            Search
+                        </button>
+                    </div>
+                    {/* FILTER FOR >=MD */}
                     <div className="d-none d-md-block border border-primary">
                         {this.showMdSearchFilter()}
                     </div>

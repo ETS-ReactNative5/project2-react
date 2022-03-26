@@ -1,0 +1,34 @@
+[
+    {
+        "display":"Red",
+        "value":"red"
+    },
+    {
+        "display":"Green",
+        "value": "green"
+    },
+    {
+        "display":"Blue",
+        "value":"blue"
+    },
+    {
+        "display": "Yellow",
+        "value": "yellow"
+    },
+    {
+        "display": "Orange",
+        "value": "orange"
+    },
+    {
+        "display": "Purple",
+        "value": "purple"
+    },
+    {
+        "display": "Pink",
+        "value": "pink"
+    },
+    {
+        "display": "White",
+        "value": "white"
+    }
+]
