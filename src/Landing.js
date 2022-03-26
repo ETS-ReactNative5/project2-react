@@ -6,6 +6,7 @@ import UpdateSpecies from "./components/UpdateSpecies";
 import ReadSingleSpecies from "./components/ReadSingleSpecies";
 import ReadAllDistribution from "./components/ReadAllDistribution";
 import MdSearchFilter from "./components/MdSearchFilter";
+import SmSearchFilter from "./components/SmSearchFilter";
 import CreateUserProfile from  "./components/CreateUserProfile";
 import ReadUserProfile from "./components/ReadUserProfile";
 
@@ -85,7 +86,7 @@ export default class Landing extends React.Component {
                         </li>
                         <li className="nav-item">
                             <div className="dropdown">
-                                <button className="btn btn-secondary" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button className="btn" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                     User
                                 </button>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -120,10 +121,19 @@ export default class Landing extends React.Component {
                                 </ul>
                             </div>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Search (XS-SM)</a>
+                        <li className="nav-item d-md-none">
+                            <button className="btn" 
+                                    type="button" 
+                                    data-bs-toggle="offcanvas" 
+                                    data-bs-target="#offcanvasWithBothOptions" 
+                                    aria-controls="offcanvasWithBothOptions"
+                                    >
+                                        Search (XS-SM)
+                            </button>
                         </li>
                     </ul>
+                    {/* OFFCANVAS SEARCH FILTER FOR <MD */}
+                    <SmSearchFilter/>
                     {/* VIEW OPTIONS */}
                     <ul className="nav nav-pills justify-content-center">
                         <li className="nav-item">
@@ -152,7 +162,7 @@ export default class Landing extends React.Component {
                             </a>
                         </li>
                     </ul>
-                    {/* SEACRCH AND FILTER FOR >MD */}
+                    {/* SEARCH AND FILTER FOR >=MD */}
                     <div className="d-none d-md-block border border-primary">
                         {this.showMdSearchFilter()}
                     </div>
