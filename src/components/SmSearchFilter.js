@@ -76,12 +76,14 @@ export default class SmSearchFilter extends Component {
                                     onChange={this.updateCheckbox}
                                     checked={this.state.colourFilter.includes(eachColour.value)}
                             />
-                            <label className="form-check-label" for="flexCheckDefault">
+                            <label className="form-check-label" htmlFor="flexCheckDefault">
                                 {eachColour.display}
                             </label>
                         </div>
                     </React.Fragment>
                 )}
+
+
 
 
             </div>

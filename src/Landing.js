@@ -1,6 +1,8 @@
 import axios from "axios";
 import React from "react";
 
+import MainDisplay from "./components/MainDisplay";
+
 import ReadAllSpecies from "./components/ReadAllSpecies";
 import CreateSpecies from "./components/CreateSpecies";
 import UpdateSpecies from "./components/UpdateSpecies";
@@ -28,11 +30,19 @@ export default class Landing extends React.Component {
 
     renderPage() {
         switch (this.state.activePage) {
+            case "main":
+                return <MainDisplay />
+                break;
             case "readAllSpecies":
-                return <ReadAllSpecies />
+                return <ReadAllSpecies 
+                        species={this.state.species}
+                        setActivePage={this.setActivePage}
+                        />
                 break;
             case "createSpecies":
-                return <CreateSpecies />
+                return <CreateSpecies
+                        setActivePage={this.setActivePage}
+                        />
                 break;
             case "updateSpecies":
                 return <UpdateSpecies />
@@ -54,7 +64,7 @@ export default class Landing extends React.Component {
         }
     }
 
-    setActivePage(page) {
+    setActivePage = (page) => {
         this.setState({
             activePage: page
         })
