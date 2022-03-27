@@ -1,8 +1,16 @@
+import axios from 'axios'
 import React, { Component } from 'react'
 
 export default class ReadAllSpecies extends Component {
 
   //props species, setActivePage
+
+  state = {
+
+  }
+
+
+
   render() {
     return (
       <React.Fragment>

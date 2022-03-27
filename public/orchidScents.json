@@ -1,0 +1,26 @@
+[
+    {
+        "display":"Sweet",
+        "value":"sweet"
+    },
+    {
+        "display":"Spicy",
+        "value": "spicy"
+    },
+    {
+        "display":"Citrus",
+        "value":"citrus"
+    },
+    {
+        "display":"Fruity",
+        "value":"fruity"
+    },
+    {
+        "display":"Musk",
+        "value":"musky"
+    },
+    {
+        "display": "Decaying Matter",
+        "value": "decay"
+    }
+]

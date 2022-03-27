@@ -25,7 +25,10 @@ export default class Landing extends React.Component {
         species: [],
         distribution: [],
         conservation: [],
-        orchidColours: []
+        orchidColours: [],
+        orchidScentsOptions: [],
+        orchidPetalPatternOptions: []
+
     }
 
     renderPage() {
@@ -42,6 +45,12 @@ export default class Landing extends React.Component {
             case "createSpecies":
                 return <CreateSpecies
                         setActivePage={this.setActivePage}
+                        orchidColours={this.state.orchidColours}
+                        orchidScentsOptions={this.state.orchidScentsOptions}
+                        orchidPetalPatternOptions={this.state.orchidPetalPatternOptions}
+                        distribution={this.state.distribution}
+                        conservation={this.state.conservation}
+
                         />
                 break;
             case "updateSpecies":
@@ -82,13 +91,17 @@ export default class Landing extends React.Component {
         let distributionResponse = await axios.get(this.BASE_API_URL + "/distribution");
         let conservationResponse = await axios.get(this.BASE_API_URL + "/conservation");
         let coloursResponse = await axios.get('orchidColours.json');
+        let scentsResponse = await axios.get('orchidScents.json');
+        let petalPatternResponse = await axios.get('orchidPetalPattern.json');
 
 
         this.setState({
             species: speciesResponse.data,
             distribution: distributionResponse.data,
             conservation: conservationResponse.data,
-            orchidColours: coloursResponse.data
+            orchidColours: coloursResponse.data,
+            orchidScentsOptions: scentsResponse.data,
+            orchidPetalPatternOptions: petalPatternResponse.data 
         })
     }
 

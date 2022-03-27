@@ -10,7 +10,7 @@ export default class SmSearchFilter extends Component {
         colourFilter: []
     }
 
-    renderDistribution(options) {
+    renderDropdown(options) {
         let selectOptions = options.map(
             eachOption => <option key={eachOption._id} value={eachOption._id}>{eachOption.name}</option>
         )
@@ -53,7 +53,7 @@ export default class SmSearchFilter extends Component {
                         name="distributionFilter" 
                         value={this.state.distributionFilter} 
                         onChange={this.updateFormField}>
-                    {this.renderDistribution(this.props.distribution)}    
+                    {this.renderDropdown(this.props.distribution)}    
                 </select>
 
                 <label>Conservation Status:</label>
@@ -61,7 +61,7 @@ export default class SmSearchFilter extends Component {
                         name="conservationFilter" 
                         value={this.state.conservationFilter} 
                         onChange={this.updateFormField}>
-                    {this.renderDistribution(this.props.conservation)}    
+                    {this.renderDropdown(this.props.conservation)}    
                 </select>
 
                 <label>Colours:</label>

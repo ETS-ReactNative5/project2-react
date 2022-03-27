@@ -1,0 +1,18 @@
+[
+    {
+        "display":"Speckled",
+        "value":"speckled"
+    },
+    {
+        "display":"Veined",
+        "value": "veined"
+    },
+    {
+        "display":"Solid",
+        "value":"solid"
+    },
+    {
+        "display": "Ombré",
+        "value": "ombre"
+    }
+]
