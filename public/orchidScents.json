@@ -22,5 +22,9 @@
     {
         "display": "Decaying Matter",
         "value": "decay"
+    },
+    {
+        "display": "Unscented",
+        "value": "unscented"
     }
 ]

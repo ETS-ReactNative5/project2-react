@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import PostSpeciesForm from './PostSpeciesForm';
+import SpeciesForm from './SpeciesForm';
 
 export default class CreateSpecies extends Component {
 
@@ -13,12 +13,10 @@ export default class CreateSpecies extends Component {
     officialName: "",
     genus: "",
     species: "",
-    parent1: "", //is this correct?
+    parent1: "", 
     parent2: "",
-    creation: {
-      creatorName: "",
-      creationYear: 0
-    },
+    creatorName: "",
+    creationYear: "",
     colours: [],
     petalPattern: "",
     scents: [],
@@ -35,7 +33,7 @@ export default class CreateSpecies extends Component {
     this.setState({
         [e.target.name] : e.target.value
     })
-}
+  }
 
   updateCheckbox = (e) => {
       if(this.state[e.target.name].includes(e.target.value)){
@@ -59,7 +57,7 @@ export default class CreateSpecies extends Component {
     return selectOptions
   }
 
-  BASE_API_URL = "https://tgc16-p2-api.herokuapp.com"
+  BASE_API_URL = "http://localhost:8888"
 
   postApi = async () => {
     //error validation here
@@ -69,8 +67,8 @@ export default class CreateSpecies extends Component {
       genus: this.state.genus,
       species: this.state.species,
       hybridParents: [this.state.parent1, this.state.parent2],
-      //creation: compare with express side!
-      creation: this.state.creation,
+      creation: {creatorName: this.state.creatorName,
+                creationYear: this.state.creationYear},
       colours: this.state.colours,
       petalPattern: this.state.petalPattern,
       scents:this.state.scents,
@@ -79,7 +77,7 @@ export default class CreateSpecies extends Component {
       distribution:this.state.distribution,
       conservationStatus:this.state.conservationStatus
     })
-
+    console.log('done posting')
     this.props.setActivePage('readAllSpecies')
   }
 
@@ -87,12 +85,12 @@ export default class CreateSpecies extends Component {
     return (
       <React.Fragment>
         <div>CreateSpecies</div>
-        <PostSpeciesForm 
+        <SpeciesForm 
           orchidColours = {this.props.orchidColours}
           orchidScentsOptions = {this.props.orchidScentsOptions}
           orchidPetalPatternOptions = {this.props.orchidPetalPatternOptions}
-          distributionOptions = {this.props.distribution}
-          conservationOptions = {this.props.conservation}
+          distributionOptions = {this.props.distributionOptions}
+          conservationOptions = {this.props.conservationOptions}
 
           updateFormField = {this.updateFormField}
           updateCheckbox = {this.updateCheckbox}
@@ -105,8 +103,8 @@ export default class CreateSpecies extends Component {
           species= {this.state.species}
           parent1 = {this.state.parent1}
           parent2={this.state.parent2}
-          creatorName={this.state.creation.creatorName}
-          creationYear = {this.state.creation.creationYear}
+          creatorName={this.state.creatorName}
+          creationYear = {this.state.creationYear}
           colours = {this.state.colours}
           petalPattern = {this.state.petalPattern}
           scents = {this.state.scents}

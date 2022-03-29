@@ -23,11 +23,15 @@ export default class Landing extends React.Component {
         activePage: 'main',
         showMdSearchFilter: true,
         species: [],
-        distribution: [],
-        conservation: [],
+        distributionOptions: [],
+        conservationOptions: [],
         orchidColours: [],
         orchidScentsOptions: [],
-        orchidPetalPatternOptions: []
+        orchidPetalPatternOptions: [],
+
+        searchPrompt: "",
+        fetchingSearchResults: false,
+        searchResults: []
 
     }
 
@@ -39,6 +43,7 @@ export default class Landing extends React.Component {
             case "readAllSpecies":
                 return <ReadAllSpecies 
                         species={this.state.species}
+                        distributionOptions={this.state.distributionOptions}
                         setActivePage={this.setActivePage}
                         />
                 break;
@@ -48,8 +53,8 @@ export default class Landing extends React.Component {
                         orchidColours={this.state.orchidColours}
                         orchidScentsOptions={this.state.orchidScentsOptions}
                         orchidPetalPatternOptions={this.state.orchidPetalPatternOptions}
-                        distribution={this.state.distribution}
-                        conservation={this.state.conservation}
+                        distributionOptions={this.state.distributionOptions}
+                        conservationOptions={this.state.conservationOptions}
 
                         />
                 break;
@@ -83,8 +88,18 @@ export default class Landing extends React.Component {
         return this.state.showMdSearchFilter ? <MdSearchFilter /> : null
     }
 
+    updateFormField = (e) => {
+        this.setState({
+            [e.target.name] : e.target.value
+        })
+    }
 
-    BASE_API_URL = "https://tgc16-p2-api.herokuapp.com"
+
+    BASE_API_URL = "http://localhost:8888"
+
+    // getApi = async () => {
+    //     let speciesResponse = await axios.get(this.BASE_API_URL + "/orchid_species");
+    // }
 
     async componentDidMount() {
         let speciesResponse = await axios.get(this.BASE_API_URL + "/orchid_species");
@@ -97,8 +112,8 @@ export default class Landing extends React.Component {
 
         this.setState({
             species: speciesResponse.data,
-            distribution: distributionResponse.data,
-            conservation: conservationResponse.data,
+            distributionOptions: distributionResponse.data,
+            conservationOptions: conservationResponse.data,
             orchidColours: coloursResponse.data,
             orchidScentsOptions: scentsResponse.data,
             orchidPetalPatternOptions: petalPatternResponse.data 
@@ -168,8 +183,8 @@ export default class Landing extends React.Component {
                     </ul>
                     {/* OFFCANVAS FILTER FOR <MD */}
                     <SmSearchFilter  
-                        distribution = {this.state.distribution}
-                        conservation = {this.state.conservation}
+                        distributionOptions = {this.state.distributionOptions}
+                        conservationOptions = {this.state.conservationOptions}
                         orchidColours = {this.state.orchidColours}
                     />
                     {/* VIEW OPTIONS */}
@@ -203,6 +218,8 @@ export default class Landing extends React.Component {
                     {/* SEARCH INPUT */}
                     <div className="input-group rounded">
                         <input type="search" 
+                                name="searchPrompt"
+                                onChange={this.updateFormField}
                                 className="form-control rounded" 
                                 placeholder="Search" 
                                 aria-label="Search" 
@@ -220,6 +237,7 @@ export default class Landing extends React.Component {
                         {this.renderPage()}
 
                     </div>
+                    {/* FOOTER GOES HERE */}
                 </div>
             </React.Fragment>
         )

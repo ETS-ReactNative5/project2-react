@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 
 export default class SmSearchFilter extends Component {
 
-    // props: distribution, conservation, updateFormField, orchidColours
+    //passed down from Landing
+    // props: distributionOptions, conservationOptions, updateFormField, orchidColours
 
     state = {
         distributionFilter: "",
@@ -53,7 +54,7 @@ export default class SmSearchFilter extends Component {
                         name="distributionFilter" 
                         value={this.state.distributionFilter} 
                         onChange={this.updateFormField}>
-                    {this.renderDropdown(this.props.distribution)}    
+                    {this.renderDropdown(this.props.distributionOptions)}    
                 </select>
 
                 <label>Conservation Status:</label>
@@ -61,7 +62,7 @@ export default class SmSearchFilter extends Component {
                         name="conservationFilter" 
                         value={this.state.conservationFilter} 
                         onChange={this.updateFormField}>
-                    {this.renderDropdown(this.props.conservation)}    
+                    {this.renderDropdown(this.props.conservationOptions)}    
                 </select>
 
                 <label>Colours:</label>

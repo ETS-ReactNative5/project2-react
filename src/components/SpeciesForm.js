@@ -2,13 +2,13 @@ import React from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-function PostSpeciesForm(props) {
+function SpeciesForm(props) {
 
 //props: updateFormField, updateCheckbox, orchidColours, orchidScentsOptions, orchidPetalPatternOptions,
 //distributionOptions, conservationOptions, renderDropdown, postApi
   return (
     <React.Fragment>
-        <div>PostSpeciesForm</div>
+        <div>SpeciesForm</div>
         <div id="postSpeciesForm" className="row border border-secondary">
             <h2>Listing a new orchid</h2>
             <div className="col col-1 col-sm-2 border border-primary"></div>
@@ -43,7 +43,7 @@ function PostSpeciesForm(props) {
                             onChange={props.updateFormField}
                     />
                 </div>
-                <div className='row'>
+                {/* <div className='row'>
                     <label>Species: </label>
                     <input className="form-control" 
                             type="text" 
@@ -52,7 +52,7 @@ function PostSpeciesForm(props) {
                             name="species"
                             onChange={props.updateFormField}
                     />
-                </div>
+                </div> */}
                 <div className='row'>
                     <label>First Parent: </label>
                     <input className="form-control" 
@@ -74,7 +74,7 @@ function PostSpeciesForm(props) {
                     />
                 </div>
                 <div className='row'>
-                    <label>Name of the creator:</label>
+                    <label>Name of orchid's originator:</label>
                     <input className="form-control" 
                             type="text" 
                             placeholder="Default input"
@@ -85,19 +85,20 @@ function PostSpeciesForm(props) {
                 </div>
                 <div className='row'>
                     <label>Year of creation:</label>
-                    <DatePicker
+                    {/* <DatePicker
                         selected={props.creationYear}
-                        onChange={(date) => props.creationYear(date)}
+                        onChange={props.updateFormField}
+                        name='creationYear'
                         showYearPicker
                         dateFormat="yyyy"
-                    />
-                    {/* <input className="form-control" 
-                            type="number" 
-                            placeholder="Default input"
+                    /> */}
+                    <input className="form-control" 
+                            type="text" 
+                            placeholder="YYYY"
                             value={props.creationYear}
                             name="creationYear"
                             onChange={props.updateFormField}
-                    /> */}
+                    />
                 </div>
                 <div className='row'>
                     <label>Colours:</label>
@@ -216,4 +217,4 @@ function PostSpeciesForm(props) {
   )
 }
 
-export default PostSpeciesForm
+export default SpeciesForm
