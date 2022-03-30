@@ -16,6 +16,8 @@ import SmSearchFilter from "./components/SmSearchFilter";
 import CreateUserProfile from  "./components/CreateUserProfile";
 import ReadUserProfile from "./components/ReadUserProfile";
 
+import SpeciesModal from "./components/SpeciesModal";
+
 
 
 export default class Landing extends React.Component {
@@ -31,7 +33,12 @@ export default class Landing extends React.Component {
 
         searchPrompt: "",
         fetchingSearchResults: false,
-        searchResults: []
+        searchResults: [],
+        distributionFilter: "",
+        conservationFilter: "",
+        colourFilter: []
+
+        // activeObject: ""
 
     }
 
@@ -44,7 +51,10 @@ export default class Landing extends React.Component {
                 return <ReadAllSpecies 
                         species={this.state.species}
                         distributionOptions={this.state.distributionOptions}
+                        conservationOptions={this.state.conservationOptions}
                         setActivePage={this.setActivePage}
+                        selectActiveDisplay={this.selectActiveDisplay}
+                        renderModal={this.renderModal}
                         />
                 break;
             case "createSpecies":
@@ -62,7 +72,9 @@ export default class Landing extends React.Component {
                 return <UpdateSpecies />
                 break;
             case "readSingleSpecies":
-                return <ReadSingleSpecies />
+                return <ReadSingleSpecies
+                        activeObject = {this.state.activeObject}
+                        />
                 break;
             case "readAllDistribution":
                 return <ReadAllDistribution />
@@ -84,6 +96,14 @@ export default class Landing extends React.Component {
         })
     }
 
+    // selectActiveDisplay = (identifier) => {
+    //     this.setState({
+    //         activeObject: identifier
+    //         // ,
+    //         // activePage: "readSingleSpecies"
+    //     })
+    // }
+
     showMdSearchFilter() {
         return this.state.showMdSearchFilter ? <MdSearchFilter /> : null
     }
@@ -93,6 +113,49 @@ export default class Landing extends React.Component {
             [e.target.name] : e.target.value
         })
     }
+
+    updateCheckbox = (e) => {
+        if(this.state[e.target.name].includes(e.target.value)){
+            let indexToRemove = this.state[e.target.name].findIndex( 
+                value => value===e.target.value
+            )
+            this.setState({
+                [e.target.name]: [...this.state[e.target.name].slice(0, indexToRemove), ...this.state[e.target.name].slice(indexToRemove + 1)]
+            })
+        } else {
+            this.setState({
+                [e.target.name]: [...this.state[e.target.name], e.target.value]
+            })
+        }
+    }
+
+    getSearchResults = async() => {
+        let params = {
+            params: {}
+        }
+
+        let searchConditions = [this.state.searchPrompt, this.state.distributionFilter, this.state.conservationFilter]
+
+        searchConditions.map(
+            condition => {
+                if(condition){
+                params.params[condition] = condition
+            }
+        }
+        )
+        console.log(params)
+        
+        // if(this.state.searchPrompt){
+        //     params.params.searchPrompt = this.state.searchPrompt
+        // }
+
+    }
+
+    // async componentDidUpdate() {
+    //     if(fetchingSearchResults === true){
+
+    //     }
+    // }
 
 
     BASE_API_URL = "http://localhost:8888"
@@ -186,6 +249,11 @@ export default class Landing extends React.Component {
                         distributionOptions = {this.state.distributionOptions}
                         conservationOptions = {this.state.conservationOptions}
                         orchidColours = {this.state.orchidColours}
+                        updateFormField = {this.updateFormField}
+                        distributionFilter = {this.state.distributionFilter}
+                        conservationFilter = {this.state.conservationFilter}
+                        colourFilter = {this.state.colourFilter}
+                        updateCheckbox = {this.updateCheckbox}
                     />
                     {/* VIEW OPTIONS */}
                     <ul className="nav nav-pills justify-content-center">

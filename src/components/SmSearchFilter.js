@@ -3,12 +3,14 @@ import React, { Component } from 'react'
 export default class SmSearchFilter extends Component {
 
     //passed down from Landing
-    // props: distributionOptions, conservationOptions, updateFormField, orchidColours
+    // props: distributionOptions, conservationOptions,
+    // orchidColours, updateFormField, updateCheckbox,
+    // distributionFilter, conservationFilter, colourFilter
 
     state = {
-        distributionFilter: "",
-        conservationFilter: "",
-        colourFilter: []
+        // distributionFilter: "",
+        // conservationFilter: "",
+        // colourFilter: []
     }
 
     renderDropdown(options) {
@@ -18,26 +20,26 @@ export default class SmSearchFilter extends Component {
         return selectOptions
     }
 
-    updateFormField = (e) => {
-        this.setState({
-            [e.target.name] : e.target.value
-        })
-    }
+    // updateFormField = (e) => {
+    //     this.setState({
+    //         [e.target.name] : e.target.value
+    //     })
+    // }
 
-    updateCheckbox = (e) => {
-        if(this.state[e.target.name].includes(e.target.value)){
-            let indexToRemove = this.state[e.target.name].findIndex( 
-                value => value===e.target.value
-            )
-            this.setState({
-                [e.target.name]: [...this.state[e.target.name].slice(0, indexToRemove), ...this.state[e.target.name].slice(indexToRemove + 1)]
-            })
-        } else {
-            this.setState({
-                [e.target.name]: [...this.state[e.target.name], e.target.value]
-            })
-        }
-    }
+    // updateCheckbox = (e) => {
+    //     if(this.state[e.target.name].includes(e.target.value)){
+    //         let indexToRemove = this.state[e.target.name].findIndex( 
+    //             value => value===e.target.value
+    //         )
+    //         this.setState({
+    //             [e.target.name]: [...this.state[e.target.name].slice(0, indexToRemove), ...this.state[e.target.name].slice(indexToRemove + 1)]
+    //         })
+    //     } else {
+    //         this.setState({
+    //             [e.target.name]: [...this.state[e.target.name], e.target.value]
+    //         })
+    //     }
+    // }
 
     
     render() {
@@ -52,16 +54,16 @@ export default class SmSearchFilter extends Component {
                 <label>Region:</label>
                 <select className='form-select'
                         name="distributionFilter" 
-                        value={this.state.distributionFilter} 
-                        onChange={this.updateFormField}>
+                        value={this.props.distributionFilter} 
+                        onChange={this.props.updateFormField}>
                     {this.renderDropdown(this.props.distributionOptions)}    
                 </select>
 
                 <label>Conservation Status:</label>
                 <select className='form-select'
                         name="conservationFilter" 
-                        value={this.state.conservationFilter} 
-                        onChange={this.updateFormField}>
+                        value={this.props.conservationFilter} 
+                        onChange={this.props.updateFormField}>
                     {this.renderDropdown(this.props.conservationOptions)}    
                 </select>
 
@@ -74,8 +76,8 @@ export default class SmSearchFilter extends Component {
                                     value={eachColour.value}
                                     name="colourFilter"
                                     id="flexCheckDefault"
-                                    onChange={this.updateCheckbox}
-                                    checked={this.state.colourFilter.includes(eachColour.value)}
+                                    onChange={this.props.updateCheckbox}
+                                    checked={this.props.colourFilter.includes(eachColour.value)}
                             />
                             <label className="form-check-label" htmlFor="flexCheckDefault">
                                 {eachColour.display}

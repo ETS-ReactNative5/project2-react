@@ -3,9 +3,11 @@ import React, { Component } from 'react'
 import SpeciesCard from './SpeciesCard'
 
 export default class ReadAllSpecies extends Component {
+  
 
   //passed from Landing
-  //props species, distributionOptions, setActivePage
+  //props species, distributionOptions, setActivePage, selectActiveDisplay
+  // renderModal
 
   state = {
 
@@ -28,7 +30,11 @@ export default class ReadAllSpecies extends Component {
               <React.Fragment key={eachItem._id}>
                 <div className='col col-10 col-sm-8 col-md-6 col-lg-4 border border-danger mx-auto'>
                 <SpeciesCard eachItem={eachItem}
-                              distributionOptions={this.props.distributionOptions}/>
+                              distributionOptions={this.props.distributionOptions}
+                              conservationOptions={this.props.conservationOptions}
+                              // selectActiveDisplay={this.props.selectActiveDisplay}
+                              setActivePage={this.props.setActivePage}
+                              />
                 </div>
               </React.Fragment>
             )}
