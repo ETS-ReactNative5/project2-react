@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import SpeciesModal from './SpeciesModal';
 
 //path: Landing => ReadAllSpecies =>
@@ -89,6 +88,8 @@ export default class SpeciesCard extends Component {
                         <SpeciesModal eachItem = {this.props.eachItem}
                                     activeDistribution={this.state.activeDistribution}
                                     activeConservation={this.state.activeConservation}
+                                    setActivePage={this.props.setActivePage}
+                                    selectEdit = {this.props.selectEdit}
                                     />
                     </div>
                     

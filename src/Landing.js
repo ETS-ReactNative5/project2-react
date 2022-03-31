@@ -36,9 +36,10 @@ export default class Landing extends React.Component {
         searchResults: [],
         distributionFilter: "",
         conservationFilter: "",
-        colourFilter: []
+        colourFilter: [],
 
         // activeObject: ""
+        activeEditId: ""
 
     }
 
@@ -53,8 +54,9 @@ export default class Landing extends React.Component {
                         distributionOptions={this.state.distributionOptions}
                         conservationOptions={this.state.conservationOptions}
                         setActivePage={this.setActivePage}
-                        selectActiveDisplay={this.selectActiveDisplay}
-                        renderModal={this.renderModal}
+                        selectEdit = {this.selectEdit}
+                        // selectActiveDisplay={this.selectActiveDisplay}
+                        // renderModal={this.renderModal}
                         />
                 break;
             case "createSpecies":
@@ -69,13 +71,15 @@ export default class Landing extends React.Component {
                         />
                 break;
             case "updateSpecies":
-                return <UpdateSpecies />
-                break;
-            case "readSingleSpecies":
-                return <ReadSingleSpecies
-                        activeObject = {this.state.activeObject}
+                return <UpdateSpecies 
+                        activeEditId = {this.state.activeEditId}
                         />
                 break;
+            // case "readSingleSpecies":
+            //     return <ReadSingleSpecies
+            //             activeObject = {this.state.activeObject}
+            //             />
+            //     break;
             case "readAllDistribution":
                 return <ReadAllDistribution />
                 break;
@@ -96,13 +100,12 @@ export default class Landing extends React.Component {
         })
     }
 
-    // selectActiveDisplay = (identifier) => {
-    //     this.setState({
-    //         activeObject: identifier
-    //         // ,
-    //         // activePage: "readSingleSpecies"
-    //     })
-    // }
+    selectEdit = (identifier) => {
+        this.setState({
+            activeEditId: identifier
+        })
+    }
+
 
     showMdSearchFilter() {
         return this.state.showMdSearchFilter ? <MdSearchFilter /> : null
@@ -130,31 +133,55 @@ export default class Landing extends React.Component {
     }
 
     getSearchResults = async() => {
-        let params = {
+        let payload = {
             params: {}
         }
 
-        let searchConditions = [this.state.searchPrompt, this.state.distributionFilter, this.state.conservationFilter]
+        // let searchConditions = [this.state.searchPrompt, this.state.distributionFilter, this.state.conservationFilter]
 
-        searchConditions.map(
-            condition => {
-                if(condition){
-                params.params[condition] = condition
-            }
-        }
-        )
-        console.log(params)
-        
-        // if(this.state.searchPrompt){
-        //     params.params.searchPrompt = this.state.searchPrompt
+        // searchConditions.map(
+        //     condition => {
+        //         if(condition){
+        //         payload.params[condition] = condition
+        //     }
+        //     return payload
         // }
+        // )
+
+        if(this.state.searchPrompt){
+            payload.params.searchPrompt = this.state.searchPrompt
+        }
+
+        if(this.state.distributionFilter){
+            payload.params.distributionFilter = this.state.distributionFilter
+        }
+
+        if(this.state.conservationFilter){
+            payload.params.conservationFilter = this.state.conservationFilter
+        }
+
+        if(this.state.colourFilter){
+            payload.params.colourFilter = this.state.colourFilter
+        }
+
+        console.log(payload)
+                                                                                                                                  
+        let searchResponse = await axios.get(this.BASE_API_URL + "/orchid_species", payload);
+        this.setState({
+            species: searchResponse.data
+        })
+        console.log(this.state.species)
 
     }
 
     // async componentDidUpdate() {
-    //     if(fetchingSearchResults === true){
-
+    //     if(this.state.fetchingSearchResults === true){
+    //         await this.getSearchResults();
     //     }
+    //     this.setState({
+    //         fetchingSearchResults: false
+    //     })
+    //     console.log(this.state.species)
     // }
 
 
@@ -293,7 +320,10 @@ export default class Landing extends React.Component {
                                 aria-label="Search" 
                                 aria-describedby="search-addon" />
                         <button className="input-group-text border-0" 
-                                id="search-addon">
+                                id="search-addon"
+                                onClick={() => {this.getSearchResults();
+                                                this.setActivePage("readAllSpecies")}}
+                                >
                             Search
                         </button>
                     </div>

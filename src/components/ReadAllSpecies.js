@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { Component } from 'react'
 import SpeciesCard from './SpeciesCard'
 
@@ -34,6 +33,8 @@ export default class ReadAllSpecies extends Component {
                               conservationOptions={this.props.conservationOptions}
                               // selectActiveDisplay={this.props.selectActiveDisplay}
                               setActivePage={this.props.setActivePage}
+                              selectEdit = {this.props.selectEdit}
+
                               />
                 </div>
               </React.Fragment>

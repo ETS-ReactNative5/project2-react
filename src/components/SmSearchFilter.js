@@ -67,6 +67,14 @@ export default class SmSearchFilter extends Component {
                     {this.renderDropdown(this.props.conservationOptions)}    
                 </select>
 
+                {/* <label>Discovered/Created Before:</label>
+                <input type="number"
+                
+                />
+
+                <label>Discovered/Created After:</label> */}
+
+
                 <label>Colours:</label>
                 {this.props.orchidColours.map( eachColour => 
                     <React.Fragment key={eachColour.value}>
@@ -85,6 +93,16 @@ export default class SmSearchFilter extends Component {
                         </div>
                     </React.Fragment>
                 )}
+
+                <button className="input-group-text border-0" 
+                    id="search-addon"
+                    // onClick={() => this.setState({
+                    //     fetchingSearchResults: true
+                    // })}
+                    onClick={() => this.getSearchResults()}
+                    >
+                    Apply filters
+                </button>
 
 
 

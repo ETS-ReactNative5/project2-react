@@ -12,7 +12,6 @@ export default class CreateSpecies extends Component {
     commonName: "",
     officialName: "",
     genus: "",
-    species: "",
     parent1: "", 
     parent2: "",
     creatorName: "",
@@ -26,8 +25,6 @@ export default class CreateSpecies extends Component {
     conservationStatus: ""
 
   }
-
-  
 
   updateFormField = (e) => {
     this.setState({
