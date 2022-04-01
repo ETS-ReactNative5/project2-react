@@ -16,7 +16,6 @@ import SmSearchFilter from "./components/SmSearchFilter";
 import CreateUserProfile from  "./components/CreateUserProfile";
 import ReadUserProfile from "./components/ReadUserProfile";
 
-import SpeciesModal from "./components/SpeciesModal";
 
 
 
@@ -39,7 +38,9 @@ export default class Landing extends React.Component {
         colourFilter: [],
 
         // activeObject: ""
-        activeEditId: ""
+        activeEditId: "",
+
+        refreshSpeciesDisplay: false
 
     }
 
@@ -73,6 +74,13 @@ export default class Landing extends React.Component {
             case "updateSpecies":
                 return <UpdateSpecies 
                         activeEditId = {this.state.activeEditId}
+                        orchidColours={this.state.orchidColours}
+                        orchidScentsOptions={this.state.orchidScentsOptions}
+                        orchidPetalPatternOptions={this.state.orchidPetalPatternOptions}
+                        distributionOptions={this.state.distributionOptions}
+                        conservationOptions={this.state.conservationOptions}
+                        setActivePage={this.setActivePage}
+                        refreshSpeciesDisplay={this.refreshSpeciesDisplay}
                         />
                 break;
             // case "readSingleSpecies":
@@ -105,7 +113,6 @@ export default class Landing extends React.Component {
             activeEditId: identifier
         })
     }
-
 
     showMdSearchFilter() {
         return this.state.showMdSearchFilter ? <MdSearchFilter /> : null
@@ -174,13 +181,24 @@ export default class Landing extends React.Component {
 
     }
 
+     refreshSpeciesDisplay = async() => {
+        console.log('starting refreshSpeciesDisplay')
+        let speciesResponse = await axios.get("http://localhost:8888/orchid_species");
+        this.setState({
+            species: speciesResponse.data,
+        })
+        console.log('ending refreshSpeciesDisplay')
+    }
+
     // async componentDidUpdate() {
-    //     if(this.state.fetchingSearchResults === true){
-    //         await this.getSearchResults();
+    //     if(this.state.refreshSpeciesDisplay === true){
+    //         await this.refreshSpeciesDisplay();
     //     }
+
     //     this.setState({
-    //         fetchingSearchResults: false
+    //         refreshSpeciesDisplay: false
     //     })
+        
     //     console.log(this.state.species)
     // }
 

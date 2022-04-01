@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import SpeciesModal from './SpeciesModal';
+import FactsModal from './FactsModal';
 
 //path: Landing => ReadAllSpecies =>
 // this.props: eachItem from species, distributionOptions, conservationOptions, setActivePage
@@ -7,8 +9,8 @@ import SpeciesModal from './SpeciesModal';
 
 export default class SpeciesCard extends Component {
     state = {
-        activeDistribution:"",
-        activeConservation:""
+        activeDistribution: "",
+        activeConservation: ""
 
     }
 
@@ -19,7 +21,7 @@ export default class SpeciesCard extends Component {
     //     console.log(response.data)
     // }
 
-    matchName(distributionId) {
+    matchName = (distributionId) => {
         let matchedDistribution = this.props.distributionOptions.filter(
             eachDistribution =>
                 (distributionId === eachDistribution._id)
@@ -27,15 +29,32 @@ export default class SpeciesCard extends Component {
         return matchedDistribution[0].name
     }
 
+
     correspondData(distributionId, conservationId) {
+
         let matchedDistribution = this.props.distributionOptions.filter(
             eachDistribution =>
-                (distributionId === eachDistribution._id)
+                distributionId === eachDistribution._id
         )
+
+        // for (let eachDistribution of this.props.distributionOptions) {
+        //     // console.log(eachDistribution)
+        //     console.log("....comparing...")
+        //     console.log(distributionId, eachDistribution._id)
+        //     if (distributionId === eachDistribution._id) {
+        //         this.setState({
+        //             activeDistribution: eachDistribution.name
+        //         })
+        //     }
+        // }
+
+        // console.log(matchedDistribution)
+
         let matchedConservation = this.props.conservationOptions.filter(
             eachConservation =>
-                (conservationId === eachConservation._id)
+                conservationId === eachConservation._id
         )
+
         this.setState({
             activeDistribution: matchedDistribution[0].name,
             activeConservation: matchedConservation[0].name
@@ -69,30 +88,38 @@ export default class SpeciesCard extends Component {
                     />
                     <div className="card-body">
                         <h6>{this.props.eachItem.officialName}</h6>
-                        <p>Native to {this.matchName(this.props.eachItem.distribution)}</p>
+                        {/* <p>Native to {this.matchName(this.props.eachItem.distribution)}</p> */}
                         <div className='row'>
                             <div className='col-6'>
                                 <a
-                                data-bs-toggle="modal"
-                                data-bs-target={"#modal" + this.props.eachItem._id}
-                                onClick={() => {this.correspondData(this.props.eachItem.distribution, this.props.eachItem.conservationStatus)}}
+                                    data-bs-toggle="modal"
+                                    data-bs-target={"#modal" + this.props.eachItem._id}
+                                    onClick={() => { this.correspondData(this.props.eachItem.distribution, this.props.eachItem.conservationStatus) }}
                                 >
                                     About this species
                                 </a>
                             </div>
                             <div className='col-6'>
-                                <a>View facts</a>
+                                <a
+                                    data-bs-toggle="modal"
+                                    data-bs-target={"#modal-facts" + this.props.eachItem._id}
+                                    // onClick={() => this.props.setActivePage('readFacts')}
+                                >
+                                    View facts
+                                </a>
                             </div>
                         </div>
 
-                        <SpeciesModal eachItem = {this.props.eachItem}
-                                    activeDistribution={this.state.activeDistribution}
-                                    activeConservation={this.state.activeConservation}
-                                    setActivePage={this.props.setActivePage}
-                                    selectEdit = {this.props.selectEdit}
-                                    />
+                        <SpeciesModal eachItem={this.props.eachItem}
+                            activeDistribution={this.state.activeDistribution}
+                            activeConservation={this.state.activeConservation}
+                            setActivePage={this.props.setActivePage}
+                            selectEdit={this.props.selectEdit}
+                        />
+                        <FactsModal eachItem={this.props.eachItem}
+                        />
                     </div>
-                    
+
                 </div>
             </React.Fragment>
         )

@@ -9,6 +9,8 @@ export default class CreateSpecies extends Component {
 
   state= {
 
+    apiMethod : "post",
+
     commonName: "",
     officialName: "",
     genus: "",
@@ -54,6 +56,14 @@ export default class CreateSpecies extends Component {
     return selectOptions
   }
 
+  apiMethod = () => {
+    if(this.state.apiMethod === "post"){
+      this.postApi();
+    } else if(this.state.apiMethod === "put"){
+      this.putApi();
+    }
+  }
+
   BASE_API_URL = "http://localhost:8888"
 
   postApi = async () => {
@@ -75,7 +85,7 @@ export default class CreateSpecies extends Component {
       conservationStatus:this.state.conservationStatus
     })
     console.log('done posting')
-    this.props.setActivePage('readAllSpecies')
+    // this.props.setActivePage('readAllSpecies')
   }
 
   render() {
@@ -92,7 +102,7 @@ export default class CreateSpecies extends Component {
           updateFormField = {this.updateFormField}
           updateCheckbox = {this.updateCheckbox}
           renderDropdown = {this.renderDropdown}
-          postApi = {this.postApi}
+          apiMethod = {this.apiMethod}
 
           commonName = {this.state.commonName}
           officialName = {this.state.officialName}

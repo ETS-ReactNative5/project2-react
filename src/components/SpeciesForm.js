@@ -201,7 +201,9 @@ function SpeciesForm(props) {
                 </div>
                 <div className='row'>
                     <button className='btn btn-primary'
-                            onClick={props.postApi}
+                            onClick={() => {props.apiMethod()
+                                            // props.refreshSpeciesDisplay()
+                                            }}
                     >
                         Submit
                     </button>
