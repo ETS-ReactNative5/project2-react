@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { AiFillEdit } from 'react-icons/ai'
+import { RiDeleteBinFill } from 'react-icons/ri'
+import { TiTick } from 'react-icons/ti'
+import { MdCancel } from 'react-icons/md'
 
 export default class FactsModal extends Component {
 
@@ -7,7 +11,9 @@ export default class FactsModal extends Component {
         action: "readingFacts",
         // refreshFacts: false,
         facts: this.props.eachItem.facts,
-        newFact: ""
+        newFact: "",
+        factIdBeingEdited: "",
+        factToChange: {}
 
     }
 
@@ -33,16 +39,26 @@ export default class FactsModal extends Component {
         return this.refreshFacts();
     }
 
+    apiFactsPut = async() => {
+        await axios.put(this.BASE_API_URL + '/orchid_species/' + this.props.eachItem._id + '/facts/' + this.state.factIdBeingEdited,{
+            fact: this.state.factToChange
+        })
+        this.setState({
+            factToChange: "",
+            factIdBeingEdited: ""
+        })
+        console.log('done putting fact to ' + this.props.eachItem.officialName)
+        return this.refreshFacts();
+    }
+
     refreshFacts = async () => {
         console.log('refreshingFacts')
         // if(this.state.refreshFacts === true){
             let factsResponse = await axios.get(this.BASE_API_URL + '/orchid_species/' + this.props.eachItem._id + '/facts')
-            console.log(factsResponse.data)
             this.setState({
                 facts: factsResponse.data.facts,
                 action: "readingFacts"
             })
-        
     }
 
     renderTextbox() {
@@ -65,12 +81,73 @@ export default class FactsModal extends Component {
             )
     }
 
+    editFact = (factIdBeingEdited) => {
+        console.log('editfact')
+        console.log(factIdBeingEdited)
+        let factBeingEdited = this.state.facts.find( fact => fact._id === factIdBeingEdited)
+        console.log(factBeingEdited)
+        this.setState({
+            factIdBeingEdited: factIdBeingEdited,
+            factToChange: factBeingEdited.fact
+        })
+    }
+
+    renderUpdateFact = (f) => {
+        return <React.Fragment key={f._id}>
+            <div className='row border border-success'>
+                <div className='col-9'>
+                    <input className="form-control" 
+                            type="text" 
+                            row='3'
+                            value={this.state.factToChange}
+                            name='factToChange'
+                            onChange={this.updateFormField}
+                    />
+                </div>
+                <div className='col-1'>
+                    <button className='btn'
+                            onClick={this.apiFactsPut}>
+                        <TiTick/>
+                    </button>
+                </div>
+                <div className='col-1'>
+                    <MdCancel/>
+                </div>
+            </div>
+        </React.Fragment>
+    }
+
     renderReadFacts = (f) => {
         return <React.Fragment key={f._id}>
-            <div className='row'>
-                <div className='col'>
+            <div className='row border border-danger'>
+                <div className='col-9'>
                     <li className="list-group-item">{f.fact}</li>
                 </div>
+                <div className='col-1'>
+                    <button className='btn'
+                            onClick={() => {this.editFact(f._id)}}
+                            >
+                        <AiFillEdit  />
+                    </button>
+                </div>
+                <div className='col-1'>
+                    <button className='btn'
+                            type="button" 
+                            data-bs-toggle="collapse" 
+                            data-bs-target={"#collapseExample" + f._id} 
+                            aria-expanded="false" 
+                            aria-controls="collapseExample"
+                            
+                            >
+                        <RiDeleteBinFill />
+                    </button>
+                    <div className="collapse" id={'collapseExample' + f._id}>
+                        <div className="card card-body">
+                            Are you sure you wish to delete the above fact?
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
             
@@ -86,7 +163,12 @@ export default class FactsModal extends Component {
                         return <ul className="list-group">
                             {factsJSXs.push(this.renderReadFacts(f))}
                         </ul>
-                        
+                    } else {
+                        // return <ul className="list-group">
+                            // {
+                                factsJSXs.push(this.renderUpdateFact(f))
+                            // }
+                        // </ul>
                     }
                 }
             )
