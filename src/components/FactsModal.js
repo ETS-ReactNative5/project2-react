@@ -24,7 +24,6 @@ export default class FactsModal extends Component {
             fact: this.state.newFact
         })
         this.setState({
-            action: "",
             newFact: ""
         })
         console.log('done posting fact to ' + this.props.eachItem.officialName)
@@ -38,14 +37,12 @@ export default class FactsModal extends Component {
         console.log('refreshingFacts')
         // if(this.state.refreshFacts === true){
             let factsResponse = await axios.get(this.BASE_API_URL + '/orchid_species/' + this.props.eachItem._id + '/facts')
-        console.log(factsResponse.data)
+            console.log(factsResponse.data)
             this.setState({
-                facts: factsResponse.data.facts
+                facts: factsResponse.data.facts,
+                action: "readingFacts"
             })
-        // }
-        // this.setState({
-        //     refreshFacts: false
-        // })
+        
     }
 
     renderTextbox() {
@@ -70,7 +67,13 @@ export default class FactsModal extends Component {
 
     renderReadFacts = (f) => {
         return <React.Fragment key={f._id}>
-            <li className="list-group-item">{f.fact}</li>
+            <div className='row'>
+                <div className='col'>
+                    <li className="list-group-item">{f.fact}</li>
+                </div>
+
+            </div>
+            
         </React.Fragment>
     }
 
