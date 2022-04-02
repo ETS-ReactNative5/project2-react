@@ -4,7 +4,7 @@ import axios from 'axios';
 export default class FactsModal extends Component {
 
     state = {
-        action: "",
+        action: "readingFacts",
         // refreshFacts: false,
         facts: this.props.eachItem.facts,
         newFact: ""
@@ -68,22 +68,34 @@ export default class FactsModal extends Component {
             )
     }
 
+    renderReadFacts = (f) => {
+        return <React.Fragment key={f._id}>
+            <li className="list-group-item">{f.fact}</li>
+        </React.Fragment>
+    }
+
     renderFacts() {
         let factsJSXs = [];
         if(this.state.facts.length !== 0){
             this.state.facts.map(
                 f => {
                     if(this.state.factIdBeingEdited !== f._id) {
-                        factJSX
+                        return <ul className="list-group">
+                            {factsJSXs.push(this.renderReadFacts(f))}
+                        </ul>
+                        
                     }
                 }
             )
         }
+        return factsJSXs
     }
 
     renderContent() {
         if(this.state.action === 'addingNewFact'){
            return this.renderTextbox();
+        } else if(this.state.action === 'readingFacts'){
+            return this.renderFacts();
         }
     }
 
