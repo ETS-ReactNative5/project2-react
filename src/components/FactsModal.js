@@ -51,6 +51,12 @@ export default class FactsModal extends Component {
         return this.refreshFacts();
     }
 
+    apiFactsDelete = async(factIdToDelete) => {
+        await axios.delete(this.BASE_API_URL + '/orchid_species/' + this.props.eachItem._id + '/facts/' + factIdToDelete)
+        console.log('done deleting fact')
+        return this.refreshFacts();
+    }
+
     refreshFacts = async () => {
         console.log('refreshingFacts')
         // if(this.state.refreshFacts === true){
@@ -122,6 +128,31 @@ export default class FactsModal extends Component {
             <div className='row border border-danger'>
                 <div className='col-9'>
                     <li className="list-group-item">{f.fact}</li>
+                    <div className="collapse" id={'collapseExample' + f._id}>
+                        <div className="card card-body">
+                            Are you sure you wish to delete the above fact?
+                        </div>
+                        <div className='row'>
+                        <div className='col-6'>
+                            <button className='btn mx-auto'
+                                    onClick={() => {this.apiFactsDelete(f._id)}}
+                            >
+                                <TiTick/>
+                            </button>
+                        </div>
+                        <div className='col-6'>
+                            <button className='btn mx-auto'
+                                    data-bs-toggle="collapse" 
+                                    data-bs-target={"#collapseExample" + f._id} 
+                                    aria-expanded="false" 
+                                    aria-controls="collapseExample"
+                            >
+                                <MdCancel/>
+                            </button>
+                        </div>
+                    </div>
+                    </div>
+                    
                 </div>
                 <div className='col-1'>
                     <button className='btn'
@@ -141,11 +172,7 @@ export default class FactsModal extends Component {
                             >
                         <RiDeleteBinFill />
                     </button>
-                    <div className="collapse" id={'collapseExample' + f._id}>
-                        <div className="card card-body">
-                            Are you sure you wish to delete the above fact?
-                        </div>
-                    </div>
+                    
                 </div>
 
 
