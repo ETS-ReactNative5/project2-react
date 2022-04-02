@@ -117,7 +117,14 @@ export default class FactsModal extends Component {
                     </button>
                 </div>
                 <div className='col-1'>
-                    <MdCancel/>
+                    <button className='btn'
+                            onClick={() => {this.setState({
+                                factIdBeingEdited: "",
+                                factToChange: ""
+                            })}}
+                    >
+                        <MdCancel/>
+                    </button>
                 </div>
             </div>
         </React.Fragment>

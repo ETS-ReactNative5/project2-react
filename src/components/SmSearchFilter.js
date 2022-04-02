@@ -96,10 +96,9 @@ export default class SmSearchFilter extends Component {
 
                 <button className="input-group-text border-0" 
                     id="search-addon"
-                    // onClick={() => this.setState({
-                    //     fetchingSearchResults: true
-                    // })}
-                    onClick={() => this.getSearchResults()}
+                    onClick={() => {this.props.getSearchResults();
+                                    this.props.setActivePage("readAllSpecies")}}
+                    data-bs-dismiss="offcanvas"
                     >
                     Apply filters
                 </button>

@@ -61,6 +61,15 @@ export default class SpeciesCard extends Component {
         })
     }
 
+    checkWordCount(givenName){
+        let output = ""
+        if(givenName.trim().split(' ').length ==2 ){
+            let [word1, word2] = givenName.trim().split(' ')
+            output = <React.Fragment>{word1}<span className='toItalicise'>{word2}</span></React.Fragment>
+        } 
+        return output
+    }
+
     render() {
         // console.log(this.props.eachItem)
         return (
@@ -88,7 +97,9 @@ export default class SpeciesCard extends Component {
                     />
                     <div className="card-body">
                         <h6>{this.props.eachItem.officialName}</h6>
-                        {/* <p>Native to {this.matchName(this.props.eachItem.distribution)}</p> */}
+                        {/* <h6>{this.checkWordCount(this.props.eachItem.officialName)}</h6> */}
+
+                        <p>Native to {this.matchName(this.props.eachItem.distribution)}</p>
                         <div className='row'>
                             <div className='col-6'>
                                 <a

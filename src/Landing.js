@@ -115,7 +115,18 @@ export default class Landing extends React.Component {
     }
 
     showMdSearchFilter() {
-        return this.state.showMdSearchFilter ? <MdSearchFilter /> : null
+        return this.state.showMdSearchFilter ? <MdSearchFilter 
+                        distributionOptions = {this.state.distributionOptions}
+                        conservationOptions = {this.state.conservationOptions}
+                        orchidColours = {this.state.orchidColours}
+                        updateFormField = {this.updateFormField}
+                        distributionFilter = {this.state.distributionFilter}
+                        conservationFilter = {this.state.conservationFilter}
+                        colourFilter = {this.state.colourFilter}
+                        updateCheckbox = {this.updateCheckbox}
+                        getSearchResults={this.getSearchResults}
+                        setActivePage={this.setActivePage}
+        /> : null
     }
 
     updateFormField = (e) => {
@@ -299,6 +310,8 @@ export default class Landing extends React.Component {
                         conservationFilter = {this.state.conservationFilter}
                         colourFilter = {this.state.colourFilter}
                         updateCheckbox = {this.updateCheckbox}
+                        getSearchResults={this.getSearchResults}
+                        setActivePage={this.setActivePage}
                     />
                     {/* VIEW OPTIONS */}
                     <ul className="nav nav-pills justify-content-center">
@@ -307,9 +320,11 @@ export default class Landing extends React.Component {
                                 aria-current="page"
                                 href="#"
                                 onClick={() => {
+                                    this.refreshSpeciesDisplay();
                                     this.setActivePage('readAllSpecies');
                                     this.setState({
-                                        showMdSearchFilter: true
+                                        showMdSearchFilter: true,
+                                        searchPrompt: ""
                                     });
                                 }}>
                                 View Species

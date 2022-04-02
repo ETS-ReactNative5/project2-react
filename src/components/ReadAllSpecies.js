@@ -17,7 +17,6 @@ export default class ReadAllSpecies extends Component {
   render() {
     return (
       <React.Fragment>
-        <div>ReadAllSpecies</div>
         <div>
           <a onClick={() => this.props.setActivePage('createSpecies')}>
             Help us expand our collection
