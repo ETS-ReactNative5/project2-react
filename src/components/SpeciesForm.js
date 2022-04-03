@@ -10,10 +10,11 @@ function SpeciesForm(props) {
     <React.Fragment>
         <div>SpeciesForm</div>
         <div id="postSpeciesForm" className="row border border-secondary">
-            <h2>Listing a new orchid</h2>
+            {/* <h2>{props.message}</h2> */}
             <div className="col col-1 col-sm-2 border border-primary"></div>
             <div className="col col-md-8 border border-warning">
                 <div className='row'>
+                    <h2>{props.message}</h2>
                     <label>Common Name: </label>
                     <input className="form-control" 
                             type="text" 

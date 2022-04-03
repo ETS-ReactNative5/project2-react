@@ -151,6 +151,8 @@ export default class UpdateSpecies extends Component {
           imageUrl = {this.state.imageUrl}
           distribution = {this.state.distribution}
           conservationStatus = {this.state.conservationStatus}
+
+          message={"Editing information about " + this.state.officialName}
           
         />
       </React.Fragment>

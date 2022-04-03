@@ -24,8 +24,7 @@ export default class CreateSpecies extends Component {
     floralGrouping: "",
     imageUrl: "",
     distribution: "",
-    conservationStatus: "",
-    testing: ""
+    conservationStatus: ""
 
   }
 
@@ -120,6 +119,8 @@ export default class CreateSpecies extends Component {
           imageUrl = {this.state.imageUrl}
           distribution = {this.state.distribution}
           conservationStatus = {this.state.conservationStatus}
+
+          message="Listing a new orchid species"
           
         />
 

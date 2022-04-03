@@ -15,6 +15,7 @@ import SmSearchFilter from "./components/SmSearchFilter";
 
 import CreateUserProfile from  "./components/CreateUserProfile";
 import ReadUserProfile from "./components/ReadUserProfile";
+import Login from "./components/Login";
 
 import { FaUserAlt } from 'react-icons/fa'
 import { BsSearch } from 'react-icons/bs'
@@ -26,6 +27,9 @@ import { TiThMenu } from 'react-icons/ti'
 
 export default class Landing extends React.Component {
     state = {
+
+        dataLoaded: false,
+
         activePage: 'main',
         showMdSearchFilter: true,
         species: [],
@@ -49,7 +53,9 @@ export default class Landing extends React.Component {
 
         userEmail: "",
         currentUserId: "",
-        registrationMsg: ""
+        registrationMsg: "",
+        loginMsg: "",
+        loggedIn: false
 
     }
 
@@ -118,11 +124,16 @@ export default class Landing extends React.Component {
                         conservationOptions={this.state.conservationOptions}
                         setActivePage={this.setActivePage}
                         selectEdit = {this.selectEdit}
-
-
-                
                 />
                 break;
+            case "login":
+                return <Login
+                        updateFormField = {this.updateFormField}
+                        userEmail={this.state.userEmail}
+                        getApiUserEmail={this.getApiUserEmail}
+                        loginMsg={this.state.loginMsg}
+                
+                />
             default:
                 break;
         }
@@ -229,15 +240,48 @@ export default class Landing extends React.Component {
     }
 
     postApiUserEmail = async() => {
-        let results = await axios.post(this.BASE_API_URL + '/users',{
-            userEmail: this.state.userEmail
+
+        this.setState({
+            registrationMsg: ""
         })
 
-        console.log(results.data.insertedId)
+        let results = await axios.post(this.BASE_API_URL + '/users',{
+            userEmail: this.state.userEmail
+        }).catch((e) => {
+            console.log(e.response.data.message)
+            this.setState({
+                registrationMsg: e.response.data.message,
+            });
+        });
+
+        // console.log(e.response.data.message)
+        // console.log(results.data.insertedId)
 
         this.setState({
             currentUserId: results.data.insertedId,
-            registrationMsg:"Thanks for registering an account! You can now save favourites to your profile."
+            registrationMsg:"Thanks for registering an account! You can now save favourites to your profile.",
+            loggedIn: true
+        })
+    }
+
+    getApiUserEmail = async() => {
+        
+        let response = await axios.get(this.BASE_API_URL + '/users',
+            {
+                params: {
+                    userEmail: this.state.userEmail
+                }
+            }).catch( (e) => {
+            this.setState({
+                loginMsg: e.response.data.message
+            });
+        });
+
+        console.log(response.data)
+        this.setState({
+            currentUserId: response.data._id,
+            loginMsg:"You have logged in successfully.",
+            loggedIn: true
         })
     }
 
@@ -268,7 +312,8 @@ export default class Landing extends React.Component {
             conservationOptions: conservationResponse.data,
             orchidColours: coloursResponse.data,
             orchidScentsOptions: scentsResponse.data,
-            orchidPetalPatternOptions: petalPatternResponse.data 
+            orchidPetalPatternOptions: petalPatternResponse.data,
+            dataLoaded: true
         })
     }
 
@@ -296,7 +341,8 @@ export default class Landing extends React.Component {
                                 </button>
                                 <ul className="dropdown-menu" 
                                     aria-labelledby="dropdownMenu2">
-                                    <li>
+
+                                    {!this.state.loggedIn && <li>
                                         <button 
                                             className="dropdown-item" 
                                             type="button"
@@ -310,8 +356,25 @@ export default class Landing extends React.Component {
                                             >
                                                 Create Account
                                         </button> 
-                                    </li>
-                                    <li>
+                                    </li>}
+
+                                    {!this.state.loggedIn && <li>
+                                        <button 
+                                            className="dropdown-item" 
+                                            type="button"
+                                            onClick = {() => {
+                                                this.setActivePage('login');
+                                                this.setState({
+                                                    showMdSearchFilter: false,
+                                                    loginMsg:""
+                                                });
+                                            }}
+                                            >
+                                                Login
+                                        </button> 
+                                    </li>}
+
+                                    {this.state.loggedIn && <li>
                                         <button 
                                             className="dropdown-item" 
                                             type="button"
@@ -324,7 +387,24 @@ export default class Landing extends React.Component {
                                             >
                                                 View Favourites
                                         </button>
-                                    </li>
+                                    </li>}
+
+                                    {this.state.loggedIn && <li>
+                                        <button 
+                                            className="dropdown-item" 
+                                            type="button"
+                                            onClick = {() => {
+                                                this.setActivePage('main');
+                                                this.setState({
+                                                    showMdSearchFilter: true,
+                                                    currentUserId: "",
+                                                    loggedIn:false
+                                                });
+                                            }}
+                                            >
+                                                Log out
+                                        </button>
+                                    </li>}
                                 </ul>
                             </div>
                         </li>
@@ -353,6 +433,7 @@ export default class Landing extends React.Component {
                         setActivePage={this.setActivePage}
                     />
                     {/* VIEW OPTIONS */}
+                    {this.state.dataLoaded &&
                     <ul className="nav nav-pills justify-content-center">
                         <li className="nav-item">
                             <a className="nav-link"
@@ -382,7 +463,9 @@ export default class Landing extends React.Component {
                             </a>
                         </li>
                     </ul>
+                    }
                     {/* SEARCH INPUT */}
+                    {this.state.dataLoaded && 
                     <div className="input-group border border-dark rounded-3">
                         <input type="search" 
                                 name="searchPrompt"
@@ -402,10 +485,13 @@ export default class Landing extends React.Component {
                             <BsSearch/>
                         </button>
                     </div>
+                    }
                     {/* FILTER FOR >=MD */}
+                    {this.state.dataLoaded &&
                     <div className="d-none d-md-block border border-primary">
                         {this.showMdSearchFilter()}
                     </div>
+                    }
                     <div className="border border-success">
                         {this.renderPage()}
 
