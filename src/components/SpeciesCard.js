@@ -63,10 +63,13 @@ export default class SpeciesCard extends Component {
 
     checkWordCount(givenName){
         let output = ""
-        if(givenName.trim().split(' ').length ==2 ){
+        if(givenName.trim().split(' ').length === 2 ){
             let [word1, word2] = givenName.trim().split(' ')
-            output = <React.Fragment>{word1}<span className='toItalicise'>{word2}</span></React.Fragment>
-        } 
+            output = <React.Fragment><span className='toItalicise'>{word1 + " " + word2}</span></React.Fragment>
+        } else{
+            let [word1,...rest] = givenName.trim().split(' ')
+            output= <React.Fragment><span className='toItalicise'>{word1 + " "}</span>{rest.join(' ')}</React.Fragment>
+        }
         return output
     }
 
@@ -96,8 +99,8 @@ export default class SpeciesCard extends Component {
                         }}
                     />
                     <div className="card-body">
-                        <h6>{this.props.eachItem.officialName}</h6>
-                        {/* <h6>{this.checkWordCount(this.props.eachItem.officialName)}</h6> */}
+                        {/* <h6>{this.props.eachItem.officialName}</h6> */}
+                        <h6>{this.checkWordCount(this.props.eachItem.officialName)}</h6>
 
                         <p>Native to {this.matchName(this.props.eachItem.distribution)}</p>
                         <div className='row'>
@@ -126,6 +129,8 @@ export default class SpeciesCard extends Component {
                             activeConservation={this.state.activeConservation}
                             setActivePage={this.props.setActivePage}
                             selectEdit={this.props.selectEdit}
+                            showMdSearchFilter = {this.props.showMdSearchFilter}
+                            postApiUserFavourite={this.props.postApiUserFavourite}
                         />
                         <FactsModal eachItem={this.props.eachItem}
                         />

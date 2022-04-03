@@ -16,6 +16,11 @@ import SmSearchFilter from "./components/SmSearchFilter";
 import CreateUserProfile from  "./components/CreateUserProfile";
 import ReadUserProfile from "./components/ReadUserProfile";
 
+import { FaUserAlt } from 'react-icons/fa'
+import { BsSearch } from 'react-icons/bs'
+import { TiThMenu } from 'react-icons/ti'
+
+
 
 
 
@@ -40,7 +45,11 @@ export default class Landing extends React.Component {
         // activeObject: ""
         activeEditId: "",
 
-        refreshSpeciesDisplay: false
+        // refreshSpeciesDisplay: false,
+
+        userEmail: "",
+        currentUserId: "",
+        registrationMsg: ""
 
     }
 
@@ -56,6 +65,8 @@ export default class Landing extends React.Component {
                         conservationOptions={this.state.conservationOptions}
                         setActivePage={this.setActivePage}
                         selectEdit = {this.selectEdit}
+                        showMdSearchFilter={this.state.showMdSearchFilter}
+                        postApiUserFavourite={this.postApiUserFavourite}
                         // selectActiveDisplay={this.selectActiveDisplay}
                         // renderModal={this.renderModal}
                         />
@@ -92,10 +103,25 @@ export default class Landing extends React.Component {
                 return <ReadAllDistribution />
                 break;
             case "createUserProfile":
-                return <CreateUserProfile />
+                return <CreateUserProfile 
+                        updateFormField = {this.updateFormField}
+                        setActivePage={this.setActivePage}
+                        userEmail={this.state.userEmail}
+                        postApiUserEmail={this.postApiUserEmail}
+                        registrationMsg={this.state.registrationMsg}
+                        />
                 break;
             case "readUserProfile":
-                return <ReadUserProfile />
+                return <ReadUserProfile
+                        currentUserId={this.state.currentUserId}
+                        distributionOptions={this.state.distributionOptions}
+                        conservationOptions={this.state.conservationOptions}
+                        setActivePage={this.setActivePage}
+                        selectEdit = {this.selectEdit}
+
+
+                
+                />
                 break;
             default:
                 break;
@@ -197,21 +223,29 @@ export default class Landing extends React.Component {
         let speciesResponse = await axios.get("http://localhost:8888/orchid_species");
         this.setState({
             species: speciesResponse.data,
+            activeEditId: ""
         })
         console.log('ending refreshSpeciesDisplay')
     }
 
-    // async componentDidUpdate() {
-    //     if(this.state.refreshSpeciesDisplay === true){
-    //         await this.refreshSpeciesDisplay();
-    //     }
+    postApiUserEmail = async() => {
+        let results = await axios.post(this.BASE_API_URL + '/users',{
+            userEmail: this.state.userEmail
+        })
 
-    //     this.setState({
-    //         refreshSpeciesDisplay: false
-    //     })
-        
-    //     console.log(this.state.species)
-    // }
+        console.log(results.data.insertedId)
+
+        this.setState({
+            currentUserId: results.data.insertedId,
+            registrationMsg:"Thanks for registering an account! You can now save favourites to your profile."
+        })
+    }
+
+    postApiUserFavourite = async(speciesId) => {
+        await axios.post(this.BASE_API_URL + '/users/' + this.state.currentUserId + '/favourites/' + speciesId, {
+            favourites: speciesId
+        })
+    }
 
 
     BASE_API_URL = "http://localhost:8888"
@@ -227,7 +261,6 @@ export default class Landing extends React.Component {
         let coloursResponse = await axios.get('orchidColours.json');
         let scentsResponse = await axios.get('orchidScents.json');
         let petalPatternResponse = await axios.get('orchidPetalPattern.json');
-
 
         this.setState({
             species: speciesResponse.data,
@@ -254,10 +287,15 @@ export default class Landing extends React.Component {
                         </li>
                         <li className="nav-item">
                             <div className="dropdown">
-                                <button className="btn" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                                    User
+                                <button className="btn" 
+                                        type="button" 
+                                        id="dropdownMenu2" 
+                                        data-bs-toggle="dropdown" 
+                                        aria-expanded="false">
+                                    <FaUserAlt/>
                                 </button>
-                                <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <ul className="dropdown-menu" 
+                                    aria-labelledby="dropdownMenu2">
                                     <li>
                                         <button 
                                             className="dropdown-item" 
@@ -265,7 +303,8 @@ export default class Landing extends React.Component {
                                             onClick = {() => {
                                                 this.setActivePage('createUserProfile');
                                                 this.setState({
-                                                    showMdSearchFilter: false
+                                                    showMdSearchFilter: false,
+                                                    registrationMsg: ""
                                                 });
                                             }}
                                             >
@@ -283,7 +322,7 @@ export default class Landing extends React.Component {
                                                 });
                                             }}
                                             >
-                                                View Profile
+                                                View Favourites
                                         </button>
                                     </li>
                                 </ul>
@@ -296,7 +335,7 @@ export default class Landing extends React.Component {
                                     data-bs-target="#XsSmSearchFilter" 
                                     aria-controls="offcanvasWithBothOptions"
                                     >
-                                        Filter (XS-SM)
+                                        <TiThMenu/>
                             </button>
                         </li>
                     </ul>
@@ -344,20 +383,23 @@ export default class Landing extends React.Component {
                         </li>
                     </ul>
                     {/* SEARCH INPUT */}
-                    <div className="input-group rounded">
+                    <div className="input-group border border-dark rounded-3">
                         <input type="search" 
                                 name="searchPrompt"
+                                value={this.state.searchPrompt}
                                 onChange={this.updateFormField}
-                                className="form-control rounded" 
+                                className="form-control border-0" 
                                 placeholder="Search" 
-                                aria-label="Search" 
-                                aria-describedby="search-addon" />
-                        <button className="input-group-text border-0" 
+                                // aria-label="Search" 
+                                // aria-describedby="search-addon" 
+                                />
+                        <button className="input-group-text border-0 btn " 
+                                type="button" 
                                 id="search-addon"
                                 onClick={() => {this.getSearchResults();
                                                 this.setActivePage("readAllSpecies")}}
                                 >
-                            Search
+                            <BsSearch/>
                         </button>
                     </div>
                     {/* FILTER FOR >=MD */}

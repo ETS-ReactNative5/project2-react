@@ -70,19 +70,21 @@ export default class FactsModal extends Component {
     renderTextbox() {
             return (
             <React.Fragment>
-                <input className="form-control" 
+                <textarea className="form-control" 
                         type="text" 
                         row='3'
                         placeholder="New fact"
                         value={this.state.newFact}
                         name="newFact"
                         onChange={this.updateFormField}
-                    />
-                    <button onClick={() => this.apiFactsPost()}
-                            className="btn btn-primary"
                     >
-                        Add to collection
-                    </button>
+                </textarea>
+                
+                <button onClick={() => this.apiFactsPost()}
+                        className="btn btn-primary"
+                >
+                    Add to collection
+                </button>
             </React.Fragment>
             )
     }

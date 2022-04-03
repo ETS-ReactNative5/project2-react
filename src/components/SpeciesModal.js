@@ -1,4 +1,10 @@
 import React from 'react'
+import { AiFillEdit } from 'react-icons/ai'
+import { BsSuitHeart } from 'react-icons/bs'
+import { BsSuitHeartFill } from 'react-icons/bs'
+
+
+
 
 function SpeciesModal(props) {
     // console.log(props.eachItem);
@@ -24,6 +30,15 @@ function SpeciesModal(props) {
                             </button>
                         </div>
                         <div className="modal-body">
+                            <img src={props.eachItem.imageUrl}
+                                alt={props.eachItem.officialName}
+                                style={{
+                                    objectFit: "cover",
+                                    borderRadius: "1rem",
+                                    height: "30%",
+                                    width: "100%"
+                                }}
+                            />
                             <   table className="table table-borderless">
                                 <thead>
                                 </thead>
@@ -77,7 +92,7 @@ function SpeciesModal(props) {
                         </div>
                         <div className="modal-footer">
                             <button type="button"
-                                className="btn btn-secondary"
+                                className="btn"
                                 data-bs-dismiss="modal"
                                 onClick={
                                     () => {
@@ -86,7 +101,19 @@ function SpeciesModal(props) {
                                     }
                                 }
                             >
-                                Edit
+                                <AiFillEdit/>
+                            </button>
+                            <button type="button"
+                                className="btn"
+                                data-bs-dismiss="modal"
+                                onClick={
+                                    () => {
+                                        props.postApiUserFavourite(props.eachItem._id);
+                                        props.setActivePage('readUserProfile');
+                                    }
+                                }
+                            >
+                                <BsSuitHeart/>
                             </button>
                         </div>
                     </div>
