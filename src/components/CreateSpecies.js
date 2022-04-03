@@ -6,7 +6,7 @@ export default class CreateSpecies extends Component {
 
   //props: setActivePage, orchidColours, orchidScentsOptions, orchidPetalPatternOptions.
   //distribution, conservation
-
+  
   state= {
 
     apiMethod : "post",
@@ -24,7 +24,8 @@ export default class CreateSpecies extends Component {
     floralGrouping: "",
     imageUrl: "",
     distribution: "",
-    conservationStatus: ""
+    conservationStatus: "",
+    testing: ""
 
   }
 
