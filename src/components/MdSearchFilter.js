@@ -45,7 +45,7 @@ export default class MdSearchFilter extends Component {
                       </select>
                 </div>
             </div>
-            <div className='row border border-primary'>
+            <div className='row border border-primary border-3'>
               <div className='col col-md-2'>
                 <label>Colours:</label>
                 </div>
@@ -70,16 +70,51 @@ export default class MdSearchFilter extends Component {
 
               </div>
               <div className='col col-md-2 my-auto'>
-                <button className="input-group-text border-0" 
+                {/* <button className="input-group-text border-0" 
+                          id="search-addon"
+                          onClick={() => {this.props.getSearchResults();
+                                          this.props.setActivePage("readAllSpecies")}}
+                          >
+                          Apply filters
+                </button> */}
+
+              </div>
+            </div>
+            <div className='row border border-primary border-3'>
+              <div className='col col-6 my-auto'>
+                <label>Number of facts added:</label>
+                      <select className='form-select'
+                              name="factsFilter" 
+                              value={this.props.factsFilter} 
+                              onChange={this.props.updateFormField}
+                      >
+                        <option key='1' value='noFilter'>No selection</option>
+                        <option key='2' value='noFacts'>None</option>
+                        <option key='3' value='factsGte3'>Three or more</option>
+                        {/* <option key={eachOption._id} value={eachOption._id}>{eachOption.name}</option> */}
+                      </select>
+              </div>
+              <div className='col col-6 my-auto'>
+                <button className="input-group-text border-0 mx-auto" 
                           id="search-addon"
                           onClick={() => {this.props.getSearchResults();
                                           this.props.setActivePage("readAllSpecies")}}
                           >
                           Apply filters
                 </button>
-
               </div>
             </div>
+
+
+
+
+            
+
+
+
+
+
+
             </div>
           <div className='col-1 col-lg-2 d-none d-md-block'></div>
         </div>

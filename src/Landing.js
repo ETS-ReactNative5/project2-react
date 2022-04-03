@@ -45,6 +45,7 @@ export default class Landing extends React.Component {
         distributionFilter: "",
         conservationFilter: "",
         colourFilter: [],
+        factsFilter: "",
 
         // activeObject: ""
         activeEditId: "",
@@ -163,6 +164,7 @@ export default class Landing extends React.Component {
                         updateCheckbox = {this.updateCheckbox}
                         getSearchResults={this.getSearchResults}
                         setActivePage={this.setActivePage}
+                        factsFilter={this.state.factsFilter}
         /> : null
     }
 
@@ -217,6 +219,14 @@ export default class Landing extends React.Component {
 
         if(this.state.colourFilter){
             payload.params.colourFilter = this.state.colourFilter
+        }
+
+        if(this.state.factsFilter){
+            if(this.state.factsFilter === 'noFacts'){
+                payload.params.noFacts = '0'
+            } else if(this.state.factsFilter === 'factsGte3'){
+                payload.params.factsGte3 = '3'
+            }
         }
 
         console.log(payload)
