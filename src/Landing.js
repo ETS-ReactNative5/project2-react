@@ -260,7 +260,7 @@ export default class Landing extends React.Component {
         }).catch((e) => {
             console.log(e.response.data.message)
             this.setState({
-                registrationMsg: e.response.data.message,
+                registrationMsg: e.response.data.message
             });
         });
 

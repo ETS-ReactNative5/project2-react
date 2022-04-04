@@ -8,7 +8,6 @@ function SpeciesForm(props) {
 //distributionOptions, conservationOptions, renderDropdown, postApi
   return (
     <React.Fragment>
-        <div>SpeciesForm</div>
         <div id="postSpeciesForm" className="row border border-secondary">
             {/* <h2>{props.message}</h2> */}
             <div className="col col-1 col-sm-2 border border-primary"></div>
@@ -23,6 +22,7 @@ function SpeciesForm(props) {
                             name="commonName"
                             onChange={props.updateFormField}
                     />
+                    <p>{props.commonNameErr}</p>
                 </div>
                 <div className='row'>
                     <label>Official Name: </label>
@@ -33,6 +33,7 @@ function SpeciesForm(props) {
                             name="officialName"
                             onChange={props.updateFormField}
                     />
+                    <p>{props.officialNameErr}</p>
                 </div>
                 <div className='row'>
                     <label>Genus: </label>
@@ -43,17 +44,8 @@ function SpeciesForm(props) {
                             name="genus"
                             onChange={props.updateFormField}
                     />
+                    <p>{props.genusErr}</p>
                 </div>
-                {/* <div className='row'>
-                    <label>Species: </label>
-                    <input className="form-control" 
-                            type="text" 
-                            placeholder="Default input"
-                            value={props.species}
-                            name="species"
-                            onChange={props.updateFormField}
-                    />
-                </div> */}
                 <div className='row'>
                     <label>First Parent: </label>
                     <input className="form-control" 
@@ -103,9 +95,10 @@ function SpeciesForm(props) {
                 </div>
                 <div className='row'>
                     <label>Colours:</label>
+                    <div className="form-control">
                     {props.orchidColours.map(
                         eachColour => 
-                            <div key={eachColour.value} className="form-check form-check-inline">
+                            <div key={eachColour.value} className='form-check form-check-inline'>
                                 <input className="form-check-input" 
                                         type="checkbox" 
                                         value={eachColour.value}
@@ -116,12 +109,15 @@ function SpeciesForm(props) {
                                 <label className="form-check-label">{eachColour.display}</label>
                             </div>
                     )}
+                    <p>{props.coloursErr}</p>
+                    </div>
                 </div>
                 <div className='row'>
                     <label>Petals Pattern:</label>
+                    <div className="form-control">
                     {props.orchidPetalPatternOptions.map(
                         eachPattern => 
-                        <div key={eachPattern.value} className="form-check form-check-inline">
+                        <div key={eachPattern.value} className='form-check form-check-inline'>
                             <input className="form-check-input" 
                                     type="radio" 
                                     name="petalPattern"
@@ -132,12 +128,15 @@ function SpeciesForm(props) {
                             <label className="form-check-label">{eachPattern.display}</label>
                         </div>
                     )}
+                    <p>{props.petalPatternErr}</p>
+                    </div>
                 </div>
                 <div className='row'>
                     <label>Scents:</label>
+                    <div className="form-control">
                     {props.orchidScentsOptions.map(
                         eachScent => 
-                        <div key={eachScent.value} className="form-check form-check-inline">
+                        <div key={eachScent.value} className='form-check form-check-inline'>
                             <input className="form-check-input" 
                                     type="checkbox" 
                                     value={eachScent.value}
@@ -148,28 +147,32 @@ function SpeciesForm(props) {
                             <label className="form-check-label">{eachScent.display}</label>
                         </div>
                     )}
+                    <p>{props.scentsErr}</p>
+                    </div>
                 </div>
                 <div className='row'>
                     <label>Floral Grouping:</label>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" 
-                                type="radio" 
-                                name="floralGrouping" 
-                                value="cluster"
-                                onChange={props.updateFormField}
-                                checked={props.floralGrouping === "cluster"}
-                        />
-                        <label className="form-check-label">Cluster</label>
-                    </div> 
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" 
-                                type="radio" 
-                                name="floralGrouping" 
-                                value="single"
-                                onChange={props.updateFormField}
-                                checked={props.floralGrouping === "single"}
-                        />
-                        <label className="form-check-label">Single</label>
+                    <div className='form-control'>
+                        <div className="form-check form-check-inline">
+                            <input className="form-check-input" 
+                                    type="radio" 
+                                    name="floralGrouping" 
+                                    value="cluster"
+                                    onChange={props.updateFormField}
+                                    checked={props.floralGrouping === "cluster"}
+                            />
+                            <label className="form-check-label">Cluster</label>
+                        </div> 
+                        <div className="form-check form-check-inline">
+                            <input className="form-check-input" 
+                                    type="radio" 
+                                    name="floralGrouping" 
+                                    value="single"
+                                    onChange={props.updateFormField}
+                                    checked={props.floralGrouping === "single"}
+                            />
+                            <label className="form-check-label">Single</label>
+                        </div>
                     </div>
                 </div>
                 <div className='row'>
@@ -181,6 +184,7 @@ function SpeciesForm(props) {
                             name="imageUrl"
                             onChange={props.updateFormField}
                     />
+                    <p>{props.imageUrlErr}</p>
                 </div>
                 <div className='row'>
                     <label>Region:</label>
@@ -190,6 +194,7 @@ function SpeciesForm(props) {
                             onChange={props.updateFormField}>
                         {props.renderDropdown(props.distributionOptions)}    
                     </select>
+                    <p>{props.distributionErr}</p>
                 </div>
                 <div className='row'>
                     <label>Conservation Status:</label>
@@ -199,6 +204,7 @@ function SpeciesForm(props) {
                             onChange={props.updateFormField}>
                         {props.renderDropdown(props.conservationOptions)}    
                     </select>
+                    <p>{props.conservationStatusErr}</p>
                 </div>
                 <div className='row'>
                     <button className='btn btn-primary'

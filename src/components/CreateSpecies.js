@@ -24,7 +24,19 @@ export default class CreateSpecies extends Component {
     floralGrouping: "",
     imageUrl: "",
     distribution: "",
-    conservationStatus: ""
+    conservationStatus: "",
+
+    commonNameErr: "",
+    officialNameErr:"",
+    genusErr: "",
+    coloursErr: "",
+    petalPatternErr: "",
+    scentsErr:"",
+    imageUrlErr:"",
+    distributionErr:"",
+    conservationStatusErr:""
+
+    
 
   }
 
@@ -67,6 +79,74 @@ export default class CreateSpecies extends Component {
   BASE_API_URL = "http://localhost:8888"
 
   postApi = async () => {
+
+    let errorTracker = false
+
+    if(this.state.commonName === "" || this.state.commonName === undefined){
+      errorTracker = true
+      this.setState({
+        commonNameErr: "Please provide the common name of this species"
+      })
+    } else if (this.state.commonName.length < 3){
+      errorTracker=true
+      this.setState({
+        commonNameErr: "Please enter a name longer than 2 characters"
+      })
+    }
+
+    if(this.state.officialName === "" || this.state.officialName === undefined){
+      errorTracker = true
+      this.setState({
+        officialNameErr: "Please provide the common name of this species"
+      })
+    } else if (this.state.officialName.length < 5){
+      errorTracker=true
+      this.setState({
+        officialNameErr: "Please enter a name longer than 4 characters"
+      })
+    }
+
+    if(this.state.genus === "" || this.state.genus === undefined){
+      errorTracker = true
+      this.setState({
+        genusErr: "Please provide the common name of this species"
+      })
+    } else if (this.state.genus.length < 3){
+      errorTracker=true
+      this.setState({
+        genusErr: "Please enter a name longer than 2 characters"
+      })
+    }
+
+    if(this.state.colours.length === 0){
+      errorTracker = true
+      this.setState({
+        coloursErr: "Please select at least one colour"
+      })
+    }
+
+    if(this.state.petalPattern === "" || this.state.petalPattern === undefined){
+      errorTracker = true
+      this.setState({
+        petalPatternErr: "Please select the closest matching pattern"
+      })
+    }
+
+    if(this.state.scents.length === 0){
+      errorTracker = true
+      this.setState({
+        scentsErr: "Please select at least one scent"
+      })
+    }
+
+
+
+    if(errorTracker){
+      return
+    }
+
+
+
     //error validation here
     await axios.post(this.BASE_API_URL + '/orchid_species', {
       commonName: this.state.commonName,
@@ -84,7 +164,12 @@ export default class CreateSpecies extends Component {
       distribution:this.state.distribution,
       conservationStatus:this.state.conservationStatus
     })
-    console.log('done posting')
+    // .catch( e => {
+    //   this.setState({
+    //     errorMsg: e.response.data.message
+    //   })
+    // })
+    
     // this.props.setActivePage('readAllSpecies')
   }
 
@@ -121,6 +206,17 @@ export default class CreateSpecies extends Component {
           conservationStatus = {this.state.conservationStatus}
 
           message="Listing a new orchid species"
+
+          commonNameErr={this.state.commonNameErr}
+          officialNameErr={this.state.officialNameErr}
+          genusErr={this.state.genusErr}
+          coloursErr={this.state.coloursErr}
+          petalPatternErr={this.state.petalPatternErr}
+          scentsErr={this.state.scentsErr}
+          imageUrlErr={this.state.imageUrlErr}
+          distributionErr={this.state.distributionErr}
+          conservationStatusErr={this.state.conservationStatusErr}
+          
           
         />
 
