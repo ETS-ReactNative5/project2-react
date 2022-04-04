@@ -207,6 +207,7 @@ function SpeciesForm(props) {
                     <p>{props.conservationStatusErr}</p>
                 </div>
                 <div className='row'>
+                    <p>{props.submitMsg}</p>
                     <button className='btn btn-primary'
                             onClick={() => {props.apiMethod()
                                             // props.refreshSpeciesDisplay()

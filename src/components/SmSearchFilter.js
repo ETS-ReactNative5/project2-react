@@ -7,11 +7,7 @@ export default class SmSearchFilter extends Component {
     // orchidColours, updateFormField, updateCheckbox,
     // distributionFilter, conservationFilter, colourFilter
 
-    state = {
-        // distributionFilter: "",
-        // conservationFilter: "",
-        // colourFilter: []
-    }
+    
 
     renderDropdown(options) {
         let selectOptions = options.map(
@@ -20,26 +16,7 @@ export default class SmSearchFilter extends Component {
         return selectOptions
     }
 
-    // updateFormField = (e) => {
-    //     this.setState({
-    //         [e.target.name] : e.target.value
-    //     })
-    // }
 
-    // updateCheckbox = (e) => {
-    //     if(this.state[e.target.name].includes(e.target.value)){
-    //         let indexToRemove = this.state[e.target.name].findIndex( 
-    //             value => value===e.target.value
-    //         )
-    //         this.setState({
-    //             [e.target.name]: [...this.state[e.target.name].slice(0, indexToRemove), ...this.state[e.target.name].slice(indexToRemove + 1)]
-    //         })
-    //     } else {
-    //         this.setState({
-    //             [e.target.name]: [...this.state[e.target.name], e.target.value]
-    //         })
-    //     }
-    // }
 
     
     render() {
@@ -67,13 +44,6 @@ export default class SmSearchFilter extends Component {
                     {this.renderDropdown(this.props.conservationOptions)}    
                 </select>
 
-                {/* <label>Discovered/Created Before:</label>
-                <input type="number"
-                
-                />
-
-                <label>Discovered/Created After:</label> */}
-
 
                 <label>Colours:</label>
                 {this.props.orchidColours.map( eachColour => 
@@ -93,6 +63,17 @@ export default class SmSearchFilter extends Component {
                         </div>
                     </React.Fragment>
                 )}
+
+                <label>Number of facts added:</label>
+                <select className='form-select'
+                        name="factsFilter" 
+                        value={this.props.factsFilter} 
+                        onChange={this.props.updateFormField}
+                        >
+                    <option key='1' value='noFilter'>No selection</option>
+                    <option key='2' value='noFacts'>None</option>
+                    <option key='3' value='factsGte3'>Three or more</option>
+                </select>
 
                 <button className="input-group-text border-0" 
                     id="search-addon"

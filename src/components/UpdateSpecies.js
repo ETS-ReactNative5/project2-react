@@ -5,9 +5,8 @@ import SpeciesForm from './SpeciesForm';
 
 
 export default class UpdateSpecies extends Component {
-
-
-  //props: activeEditId
+  
+  BASE_API_URL = "http://localhost:8888"
 
   state = {
 
@@ -26,7 +25,19 @@ export default class UpdateSpecies extends Component {
     floralGrouping: "",
     imageUrl: "",
     distribution: "",
-    conservationStatus: ""
+    conservationStatus: "",
+
+    commonNameErr: "",
+    officialNameErr:"",
+    genusErr: "",
+    coloursErr: "",
+    petalPatternErr: "",
+    scentsErr:"",
+    imageUrlErr:"",
+    distributionErr:"",
+    conservationStatusErr:"",
+
+    submitMsg:""
   }
 
   updateFormField = (e) => {
@@ -58,16 +69,133 @@ export default class UpdateSpecies extends Component {
   }
 
   apiMethod = () => {
-    console.log(this.BASE_API_URL + '/orchid_species/' + this.props.activeEditId)
-    if(this.state.apiMethod === "post"){
-      this.postApi();
-    } else if(this.state.apiMethod === "put"){
+    if(this.state.apiMethod === "put"){
       this.putApi();
     }
   }
 
   putApi = async () => {
-    //error validation here
+
+    //clear previous errors
+    this.setState({
+      commonNameErr:"",
+      officialNameErr:"",
+      genusErr:"",
+      coloursErr:"",
+      petalPatternErr:"",
+      scentsErr:"",
+      imageUrlErr:"",
+      distributionErr:"",
+      conservationStatusErr:"",
+      submitMsg:""
+    })
+
+    let errorTracker = false
+
+    if(!this.state.commonName){
+      errorTracker = true
+      this.setState({
+        commonNameErr: "Please provide the common name of this species"
+      })
+    } else if (this.state.commonName.length < 3){
+      errorTracker=true
+      this.setState({
+        commonNameErr: "Please enter a name longer than 2 characters"
+      })
+    }
+
+    if(!this.state.officialName){
+      errorTracker = true
+      this.setState({
+        officialNameErr: "Please provide the common name of this species"
+      })
+    } else if (this.state.officialName.length < 5){
+      errorTracker=true
+      this.setState({
+        officialNameErr: "Please enter a name longer than 4 characters"
+      })
+    }
+
+    if(!this.state.genus){
+      errorTracker = true
+      this.setState({
+        genusErr: "Please provide the common name of this species"
+      })
+    } else if (this.state.genus.length < 3){
+      errorTracker=true
+      this.setState({
+        genusErr: "Please enter a name longer than 2 characters"
+      })
+    }
+
+    if(this.state.colours.length === 0){
+      errorTracker = true
+      this.setState({
+        coloursErr: "Please select at least one colour"
+      })
+    }
+
+    if(!this.state.petalPattern){
+      errorTracker = true
+      this.setState({
+        petalPatternErr: "Please select the closest matching pattern"
+      })
+    }
+
+    if(this.state.scents.length === 0){
+      errorTracker = true
+      this.setState({
+        scentsErr: "Please select at least one scent"
+      })
+    }
+
+    const imgUrl = /(https?:\/\/.*\.(?:png|jpg))/i
+
+    if(!this.state.imageUrl){
+      errorTracker=true
+      this.setState({
+        imageUrlErr:"Please provide an image via URL"
+      })
+    } else if( !this.state.imageUrl.match(imgUrl) ){
+      errorTracker=true
+      this.setState({
+        imageUrlErr:"Please provide a valid URL"
+      })
+    }
+
+    if(!this.state.distribution){
+      errorTracker=true
+      this.setState({
+        distributionErr:"Please select where this species is native to"
+      })
+    }
+
+    if(!this.state.conservationStatus){
+      errorTracker=true
+      this.setState({
+        conservationStatusErr:"Please select the conservation status of this species"
+      })
+    }
+
+    if(errorTracker){
+      return
+    }
+
+    if(!errorTracker){
+      this.setState({
+        commonNameErr:"",
+        officialNameErr:"",
+        genusErr:"",
+        coloursErr:"",
+        petalPatternErr:"",
+        scentsErr:"",
+        imageUrlErr:"",
+        distributionErr:"",
+        conservationStatusErr:"",
+        submitMsg:"Thank you for time editing this submission"
+      })
+    }
+
 
     await axios.put(this.BASE_API_URL + '/orchid_species/' + this.props.activeEditId, {
       commonName: this.state.commonName,
@@ -84,14 +212,14 @@ export default class UpdateSpecies extends Component {
       imageUrl:this.state.imageUrl,
       distribution:this.state.distribution,
       conservationStatus:this.state.conservationStatus
-    })
-    console.log('done putting')
-    // setTimeout(this.props.refreshSpeciesDisplay(), 1500)
-    this.props.refreshSpeciesDisplay();
+    }).catch( e => {console.log(e.response.data)})
+    
+    await setTimeout(this.props.refreshSpeciesDisplay(), 2000);
+    // this.props.refreshSpeciesDisplay();
     this.props.setActivePage('readAllSpecies')
   }
 
-  BASE_API_URL = "http://localhost:8888"
+  
 
   async componentDidMount() {
     let documentEdit = await axios.get(this.BASE_API_URL + "/orchid_species/" + this.props.activeEditId)
@@ -153,6 +281,18 @@ export default class UpdateSpecies extends Component {
           conservationStatus = {this.state.conservationStatus}
 
           message={"Editing information about " + this.state.officialName}
+
+          commonNameErr={this.state.commonNameErr}
+          officialNameErr={this.state.officialNameErr}
+          genusErr={this.state.genusErr}
+          coloursErr={this.state.coloursErr}
+          petalPatternErr={this.state.petalPatternErr}
+          scentsErr={this.state.scentsErr}
+          imageUrlErr={this.state.imageUrlErr}
+          distributionErr={this.state.distributionErr}
+          conservationStatusErr={this.state.conservationStatusErr}
+
+          submitMsg={this.state.submitMsg}
           
         />
       </React.Fragment>

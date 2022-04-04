@@ -86,7 +86,7 @@ export default class Landing extends React.Component {
                         orchidPetalPatternOptions={this.state.orchidPetalPatternOptions}
                         distributionOptions={this.state.distributionOptions}
                         conservationOptions={this.state.conservationOptions}
-
+                        refreshSpeciesDisplay={this.refreshSpeciesDisplay}
                         />
                 break;
             case "updateSpecies":

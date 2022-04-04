@@ -4,6 +4,8 @@ import SpeciesForm from './SpeciesForm';
 
 export default class CreateSpecies extends Component {
 
+  BASE_API_URL = "http://localhost:8888"
+
   //props: setActivePage, orchidColours, orchidScentsOptions, orchidPetalPatternOptions.
   //distribution, conservation
   
@@ -34,10 +36,9 @@ export default class CreateSpecies extends Component {
     scentsErr:"",
     imageUrlErr:"",
     distributionErr:"",
-    conservationStatusErr:""
+    conservationStatusErr:"",
 
-    
-
+    submitMsg:""
   }
 
   updateFormField = (e) => {
@@ -71,18 +72,28 @@ export default class CreateSpecies extends Component {
   apiMethod = () => {
     if(this.state.apiMethod === "post"){
       this.postApi();
-    } else if(this.state.apiMethod === "put"){
-      this.putApi();
     }
   }
 
-  BASE_API_URL = "http://localhost:8888"
-
   postApi = async () => {
+
+    //clear previous errors
+    this.setState({
+      commonNameErr:"",
+      officialNameErr:"",
+      genusErr:"",
+      coloursErr:"",
+      petalPatternErr:"",
+      scentsErr:"",
+      imageUrlErr:"",
+      distributionErr:"",
+      conservationStatusErr:"",
+      submitMsg:""
+    })
 
     let errorTracker = false
 
-    if(this.state.commonName === "" || this.state.commonName === undefined){
+    if(!this.state.commonName){
       errorTracker = true
       this.setState({
         commonNameErr: "Please provide the common name of this species"
@@ -94,7 +105,7 @@ export default class CreateSpecies extends Component {
       })
     }
 
-    if(this.state.officialName === "" || this.state.officialName === undefined){
+    if(!this.state.officialName){
       errorTracker = true
       this.setState({
         officialNameErr: "Please provide the common name of this species"
@@ -106,7 +117,7 @@ export default class CreateSpecies extends Component {
       })
     }
 
-    if(this.state.genus === "" || this.state.genus === undefined){
+    if(!this.state.genus){
       errorTracker = true
       this.setState({
         genusErr: "Please provide the common name of this species"
@@ -125,7 +136,7 @@ export default class CreateSpecies extends Component {
       })
     }
 
-    if(this.state.petalPattern === "" || this.state.petalPattern === undefined){
+    if(!this.state.petalPattern){
       errorTracker = true
       this.setState({
         petalPatternErr: "Please select the closest matching pattern"
@@ -139,15 +150,53 @@ export default class CreateSpecies extends Component {
       })
     }
 
+    const imgUrl = /(https?:\/\/.*\.(?:png|jpg))/i
 
+    if(!this.state.imageUrl){
+      errorTracker=true
+      this.setState({
+        imageUrlErr:"Please provide an image via URL"
+      })
+    } else if( !this.state.imageUrl.match(imgUrl) ){
+      errorTracker=true
+      this.setState({
+        imageUrlErr:"Please provide a valid URL"
+      })
+    }
+
+    if(!this.state.distribution){
+      errorTracker=true
+      this.setState({
+        distributionErr:"Please select where this species is native to"
+      })
+    }
+
+    if(!this.state.conservationStatus){
+      errorTracker=true
+      this.setState({
+        conservationStatusErr:"Please select the conservation status of this species"
+      })
+    }
 
     if(errorTracker){
       return
     }
 
+    if(!errorTracker){
+      this.setState({
+        commonNameErr:"",
+        officialNameErr:"",
+        genusErr:"",
+        coloursErr:"",
+        petalPatternErr:"",
+        scentsErr:"",
+        imageUrlErr:"",
+        distributionErr:"",
+        conservationStatusErr:"",
+        submitMsg:"Thank you for your submission"
+      })
+    }
 
-
-    //error validation here
     await axios.post(this.BASE_API_URL + '/orchid_species', {
       commonName: this.state.commonName,
       officialName: this.state.officialName,
@@ -163,7 +212,11 @@ export default class CreateSpecies extends Component {
       imageUrl:this.state.imageUrl,
       distribution:this.state.distribution,
       conservationStatus:this.state.conservationStatus
-    })
+    }).catch( e => {console.log(e.response.data)})
+      
+    await setTimeout(this.props.refreshSpeciesDisplay(), 2000);
+
+    this.props.setActivePage('readAllSpecies');
     // .catch( e => {
     //   this.setState({
     //     errorMsg: e.response.data.message
@@ -176,7 +229,6 @@ export default class CreateSpecies extends Component {
   render() {
     return (
       <React.Fragment>
-        <div>CreateSpecies</div>
         <SpeciesForm 
           orchidColours = {this.props.orchidColours}
           orchidScentsOptions = {this.props.orchidScentsOptions}
@@ -216,6 +268,8 @@ export default class CreateSpecies extends Component {
           imageUrlErr={this.state.imageUrlErr}
           distributionErr={this.state.distributionErr}
           conservationStatusErr={this.state.conservationStatusErr}
+
+          submitMsg={this.state.submitMsg}
           
           
         />

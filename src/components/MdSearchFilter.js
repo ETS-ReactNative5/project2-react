@@ -67,18 +67,8 @@ export default class MdSearchFilter extends Component {
                             </div>
                         </React.Fragment>
                     )}
-
               </div>
-              <div className='col col-md-2 my-auto'>
-                {/* <button className="input-group-text border-0" 
-                          id="search-addon"
-                          onClick={() => {this.props.getSearchResults();
-                                          this.props.setActivePage("readAllSpecies")}}
-                          >
-                          Apply filters
-                </button> */}
-
-              </div>
+              <div className='col col-md-2 my-auto'></div>
             </div>
             <div className='row border border-primary border-3'>
               <div className='col col-6 my-auto'>
@@ -91,7 +81,6 @@ export default class MdSearchFilter extends Component {
                         <option key='1' value='noFilter'>No selection</option>
                         <option key='2' value='noFacts'>None</option>
                         <option key='3' value='factsGte3'>Three or more</option>
-                        {/* <option key={eachOption._id} value={eachOption._id}>{eachOption.name}</option> */}
                       </select>
               </div>
               <div className='col col-6 my-auto'>
