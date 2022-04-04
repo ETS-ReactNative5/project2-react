@@ -109,7 +109,7 @@ function SpeciesModal(props) {
                                 onClick={
                                     () => {
                                         props.postApiUserFavourite(props.eachItem._id);
-                                        props.setActivePage('readUserProfile');
+                                        // props.setActivePage('readUserProfile');
                                     }
                                 }
                             >

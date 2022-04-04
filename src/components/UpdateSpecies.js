@@ -214,7 +214,7 @@ export default class UpdateSpecies extends Component {
       conservationStatus:this.state.conservationStatus
     }).catch( e => {console.log(e.response.data)})
     
-    await setTimeout(this.props.refreshSpeciesDisplay(), 2000);
+    await setTimeout(() => {this.props.refreshSpeciesDisplay()}, 5000);
     // this.props.refreshSpeciesDisplay();
     this.props.setActivePage('readAllSpecies')
   }

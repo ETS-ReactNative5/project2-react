@@ -26,6 +26,8 @@ import { TiThMenu } from 'react-icons/ti'
 
 
 export default class Landing extends React.Component {
+    BASE_API_URL = "http://localhost:8888"
+
     state = {
 
         dataLoaded: false,
@@ -56,7 +58,9 @@ export default class Landing extends React.Component {
         currentUserId: "",
         registrationMsg: "",
         loginMsg: "",
-        loggedIn: false
+        loggedIn: false,
+        userFavouriteIds: [],
+        userFavouriteSpecies: []
 
     }
 
@@ -125,6 +129,8 @@ export default class Landing extends React.Component {
                         conservationOptions={this.state.conservationOptions}
                         setActivePage={this.setActivePage}
                         selectEdit = {this.selectEdit}
+                        userFavouriteIds={this.state.userFavouriteIds}
+                        userFavouriteSpecies={this.state.userFavouriteSpecies}
                 />
                 break;
             case "login":
@@ -217,7 +223,7 @@ export default class Landing extends React.Component {
             payload.params.conservationFilter = this.state.conservationFilter
         }
 
-        if(this.state.colourFilter){
+        if(this.state.colourFilter.length > 0){
             payload.params.colourFilter = this.state.colourFilter
         }
 
@@ -287,11 +293,37 @@ export default class Landing extends React.Component {
             });
         });
 
-        console.log(response.data)
         this.setState({
             currentUserId: response.data._id,
             loginMsg:"You have logged in successfully.",
             loggedIn: true
+        })
+
+        return this.getUserFavouriteIds();
+    }
+
+    getUserFavouriteIds = async() => {
+        if(this.state.currentUserId){
+            let userFavouritesResponse = await axios.get(this.BASE_API_URL + '/users/' + this.state.currentUserId)
+            this.setState({
+                userFavouriteIds:userFavouritesResponse.data.favourites
+            })
+        }
+        return this.getUserFavouriteSpecies();
+    }
+
+    getUserFavouriteSpecies = async() => {
+        let payload = {
+            params: {}
+        }
+
+        if(this.state.userFavouriteIds.length > 0 ){
+            payload.params.userFavouriteIds = this.state.userFavouriteIds
+        }
+
+        let userFavouritesResponse = await axios.get(this.BASE_API_URL + '/orchid_species', payload);
+        this.setState({
+            userFavouriteSpecies: userFavouritesResponse.data
         })
     }
 
@@ -302,7 +334,6 @@ export default class Landing extends React.Component {
     }
 
 
-    BASE_API_URL = "http://localhost:8888"
 
     // getApi = async () => {
     //     let speciesResponse = await axios.get(this.BASE_API_URL + "/orchid_species");
