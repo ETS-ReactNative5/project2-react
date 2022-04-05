@@ -17,6 +17,8 @@ import CreateUserProfile from  "./components/CreateUserProfile";
 import ReadUserProfile from "./components/ReadUserProfile";
 import Login from "./components/Login";
 
+import Footer from './components/Footer'
+
 import { FaUserAlt } from 'react-icons/fa'
 import { BsSearch } from 'react-icons/bs'
 import { TiThMenu } from 'react-icons/ti'
@@ -77,7 +79,8 @@ export default class Landing extends React.Component {
                         setActivePage={this.setActivePage}
                         selectEdit = {this.selectEdit}
                         showMdSearchFilter={this.state.showMdSearchFilter}
-                        postApiUserFavourite={this.postApiUserFavourite}
+                        checkApiUserFavourite={this.checkApiUserFavourite}
+                        userFavouriteIds={this.state.userFavouriteIds}
                         // selectActiveDisplay={this.selectActiveDisplay}
                         // renderModal={this.renderModal}
                         />
@@ -131,6 +134,7 @@ export default class Landing extends React.Component {
                         selectEdit = {this.selectEdit}
                         userFavouriteIds={this.state.userFavouriteIds}
                         userFavouriteSpecies={this.state.userFavouriteSpecies}
+                        checkApiUserFavourite={this.checkApiUserFavourite}
                 />
                 break;
             case "login":
@@ -302,6 +306,18 @@ export default class Landing extends React.Component {
         return this.getUserFavouriteIds();
     }
 
+    checkApiUserFavourite = async(speciesId) => {
+
+        if(this.state.userFavouriteIds.includes(speciesId)){
+            await axios.delete(this.BASE_API_URL + '/users/' + this.state.currentUserId + '/favourites/' + speciesId)
+        } else {
+            await axios.post(this.BASE_API_URL + '/users/' + this.state.currentUserId + '/favourites/' + speciesId, {
+                favourites: speciesId
+            })
+        }
+        return this.getUserFavouriteIds();
+    }
+
     getUserFavouriteIds = async() => {
         if(this.state.currentUserId){
             let userFavouritesResponse = await axios.get(this.BASE_API_URL + '/users/' + this.state.currentUserId)
@@ -317,21 +333,20 @@ export default class Landing extends React.Component {
             params: {}
         }
 
-        if(this.state.userFavouriteIds.length > 0 ){
+        // && this.state.userFavouriteIds.length > 0
+        // if(this.state.userFavouriteIds.length > 0 ){
+        if(this.state.currentUserId){
             payload.params.userFavouriteIds = this.state.userFavouriteIds
-        }
-
-        let userFavouritesResponse = await axios.get(this.BASE_API_URL + '/orchid_species', payload);
-        this.setState({
+            let userFavouritesResponse = await axios.get(this.BASE_API_URL + '/orchid_species', payload);
+            this.setState({
             userFavouriteSpecies: userFavouritesResponse.data
         })
+        }
+
+        
     }
 
-    postApiUserFavourite = async(speciesId) => {
-        await axios.post(this.BASE_API_URL + '/users/' + this.state.currentUserId + '/favourites/' + speciesId, {
-            favourites: speciesId
-        })
-    }
+    
 
 
 
@@ -439,7 +454,10 @@ export default class Landing extends React.Component {
                                                 this.setState({
                                                     showMdSearchFilter: true,
                                                     currentUserId: "",
-                                                    loggedIn:false
+                                                    loggedIn:false,
+                                                    userEmail: "",
+                                                    userFavouriteIds: [],
+                                                    userFavouriteSpecies: []
                                                 });
                                             }}
                                             >
@@ -535,9 +553,9 @@ export default class Landing extends React.Component {
                     }
                     <div className="border border-success">
                         {this.renderPage()}
-
                     </div>
                     {/* FOOTER GOES HERE */}
+                    <Footer/>
                 </div>
             </React.Fragment>
         )

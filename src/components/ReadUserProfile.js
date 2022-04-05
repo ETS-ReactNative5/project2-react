@@ -67,7 +67,8 @@ export default class ReadUserProfile extends Component {
                               setActivePage={this.props.setActivePage}
                               selectEdit = {this.props.selectEdit}
                               showMdSearchFilter={this.props.showMdSearchFilter}
-                              // postApiUserFavourite={this.props.postApiUserFavourite}
+                              checkApiUserFavourite={this.props.checkApiUserFavourite}
+                              userFavouriteIds={this.props.userFavouriteIds}
                               />
                 </div>
               </React.Fragment>

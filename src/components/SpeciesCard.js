@@ -10,7 +10,8 @@ import FactsModal from './FactsModal';
 export default class SpeciesCard extends Component {
     state = {
         activeDistribution: "",
-        activeConservation: ""
+        activeConservation: "",
+        favourited: false
 
     }
 
@@ -73,10 +74,41 @@ export default class SpeciesCard extends Component {
         return output
     }
 
+    checkFavourited() {
+        // return console.log('here')
+    // if(this.props.userFavouriteIds.length > 0){
+        if(this.props.userFavouriteIds.includes(this.props.eachItem._id)){
+            this.setState({
+                favourited:true
+                
+            })
+        } else {
+            this.setState({
+                favourited: false
+            })
+        }
+    // }
+}
+
+    componentDidUpdate(prevProps){
+        if(prevProps.userFavouriteIds !== this.props.userFavouriteIds){
+            console.log('componenddidupdate')
+            return this.checkFavourited()
+        }
+    }
+    
+    componentDidMount() {
+        this.checkFavourited()
+    }
+
+    
+
     render() {
+        // {this.checkFavourited()}
         // console.log(this.props.eachItem)
         return (
             <React.Fragment key={this.props.eachItem._id}>
+                
                 <div className='card'
                     style={{
                         height: "50vh",
@@ -130,7 +162,8 @@ export default class SpeciesCard extends Component {
                             setActivePage={this.props.setActivePage}
                             selectEdit={this.props.selectEdit}
                             showMdSearchFilter = {this.props.showMdSearchFilter}
-                            postApiUserFavourite={this.props.postApiUserFavourite}
+                            checkApiUserFavourite={this.props.checkApiUserFavourite}
+                            favourited={this.state.favourited}
                         />
                         <FactsModal eachItem={this.props.eachItem}
                         />

@@ -27,14 +27,16 @@ export default class ReadAllSpecies extends Component {
               eachItem => 
               <React.Fragment key={eachItem._id}>
                 <div className='col col-10 col-sm-8 col-md-6 col-lg-4 col-xl-3 border border-danger mx-auto'>
-                <SpeciesCard eachItem={eachItem}
+                <SpeciesCard  eachItem={eachItem}
                               distributionOptions={this.props.distributionOptions}
                               conservationOptions={this.props.conservationOptions}
                               // selectActiveDisplay={this.props.selectActiveDisplay}
                               setActivePage={this.props.setActivePage}
                               selectEdit = {this.props.selectEdit}
                               showMdSearchFilter={this.props.showMdSearchFilter}
-                              postApiUserFavourite={this.props.postApiUserFavourite}
+                              checkApiUserFavourite={this.props.checkApiUserFavourite}
+                              userFavouriteIds={this.props.userFavouriteIds}
+                              // {}
                               />
                 </div>
               </React.Fragment>

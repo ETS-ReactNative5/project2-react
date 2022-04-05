@@ -105,15 +105,15 @@ function SpeciesModal(props) {
                             </button>
                             <button type="button"
                                 className="btn"
-                                data-bs-dismiss="modal"
+                                // data-bs-dismiss="modal"
                                 onClick={
                                     () => {
-                                        props.postApiUserFavourite(props.eachItem._id);
+                                        props.checkApiUserFavourite(props.eachItem._id);
                                         // props.setActivePage('readUserProfile');
                                     }
                                 }
                             >
-                                <BsSuitHeart/>
+                                {props.favourited === true ? <BsSuitHeartFill/> : <BsSuitHeart/>}
                             </button>
                         </div>
                     </div>
