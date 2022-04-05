@@ -70,6 +70,13 @@ export default class ReadUserProfile extends Component {
   //   })
   // }
 
+  readEmail = () => {
+
+    this.setState({
+      action: "readingEmail"
+    })
+  }
+
   beginEditEmail() {
     return <div className="form-floating mb-3">
     <input type="email" 
@@ -83,9 +90,10 @@ export default class ReadUserProfile extends Component {
     <button className='btn'
             onClick={async () => {
               await this.props.putApiUserEmail();
-              setTimeout( this.setState({
+              this.setState({
                 action: "readingEmail"
-              }), 3000)
+              });
+              // setTimeout(this.readEmail, 3000)
             }}
             >
               Submit
@@ -111,7 +119,7 @@ export default class ReadUserProfile extends Component {
             <div className='col-6 d-flex'>
                 <button className='btn ms-auto'
                         data-bs-toggle="collapse" 
-                        data-bs-target={"#collapseExample"} 
+                        data-bs-target="#collapseExample"
                         aria-expanded="false" 
                         aria-controls="collapseExample"
                 >
@@ -120,8 +128,13 @@ export default class ReadUserProfile extends Component {
             </div>
             <div className='col-6 d-flex'>
                 <button className='btn me-auto'
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#collapseExample"
+                        aria-expanded="false" 
+                        aria-controls="collapseExample"
                         onClick={async() => {
                           await this.props.deleteApiUserEmail()
+                          // this.props.setActivePage('main')
                           setTimeout(() => this.props.setActivePage('main'), 3000)
                         }}
                 >

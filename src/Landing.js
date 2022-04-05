@@ -308,6 +308,17 @@ export default class Landing extends React.Component {
             this.setState({
                 editEmailMsg: e.response.data.message
             })
+        }).then((res)=> {
+            if(res.status === 200){
+                this.setState({
+                    editEmailMsg: "Your email has been changed"
+                })
+                setTimeout(() => {
+                    this.setState({
+                        editEmailMsg: ""
+                    })
+                }, 3000)      
+            }
         })
         
         // .then(() => {
@@ -326,10 +337,22 @@ export default class Landing extends React.Component {
 
     deleteApiUserEmail = async() => {
         await axios.delete(this.BASE_API_URL + '/users/' + this.state.currentUserId)
+                    .then((res) => {
+                        if(res.status === 200){
+                            this.setState({
+                                editEmailMsg: "Your email has been deleted. You will now be redirected to the main page"
+                            })
+                            setTimeout(this.deleteEmailActions, 5000)
+                        }
+                    })
+    }
+
+    deleteEmailActions = () => {
         this.setState({
             currentUserId: "",
             loggedIn: false,
-            userEmail: ""
+            userEmail: "",
+            editEmailMsg: ""
         })
     }
 
