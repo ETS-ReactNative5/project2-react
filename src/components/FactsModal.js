@@ -90,10 +90,7 @@ export default class FactsModal extends Component {
     }
 
     editFact = (factIdBeingEdited) => {
-        console.log('editfact')
-        console.log(factIdBeingEdited)
         let factBeingEdited = this.state.facts.find( fact => fact._id === factIdBeingEdited)
-        console.log(factBeingEdited)
         this.setState({
             factIdBeingEdited: factIdBeingEdited,
             factToChange: factBeingEdited.fact
@@ -214,7 +211,7 @@ export default class FactsModal extends Component {
 
     renderContent() {
         if(this.state.action === 'addingNewFact'){
-           return this.renderTextbox();
+            return this.renderTextbox();
         } else if(this.state.action === 'readingFacts'){
             return this.renderFacts();
         }
@@ -240,9 +237,9 @@ export default class FactsModal extends Component {
                             </div>
                             <div className="modal-body">
                                 <div className = 'row'>
-                                <div className='col col-md-8 mx-auto'>
-                                {this.renderContent()}
-                                </div>
+                                    <div className='col col-md-8 mx-auto'>
+                                    {this.renderContent()}
+                                    </div>
 
                                 </div>
                                 

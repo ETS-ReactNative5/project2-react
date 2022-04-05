@@ -60,6 +60,7 @@ export default class Landing extends React.Component {
         currentUserId: "",
         registrationMsg: "",
         loginMsg: "",
+        editEmailMsg: "",
         loggedIn: false,
         userFavouriteIds: [],
         userFavouriteSpecies: [],
@@ -130,6 +131,10 @@ export default class Landing extends React.Component {
             case "readUserProfile":
                 return <ReadUserProfile
                         currentUserId={this.state.currentUserId}
+                        userEmail={this.state.userEmail}
+                        updateFormField = {this.updateFormField}
+                        putApiUserEmail = {this.putApiUserEmail}
+                        editEmailMsg={this.state.editEmailMsg}
                         distributionOptions={this.state.distributionOptions}
                         conservationOptions={this.state.conservationOptions}
                         setActivePage={this.setActivePage}
@@ -274,16 +279,27 @@ export default class Landing extends React.Component {
             this.setState({
                 registrationMsg: e.response.data.message
             });
-        });
-
-        // console.log(e.response.data.message)
-        // console.log(results.data.insertedId)
+        })
 
         this.setState({
             currentUserId: results.data.insertedId,
             registrationMsg:"Thanks for registering an account! You can now save favourites to your profile.",
             loggedIn: true
         })
+    }
+
+    putApiUserEmail = async () => {
+        this.setState({
+            editEmailMsg: ""
+        })
+        await axios.put(this.BASE_API_URL + '/users/' + this.state.currentUserId,{
+            userEmail: this.state.userEmail
+        }).catch((e) => {
+            this.setState({
+                editEmailMsg: e.response.data.message
+            })
+        });
+        
     }
 
     getApiUserEmail = async() => {

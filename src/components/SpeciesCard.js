@@ -13,7 +13,6 @@ export default class SpeciesCard extends Component {
         activeConservation: "",
         favourited: false,
         instructionMsg:""
-
     }
 
     // BASE_API_URL = "http://localhost:8888"
@@ -92,19 +91,9 @@ export default class SpeciesCard extends Component {
     }
 
     setInstructions = () => {
-
-        if(this.props.loggedIn === false){
-            this.setState({
-                instructionMsg: "Please create an account to favourite a species"
-            })
-        } else {
-            this.setState({
-                instructionMsg: ""
-            })
-        }
-        // this.setState({
-        //     instructionMsg: (this.props.loggedIn === false) ? "Please create an account to favourite a species" : "" 
-        // })
+        this.setState({
+            instructionMsg: (this.props.loggedIn) ? "" :"Please create an account to favourite a species" 
+        })
     }
 
     clearInstructions = () => {
@@ -123,8 +112,6 @@ export default class SpeciesCard extends Component {
     componentDidMount() {
         this.checkFavourited()
     }
-
-    
 
     render() {
         // {this.checkFavourited()}

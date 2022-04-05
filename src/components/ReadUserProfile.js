@@ -3,6 +3,9 @@ import React, { Component } from 'react'
 
 import SpeciesCard from './SpeciesCard'
 
+import { AiFillEdit } from 'react-icons/ai'
+
+
 export default class ReadUserProfile extends Component {
 
   BASE_API_URL = "http://localhost:8888"
@@ -10,8 +13,9 @@ export default class ReadUserProfile extends Component {
   state = {
     // userFavouriteIds: [],
     // userFavouriteSpecies: [],
-    loaded: false
+    // loaded: false
     // userFavouriteSpecies2:[]
+    action: "readingEmail"
   }
 
   // componentDidUpdate(prevState){
@@ -58,12 +62,70 @@ export default class ReadUserProfile extends Component {
 
   // }
 
+  // editEmail = () => {
+  //   this.setState({
+  //     action: "editingEmail"
+  //   })
+  // }
+
+  beginEditEmail() {
+    return <div className="form-floating mb-3">
+    <input type="email" 
+            className="form-control" 
+            id="floatingInput" 
+            placeholder="name@example.com"
+            name='userEmail'
+            onChange={this.props.updateFormField}
+            />
+    <label htmlFor="floatingInput">New email address</label>
+    <button className='btn'
+            onClick={() => {this.props.putApiUserEmail()}}
+                >
+                  Submit
+    </button>
+    <p>{this.props.editEmailMsg}</p>
+  </div>
+  }
+
+  renderEmail() {
+    return <div className='d-flex'>
+      
+        <p>Hello, {this.props.userEmail}</p>
+        <button className='btn ms-auto'
+                onClick={() => {this.setState({
+                  action: "editingEmail"
+                })}}
+                >
+                  <AiFillEdit  />
+        </button>
+      </div>
+  }
+
+  renderContent() {
+    if(this.state.action === 'editingEmail'){
+      return this.beginEditEmail()
+    } else if(this.state.action === 'readingEmail'){
+      return this.renderEmail()
+    }
+  }
+
   render() {
 
+    // dont need this if validation because users can't even see this page without creating an account/logging in first?
+    // needs validation if favourites == 0
     if(this.props.currentUserId){
       // if (this.state.loaded) {
         return <React.Fragment>
-          <div className='row'>
+        {/* <div className = 'row'>
+          <div className='col col-2'></div>
+          <div className='col-8 border border-primary border-3'>
+            {this.renderContent()}
+          </div>
+          <div className='col col-2'></div>
+        </div> */}
+        <div className='border border-primary border-3'>{this.renderContent()}</div>
+
+        <div className='row'>
             {this.props.userFavouriteSpecies.map(
               eachItem => 
               <React.Fragment key={eachItem._id}>
@@ -82,6 +144,8 @@ export default class ReadUserProfile extends Component {
               </React.Fragment>
             )}
         </div>
+
+
         </React.Fragment>;
     // } else {
     //     return <React.Fragment>
