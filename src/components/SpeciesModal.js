@@ -26,7 +26,9 @@ function SpeciesModal(props) {
                             <button type="button"
                                 className="btn-close"
                                 data-bs-dismiss="modal"
-                                aria-label="Close">
+                                aria-label="Close"
+                                onClick={() => props.clearInstructions()}
+                                >
                             </button>
                         </div>
                         <div className="modal-body">
@@ -89,6 +91,7 @@ function SpeciesModal(props) {
                                     </tr>
                                 </tbody>
                             </table>
+                            <p>{props.instructionMsg}</p>
                         </div>
                         <div className="modal-footer">
                             <button type="button"
@@ -96,6 +99,7 @@ function SpeciesModal(props) {
                                 data-bs-dismiss="modal"
                                 onClick={
                                     () => {
+                                        props.clearInstructions();
                                         props.selectEdit(props.eachItem._id);
                                         props.setActivePage('updateSpecies');
                                     }
@@ -108,6 +112,7 @@ function SpeciesModal(props) {
                                 // data-bs-dismiss="modal"
                                 onClick={
                                     () => {
+                                        props.setInstructions()
                                         props.checkApiUserFavourite(props.eachItem._id);
                                         // props.setActivePage('readUserProfile');
                                     }

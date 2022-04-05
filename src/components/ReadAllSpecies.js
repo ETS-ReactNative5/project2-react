@@ -36,7 +36,7 @@ export default class ReadAllSpecies extends Component {
                               showMdSearchFilter={this.props.showMdSearchFilter}
                               checkApiUserFavourite={this.props.checkApiUserFavourite}
                               userFavouriteIds={this.props.userFavouriteIds}
-                              // {}
+                              loggedIn={this.props.loggedIn}
                               />
                 </div>
               </React.Fragment>

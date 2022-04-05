@@ -62,7 +62,8 @@ export default class Landing extends React.Component {
         loginMsg: "",
         loggedIn: false,
         userFavouriteIds: [],
-        userFavouriteSpecies: []
+        userFavouriteSpecies: [],
+        instructions: ""
 
     }
 
@@ -81,6 +82,7 @@ export default class Landing extends React.Component {
                         showMdSearchFilter={this.state.showMdSearchFilter}
                         checkApiUserFavourite={this.checkApiUserFavourite}
                         userFavouriteIds={this.state.userFavouriteIds}
+                        loggedIn={this.state.loggedIn}
                         // selectActiveDisplay={this.selectActiveDisplay}
                         // renderModal={this.renderModal}
                         />
@@ -293,7 +295,8 @@ export default class Landing extends React.Component {
                 }
             }).catch( (e) => {
             this.setState({
-                loginMsg: e.response.data.message
+                loginMsg: e.response.data.message,
+                instructions: ""
             });
         });
 
@@ -308,14 +311,18 @@ export default class Landing extends React.Component {
 
     checkApiUserFavourite = async(speciesId) => {
 
-        if(this.state.userFavouriteIds.includes(speciesId)){
-            await axios.delete(this.BASE_API_URL + '/users/' + this.state.currentUserId + '/favourites/' + speciesId)
-        } else {
-            await axios.post(this.BASE_API_URL + '/users/' + this.state.currentUserId + '/favourites/' + speciesId, {
-                favourites: speciesId
-            })
+        if(this.state.loggedIn){
+            if(this.state.userFavouriteIds.includes(speciesId)){
+                await axios.delete(this.BASE_API_URL + '/users/' + this.state.currentUserId + '/favourites/' + speciesId)
+            } else {
+                await axios.post(this.BASE_API_URL + '/users/' + this.state.currentUserId + '/favourites/' + speciesId, {
+                    favourites: speciesId
+                })
+            }
+            return this.getUserFavouriteIds();
         }
-        return this.getUserFavouriteIds();
+        
+        
     }
 
     getUserFavouriteIds = async() => {
@@ -334,7 +341,6 @@ export default class Landing extends React.Component {
         }
 
         // && this.state.userFavouriteIds.length > 0
-        // if(this.state.userFavouriteIds.length > 0 ){
         if(this.state.currentUserId){
             payload.params.userFavouriteIds = this.state.userFavouriteIds
             let userFavouritesResponse = await axios.get(this.BASE_API_URL + '/orchid_species', payload);

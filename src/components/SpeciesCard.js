@@ -11,7 +11,8 @@ export default class SpeciesCard extends Component {
     state = {
         activeDistribution: "",
         activeConservation: "",
-        favourited: false
+        favourited: false,
+        instructionMsg:""
 
     }
 
@@ -88,7 +89,29 @@ export default class SpeciesCard extends Component {
             })
         }
     // }
-}
+    }
+
+    setInstructions = () => {
+
+        if(this.props.loggedIn === false){
+            this.setState({
+                instructionMsg: "Please create an account to favourite a species"
+            })
+        } else {
+            this.setState({
+                instructionMsg: ""
+            })
+        }
+        // this.setState({
+        //     instructionMsg: (this.props.loggedIn === false) ? "Please create an account to favourite a species" : "" 
+        // })
+    }
+
+    clearInstructions = () => {
+        this.setState({
+            instructionMsg: ""
+        })
+    }
 
     componentDidUpdate(prevProps){
         if(prevProps.userFavouriteIds !== this.props.userFavouriteIds){
@@ -164,6 +187,9 @@ export default class SpeciesCard extends Component {
                             showMdSearchFilter = {this.props.showMdSearchFilter}
                             checkApiUserFavourite={this.props.checkApiUserFavourite}
                             favourited={this.state.favourited}
+                            instructionMsg={this.state.instructionMsg}
+                            setInstructions={this.setInstructions}
+                            clearInstructions={this.clearInstructions}
                         />
                         <FactsModal eachItem={this.props.eachItem}
                         />

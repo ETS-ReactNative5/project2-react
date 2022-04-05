@@ -11,7 +11,15 @@ export default class ReadUserProfile extends Component {
     // userFavouriteIds: [],
     // userFavouriteSpecies: [],
     loaded: false
+    // userFavouriteSpecies2:[]
   }
+
+  // componentDidUpdate(prevState){
+  //   if(prevState.userFavouriteIds !== this.props.userFavouriteIds){
+  //       console.log('componenddidupdate')
+  //       await
+  //   }
+  // }
 
 
   // getUserFavourites = async() => {
