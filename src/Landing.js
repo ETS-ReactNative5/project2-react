@@ -134,6 +134,7 @@ export default class Landing extends React.Component {
                         userEmail={this.state.userEmail}
                         updateFormField = {this.updateFormField}
                         putApiUserEmail = {this.putApiUserEmail}
+                        deleteApiUserEmail={this.deleteApiUserEmail}
                         editEmailMsg={this.state.editEmailMsg}
                         distributionOptions={this.state.distributionOptions}
                         conservationOptions={this.state.conservationOptions}
@@ -280,12 +281,21 @@ export default class Landing extends React.Component {
                 registrationMsg: e.response.data.message
             });
         })
+        // .then(() => {
+        //     this.setState({
+        //         currentUserId: results.data.insertedId,
+        //         registrationMsg:"Thanks for registering an account! You can now save favourites to your profile.",
+        //         loggedIn: true
+        //     })
+        // })
 
         this.setState({
-            currentUserId: results.data.insertedId,
-            registrationMsg:"Thanks for registering an account! You can now save favourites to your profile.",
-            loggedIn: true
-        })
+                    currentUserId: results.data.insertedId,
+                    registrationMsg:"Thanks for registering an account! You can now save favourites to your profile.",
+                    loggedIn: true
+                })
+
+        
     }
 
     putApiUserEmail = async () => {
@@ -298,8 +308,29 @@ export default class Landing extends React.Component {
             this.setState({
                 editEmailMsg: e.response.data.message
             })
-        });
+        })
         
+        // .then(() => {
+        //     this.setState({
+        //         editEmailMsg: "Your email has been changed"
+        //     })
+
+        //     setTimeout(() => {
+        //         this.setState({
+        //             editEmailMsg: ""
+        //         })
+        //     }, 3000)
+        // });
+        
+    }
+
+    deleteApiUserEmail = async() => {
+        await axios.delete(this.BASE_API_URL + '/users/' + this.state.currentUserId)
+        this.setState({
+            currentUserId: "",
+            loggedIn: false,
+            userEmail: ""
+        })
     }
 
     getApiUserEmail = async() => {

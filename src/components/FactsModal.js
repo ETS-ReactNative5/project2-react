@@ -47,13 +47,11 @@ export default class FactsModal extends Component {
             factToChange: "",
             factIdBeingEdited: ""
         })
-        console.log('done putting fact to ' + this.props.eachItem.officialName)
         return this.refreshFacts();
     }
 
     apiFactsDelete = async(factIdToDelete) => {
         await axios.delete(this.BASE_API_URL + '/orchid_species/' + this.props.eachItem._id + '/facts/' + factIdToDelete)
-        console.log('done deleting fact')
         return this.refreshFacts();
     }
 
@@ -139,24 +137,24 @@ export default class FactsModal extends Component {
                             Are you sure you wish to delete the above fact?
                         </div>
                         <div className='row'>
-                        <div className='col-6'>
-                            <button className='btn mx-auto'
-                                    onClick={() => {this.apiFactsDelete(f._id)}}
-                            >
-                                <TiTick/>
-                            </button>
+                            <div className='col-6 d-flex'>
+                                <button className='btn ms-auto'
+                                        onClick={() => {this.apiFactsDelete(f._id)}}
+                                >
+                                    <TiTick/>
+                                </button>
+                            </div>
+                            <div className='col-6 d-flex'>
+                                <button className='btn me-auto'
+                                        data-bs-toggle="collapse" 
+                                        data-bs-target={"#collapseExample" + f._id} 
+                                        aria-expanded="false" 
+                                        aria-controls="collapseExample"
+                                >
+                                    <MdCancel/>
+                                </button>
+                            </div>
                         </div>
-                        <div className='col-6'>
-                            <button className='btn mx-auto'
-                                    data-bs-toggle="collapse" 
-                                    data-bs-target={"#collapseExample" + f._id} 
-                                    aria-expanded="false" 
-                                    aria-controls="collapseExample"
-                            >
-                                <MdCancel/>
-                            </button>
-                        </div>
-                    </div>
                     </div>
                     
                 </div>

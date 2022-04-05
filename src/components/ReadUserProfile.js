@@ -4,6 +4,8 @@ import React, { Component } from 'react'
 import SpeciesCard from './SpeciesCard'
 
 import { AiFillEdit } from 'react-icons/ai'
+import { RiDeleteBinFill } from 'react-icons/ri'
+
 
 
 export default class ReadUserProfile extends Component {
@@ -79,24 +81,73 @@ export default class ReadUserProfile extends Component {
             />
     <label htmlFor="floatingInput">New email address</label>
     <button className='btn'
-            onClick={() => {this.props.putApiUserEmail()}}
-                >
-                  Submit
+            onClick={async () => {
+              await this.props.putApiUserEmail();
+              setTimeout( this.setState({
+                action: "readingEmail"
+              }), 3000)
+            }}
+            >
+              Submit
     </button>
-    <p>{this.props.editEmailMsg}</p>
+    <button className='btn'
+            onClick={() => {this.setState({action: 'readingEmail'})}}
+            >
+              Cancel
+    </button>
+    
   </div>
   }
 
   renderEmail() {
-    return <div className='d-flex'>
-      
-        <p>Hello, {this.props.userEmail}</p>
+    return <div className='d-flex border border-danger border-3'>
+      <div className='row'>
+        <div className='align-self-center'>Hello, {this.props.userEmail}</div>
+        <div className="collapse" id="collapseExample">
+          <div className="card card-body">
+            Are you sure you wish to delete your account? You will lose all of your saved favourites.
+          </div>
+          <div className='row'>
+            <div className='col-6 d-flex'>
+                <button className='btn ms-auto'
+                        data-bs-toggle="collapse" 
+                        data-bs-target={"#collapseExample"} 
+                        aria-expanded="false" 
+                        aria-controls="collapseExample"
+                >
+                    Go back
+                </button>
+            </div>
+            <div className='col-6 d-flex'>
+                <button className='btn me-auto'
+                        onClick={async() => {
+                          await this.props.deleteApiUserEmail()
+                          setTimeout(() => this.props.setActivePage('main'), 3000)
+                        }}
+                >
+                    Delete
+                </button>
+            </div>
+            
+          </div>
+        </div>
+        </div>
         <button className='btn ms-auto'
                 onClick={() => {this.setState({
                   action: "editingEmail"
                 })}}
                 >
                   <AiFillEdit  />
+        </button>
+        <button className='btn'
+                type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#collapseExample" 
+                aria-expanded="false" 
+                aria-controls="collapseExample"
+                // onClick={() => {this.props.deleteApiUserEmail()}}
+                >
+          <RiDeleteBinFill/>
         </button>
       </div>
   }
@@ -123,7 +174,10 @@ export default class ReadUserProfile extends Component {
           </div>
           <div className='col col-2'></div>
         </div> */}
-        <div className='border border-primary border-3'>{this.renderContent()}</div>
+        <div className='border border-primary border-3'>
+          {this.renderContent()}
+          <p>{this.props.editEmailMsg}</p>
+        </div>
 
         <div className='row'>
             {this.props.userFavouriteSpecies.map(
