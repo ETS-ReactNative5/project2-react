@@ -108,7 +108,7 @@ export default class ReadUserProfile extends Component {
   }
 
   renderEmail() {
-    return <div className='d-flex white rounded mx-3 py-3 ps-3 pe-1 border border-dark'>
+    return <div className='d-flex white rounded m-3 py-3 ps-3 pe-1 border border-dark'>
       <div className='row'>
         <div className='align-self-center'>Hello, {this.props.userEmail}</div>
         <div className="collapse" id="collapseExample">
@@ -141,7 +141,6 @@ export default class ReadUserProfile extends Component {
                     Delete
                 </button>
             </div>
-            
           </div>
         </div>
         </div>
@@ -192,7 +191,7 @@ export default class ReadUserProfile extends Component {
           <p>{this.props.editEmailMsg}</p>
         </div>
 
-        <div className='row'>
+        <div className='row px-2'>
             {this.props.userFavouriteSpecies.map(
               eachItem => 
               <React.Fragment key={eachItem._id}>
@@ -206,6 +205,7 @@ export default class ReadUserProfile extends Component {
                               showMdSearchFilter={this.props.showMdSearchFilter}
                               checkApiUserFavourite={this.props.checkApiUserFavourite}
                               userFavouriteIds={this.props.userFavouriteIds}
+                              loggedIn={this.props.loggedIn}
                               />
                 </div>
               </React.Fragment>

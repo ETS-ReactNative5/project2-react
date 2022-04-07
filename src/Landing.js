@@ -13,7 +13,7 @@ import ReadAllDistribution from "./components/ReadAllDistribution";
 import MdSearchFilter from "./components/MdSearchFilter";
 import SmSearchFilter from "./components/SmSearchFilter";
 
-import CreateUserProfile from  "./components/CreateUserProfile";
+import CreateUserProfile from "./components/CreateUserProfile";
 import ReadUserProfile from "./components/ReadUserProfile";
 import Login from "./components/Login";
 
@@ -78,42 +78,43 @@ export default class Landing extends React.Component {
                 return <MainDisplay />
                 break;
             case "readAllSpecies":
-                return <ReadAllSpecies 
-                        species={this.state.species}
-                        distributionOptions={this.state.distributionOptions}
-                        conservationOptions={this.state.conservationOptions}
-                        setActivePage={this.setActivePage}
-                        selectEdit = {this.selectEdit}
-                        showMdSearchFilter={this.state.showMdSearchFilter}
-                        checkApiUserFavourite={this.checkApiUserFavourite}
-                        userFavouriteIds={this.state.userFavouriteIds}
-                        loggedIn={this.state.loggedIn}
-                        // selectActiveDisplay={this.selectActiveDisplay}
-                        // renderModal={this.renderModal}
-                        />
+                return <ReadAllSpecies
+                    species={this.state.species}
+                    distributionOptions={this.state.distributionOptions}
+                    conservationOptions={this.state.conservationOptions}
+                    setActivePage={this.setActivePage}
+                    selectEdit={this.selectEdit}
+                    showMdSearchFilter={this.state.showMdSearchFilter}
+                    checkApiUserFavourite={this.checkApiUserFavourite}
+                    userFavouriteIds={this.state.userFavouriteIds}
+                    loggedIn={this.state.loggedIn}
+                    refreshSpeciesDisplay={this.refreshSpeciesDisplay}
+                // selectActiveDisplay={this.selectActiveDisplay}
+                // renderModal={this.renderModal}
+                />
                 break;
             case "createSpecies":
                 return <CreateSpecies
-                        setActivePage={this.setActivePage}
-                        orchidColours={this.state.orchidColours}
-                        orchidScentsOptions={this.state.orchidScentsOptions}
-                        orchidPetalPatternOptions={this.state.orchidPetalPatternOptions}
-                        distributionOptions={this.state.distributionOptions}
-                        conservationOptions={this.state.conservationOptions}
-                        refreshSpeciesDisplay={this.refreshSpeciesDisplay}
-                        />
+                    setActivePage={this.setActivePage}
+                    orchidColours={this.state.orchidColours}
+                    orchidScentsOptions={this.state.orchidScentsOptions}
+                    orchidPetalPatternOptions={this.state.orchidPetalPatternOptions}
+                    distributionOptions={this.state.distributionOptions}
+                    conservationOptions={this.state.conservationOptions}
+                    refreshSpeciesDisplay={this.refreshSpeciesDisplay}
+                />
                 break;
             case "updateSpecies":
-                return <UpdateSpecies 
-                        activeEditId = {this.state.activeEditId}
-                        orchidColours={this.state.orchidColours}
-                        orchidScentsOptions={this.state.orchidScentsOptions}
-                        orchidPetalPatternOptions={this.state.orchidPetalPatternOptions}
-                        distributionOptions={this.state.distributionOptions}
-                        conservationOptions={this.state.conservationOptions}
-                        setActivePage={this.setActivePage}
-                        refreshSpeciesDisplay={this.refreshSpeciesDisplay}
-                        />
+                return <UpdateSpecies
+                    activeEditId={this.state.activeEditId}
+                    orchidColours={this.state.orchidColours}
+                    orchidScentsOptions={this.state.orchidScentsOptions}
+                    orchidPetalPatternOptions={this.state.orchidPetalPatternOptions}
+                    distributionOptions={this.state.distributionOptions}
+                    conservationOptions={this.state.conservationOptions}
+                    setActivePage={this.setActivePage}
+                    refreshSpeciesDisplay={this.refreshSpeciesDisplay}
+                />
                 break;
             // case "readSingleSpecies":
             //     return <ReadSingleSpecies
@@ -124,38 +125,39 @@ export default class Landing extends React.Component {
                 return <ReadAllDistribution />
                 break;
             case "createUserProfile":
-                return <CreateUserProfile 
-                        updateFormField = {this.updateFormField}
-                        setActivePage={this.setActivePage}
-                        userEmail={this.state.userEmail}
-                        postApiUserEmail={this.postApiUserEmail}
-                        registrationMsg={this.state.registrationMsg}
-                        />
+                return <CreateUserProfile
+                    updateFormField={this.updateFormField}
+                    setActivePage={this.setActivePage}
+                    userEmail={this.state.userEmail}
+                    postApiUserEmail={this.postApiUserEmail}
+                    registrationMsg={this.state.registrationMsg}
+                />
                 break;
             case "readUserProfile":
                 return <ReadUserProfile
-                        currentUserId={this.state.currentUserId}
-                        userEmail={this.state.userEmail}
-                        updateFormField = {this.updateFormField}
-                        putApiUserEmail = {this.putApiUserEmail}
-                        deleteApiUserEmail={this.deleteApiUserEmail}
-                        editEmailMsg={this.state.editEmailMsg}
-                        distributionOptions={this.state.distributionOptions}
-                        conservationOptions={this.state.conservationOptions}
-                        setActivePage={this.setActivePage}
-                        selectEdit = {this.selectEdit}
-                        userFavouriteIds={this.state.userFavouriteIds}
-                        userFavouriteSpecies={this.state.userFavouriteSpecies}
-                        checkApiUserFavourite={this.checkApiUserFavourite}
+                    currentUserId={this.state.currentUserId}
+                    userEmail={this.state.userEmail}
+                    updateFormField={this.updateFormField}
+                    putApiUserEmail={this.putApiUserEmail}
+                    deleteApiUserEmail={this.deleteApiUserEmail}
+                    editEmailMsg={this.state.editEmailMsg}
+                    distributionOptions={this.state.distributionOptions}
+                    conservationOptions={this.state.conservationOptions}
+                    setActivePage={this.setActivePage}
+                    selectEdit={this.selectEdit}
+                    userFavouriteIds={this.state.userFavouriteIds}
+                    userFavouriteSpecies={this.state.userFavouriteSpecies}
+                    checkApiUserFavourite={this.checkApiUserFavourite}
+                    loggedIn={this.state.loggedIn}
                 />
                 break;
             case "login":
                 return <Login
-                        updateFormField = {this.updateFormField}
-                        userEmail={this.state.userEmail}
-                        getApiUserEmail={this.getApiUserEmail}
-                        loginMsg={this.state.loginMsg}
-                
+                    updateFormField={this.updateFormField}
+                    userEmail={this.state.userEmail}
+                    getApiUserEmail={this.getApiUserEmail}
+                    loginMsg={this.state.loginMsg}
+
                 />
             default:
                 break;
@@ -175,31 +177,31 @@ export default class Landing extends React.Component {
     }
 
     showMdSearchFilter() {
-        return this.state.showMdSearchFilter ? <MdSearchFilter 
-                        distributionOptions = {this.state.distributionOptions}
-                        conservationOptions = {this.state.conservationOptions}
-                        orchidColours = {this.state.orchidColours}
-                        updateFormField = {this.updateFormField}
-                        distributionFilter = {this.state.distributionFilter}
-                        conservationFilter = {this.state.conservationFilter}
-                        colourFilter = {this.state.colourFilter}
-                        updateCheckbox = {this.updateCheckbox}
-                        getSearchResults={this.getSearchResults}
-                        setActivePage={this.setActivePage}
-                        factsFilter={this.state.factsFilter}
+        return this.state.showMdSearchFilter ? <MdSearchFilter
+            distributionOptions={this.state.distributionOptions}
+            conservationOptions={this.state.conservationOptions}
+            orchidColours={this.state.orchidColours}
+            updateFormField={this.updateFormField}
+            distributionFilter={this.state.distributionFilter}
+            conservationFilter={this.state.conservationFilter}
+            colourFilter={this.state.colourFilter}
+            updateCheckbox={this.updateCheckbox}
+            getSearchResults={this.getSearchResults}
+            setActivePage={this.setActivePage}
+            factsFilter={this.state.factsFilter}
         /> : null
     }
 
     updateFormField = (e) => {
         this.setState({
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
     updateCheckbox = (e) => {
-        if(this.state[e.target.name].includes(e.target.value)){
-            let indexToRemove = this.state[e.target.name].findIndex( 
-                value => value===e.target.value
+        if (this.state[e.target.name].includes(e.target.value)) {
+            let indexToRemove = this.state[e.target.name].findIndex(
+                value => value === e.target.value
             )
             this.setState({
                 [e.target.name]: [...this.state[e.target.name].slice(0, indexToRemove), ...this.state[e.target.name].slice(indexToRemove + 1)]
@@ -211,7 +213,7 @@ export default class Landing extends React.Component {
         }
     }
 
-    getSearchResults = async() => {
+    getSearchResults = async () => {
         let payload = {
             params: {}
         }
@@ -227,32 +229,32 @@ export default class Landing extends React.Component {
         // }
         // )
 
-        if(this.state.searchPrompt){
+        if (this.state.searchPrompt) {
             payload.params.searchPrompt = this.state.searchPrompt
         }
 
-        if(this.state.distributionFilter){
+        if (this.state.distributionFilter) {
             payload.params.distributionFilter = this.state.distributionFilter
         }
 
-        if(this.state.conservationFilter){
+        if (this.state.conservationFilter) {
             payload.params.conservationFilter = this.state.conservationFilter
         }
 
-        if(this.state.colourFilter.length > 0){
+        if (this.state.colourFilter.length > 0) {
             payload.params.colourFilter = this.state.colourFilter
         }
 
-        if(this.state.factsFilter){
-            if(this.state.factsFilter === 'noFacts'){
+        if (this.state.factsFilter) {
+            if (this.state.factsFilter === 'noFacts') {
                 payload.params.noFacts = '0'
-            } else if(this.state.factsFilter === 'factsGte3'){
+            } else if (this.state.factsFilter === 'factsGte3') {
                 payload.params.factsGte3 = '3'
             }
         }
 
         console.log(payload)
-                                                                                                                                  
+
         let searchResponse = await axios.get(this.BASE_API_URL + "/orchid_species", payload);
         this.setState({
             species: searchResponse.data
@@ -261,7 +263,7 @@ export default class Landing extends React.Component {
 
     }
 
-     refreshSpeciesDisplay = async() => {
+    refreshSpeciesDisplay = async () => {
         console.log('starting refreshSpeciesDisplay')
         let speciesResponse = await axios.get("http://localhost:8888/orchid_species");
         this.setState({
@@ -271,13 +273,13 @@ export default class Landing extends React.Component {
         console.log('ending refreshSpeciesDisplay')
     }
 
-    postApiUserEmail = async() => {
+    postApiUserEmail = async () => {
 
         this.setState({
             registrationMsg: ""
         })
 
-        let results = await axios.post(this.BASE_API_URL + '/users',{
+        let results = await axios.post(this.BASE_API_URL + '/users', {
             userEmail: this.state.userEmail
         }).catch((e) => {
             console.log(e.response.data.message)
@@ -294,26 +296,26 @@ export default class Landing extends React.Component {
         // })
 
         this.setState({
-                    currentUserId: results.data.insertedId,
-                    registrationMsg:"Thanks for registering an account! You can now save favourites to your profile.",
-                    loggedIn: true
-                })
+            currentUserId: results.data.insertedId,
+            registrationMsg: "Thanks for registering an account! You can now save favourites to your profile.",
+            loggedIn: true
+        })
 
-        
+
     }
 
     putApiUserEmail = async () => {
         this.setState({
             editEmailMsg: ""
         })
-        await axios.put(this.BASE_API_URL + '/users/' + this.state.currentUserId,{
+        await axios.put(this.BASE_API_URL + '/users/' + this.state.currentUserId, {
             userEmail: this.state.userEmail
         }).catch((e) => {
             this.setState({
                 editEmailMsg: e.response.data.message
             })
-        }).then((res)=> {
-            if(res.status === 200){
+        }).then((res) => {
+            if (res.status === 200) {
                 this.setState({
                     editEmailMsg: "Your email has been changed"
                 })
@@ -321,10 +323,10 @@ export default class Landing extends React.Component {
                     this.setState({
                         editEmailMsg: ""
                     })
-                }, 3000)      
+                }, 3000)
             }
         })
-        
+
         // .then(() => {
         //     this.setState({
         //         editEmailMsg: "Your email has been changed"
@@ -336,19 +338,21 @@ export default class Landing extends React.Component {
         //         })
         //     }, 3000)
         // });
-        
+
     }
 
-    deleteApiUserEmail = async() => {
+    
+
+    deleteApiUserEmail = async () => {
         await axios.delete(this.BASE_API_URL + '/users/' + this.state.currentUserId)
-                    .then((res) => {
-                        if(res.status === 200){
-                            this.setState({
-                                editEmailMsg: "Your email has been deleted. You will now be redirected to the main page"
-                            })
-                            setTimeout(this.deleteEmailActions, 5000)
-                        }
+            .then((res) => {
+                if (res.status === 200) {
+                    this.setState({
+                        editEmailMsg: "Your email has been deleted. You will now be redirected to the main page"
                     })
+                    setTimeout(this.deleteEmailActions, 5000)
+                }
+            })
     }
 
     deleteEmailActions = () => {
@@ -360,33 +364,33 @@ export default class Landing extends React.Component {
         })
     }
 
-    getApiUserEmail = async() => {
-        
+    getApiUserEmail = async () => {
+
         let response = await axios.get(this.BASE_API_URL + '/users',
             {
                 params: {
                     userEmail: this.state.userEmail
                 }
-            }).catch( (e) => {
-            this.setState({
-                loginMsg: e.response.data.message,
-                instructions: ""
+            }).catch((e) => {
+                this.setState({
+                    loginMsg: e.response.data.message,
+                    instructions: ""
+                });
             });
-        });
 
         this.setState({
             currentUserId: response.data._id,
-            loginMsg:"You have logged in successfully.",
+            loginMsg: "You have logged in successfully.",
             loggedIn: true
         })
 
         return this.getUserFavouriteIds();
     }
 
-    checkApiUserFavourite = async(speciesId) => {
+    checkApiUserFavourite = async (speciesId) => {
 
-        if(this.state.loggedIn){
-            if(this.state.userFavouriteIds.includes(speciesId)){
+        if (this.state.loggedIn) {
+            if (this.state.userFavouriteIds.includes(speciesId)) {
                 await axios.delete(this.BASE_API_URL + '/users/' + this.state.currentUserId + '/favourites/' + speciesId)
             } else {
                 await axios.post(this.BASE_API_URL + '/users/' + this.state.currentUserId + '/favourites/' + speciesId, {
@@ -395,35 +399,35 @@ export default class Landing extends React.Component {
             }
             return this.getUserFavouriteIds();
         }
-        
-        
+
+
     }
 
-    getUserFavouriteIds = async() => {
-        if(this.state.currentUserId){
+    getUserFavouriteIds = async () => {
+        if (this.state.currentUserId) {
             let userFavouritesResponse = await axios.get(this.BASE_API_URL + '/users/' + this.state.currentUserId)
             this.setState({
-                userFavouriteIds:userFavouritesResponse.data.favourites
+                userFavouriteIds: userFavouritesResponse.data.favourites
             })
         }
         return this.getUserFavouriteSpecies();
     }
 
-    getUserFavouriteSpecies = async() => {
+    getUserFavouriteSpecies = async () => {
         let payload = {
             params: {}
         }
 
         // && this.state.userFavouriteIds.length > 0
-        if(this.state.currentUserId){
+        if (this.state.currentUserId) {
             payload.params.userFavouriteIds = this.state.userFavouriteIds
             let userFavouritesResponse = await axios.get(this.BASE_API_URL + '/orchid_species', payload);
             this.setState({
-            userFavouriteSpecies: userFavouritesResponse.data
-        })
+                userFavouriteSpecies: userFavouritesResponse.data
+            })
         }
 
-        
+
     }
 
     async componentDidMount() {
@@ -462,133 +466,133 @@ export default class Landing extends React.Component {
                             </li>
                             <li className="nav-item">
                                 <div className="dropdown">
-                                    <button className="btn" 
-                                            type="button" 
-                                            id="dropdownMenu2" 
-                                            data-bs-toggle="dropdown" 
-                                            aria-expanded="false"
-                                            >
+                                    <button className="btn"
+                                        type="button"
+                                        id="dropdownMenu2"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
 
                                         <FaUserAlt className="react-icons" size={20} />
 
                                     </button>
-                                    <ul className="dropdown-menu" 
+                                    <ul className="dropdown-menu"
                                         aria-labelledby="dropdownMenu2">
 
                                         {!this.state.loggedIn && <li>
-                                            <button 
-                                                className="dropdown-item" 
+                                            <button
+                                                className="dropdown-item"
                                                 type="button"
-                                                onClick = {() => {
+                                                onClick={() => {
                                                     this.setActivePage('createUserProfile');
                                                     this.setState({
                                                         showMdSearchFilter: false,
                                                         registrationMsg: ""
                                                     });
                                                 }}
-                                                >
-                                                    Create Account
-                                            </button> 
+                                            >
+                                                Create Account
+                                            </button>
                                         </li>}
 
                                         {!this.state.loggedIn && <li>
-                                            <button 
-                                                className="dropdown-item" 
+                                            <button
+                                                className="dropdown-item"
                                                 type="button"
-                                                onClick = {() => {
+                                                onClick={() => {
                                                     this.setActivePage('login');
                                                     this.setState({
                                                         showMdSearchFilter: false,
-                                                        loginMsg:""
+                                                        loginMsg: ""
                                                     });
                                                 }}
-                                                >
-                                                    Login
-                                            </button> 
+                                            >
+                                                Login
+                                            </button>
                                         </li>}
 
                                         {this.state.loggedIn && <li>
-                                            <button 
-                                                className="dropdown-item" 
+                                            <button
+                                                className="dropdown-item"
                                                 type="button"
-                                                onClick = {() => {
+                                                onClick={() => {
                                                     this.setActivePage('readUserProfile');
                                                     this.setState({
                                                         showMdSearchFilter: false
                                                     });
                                                 }}
-                                                >
-                                                    View Favourites
+                                            >
+                                                View Favourites
                                             </button>
                                         </li>}
 
                                         {this.state.loggedIn && <li>
-                                            <button 
-                                                className="dropdown-item" 
+                                            <button
+                                                className="dropdown-item"
                                                 type="button"
-                                                onClick = {() => {
+                                                onClick={() => {
                                                     this.setActivePage('main');
                                                     this.setState({
                                                         showMdSearchFilter: true,
                                                         currentUserId: "",
-                                                        loggedIn:false,
+                                                        loggedIn: false,
                                                         userEmail: "",
                                                         userFavouriteIds: [],
                                                         userFavouriteSpecies: []
                                                     });
                                                 }}
-                                                >
-                                                    Log out
+                                            >
+                                                Log out
                                             </button>
                                         </li>}
                                     </ul>
                                 </div>
                             </li>
                             <li className="nav-item d-md-none">
-                                <button className="btn" 
-                                        type="button" 
-                                        data-bs-toggle="offcanvas" 
-                                        data-bs-target="#xs-sm-search-filter" 
-                                        aria-controls="offcanvasWithBothOptions"
-                                        >
-                                            <TiThMenu/>
+                                <button className="btn"
+                                    type="button"
+                                    data-bs-toggle="offcanvas"
+                                    data-bs-target="#xs-sm-search-filter"
+                                    aria-controls="offcanvasWithBothOptions"
+                                >
+                                    <TiThMenu />
                                 </button>
                             </li>
                         </ul>
                     </nav>
                     {/* OFFCANVAS FILTER FOR <MD */}
-                    <SmSearchFilter  
-                        distributionOptions = {this.state.distributionOptions}
-                        conservationOptions = {this.state.conservationOptions}
-                        orchidColours = {this.state.orchidColours}
-                        updateFormField = {this.updateFormField}
-                        distributionFilter = {this.state.distributionFilter}
-                        conservationFilter = {this.state.conservationFilter}
-                        colourFilter = {this.state.colourFilter}
-                        updateCheckbox = {this.updateCheckbox}
+                    <SmSearchFilter
+                        distributionOptions={this.state.distributionOptions}
+                        conservationOptions={this.state.conservationOptions}
+                        orchidColours={this.state.orchidColours}
+                        updateFormField={this.updateFormField}
+                        distributionFilter={this.state.distributionFilter}
+                        conservationFilter={this.state.conservationFilter}
+                        colourFilter={this.state.colourFilter}
+                        updateCheckbox={this.updateCheckbox}
                         getSearchResults={this.getSearchResults}
                         setActivePage={this.setActivePage}
                     />
                     {/* VIEW OPTIONS */}
                     {this.state.dataLoaded &&
-                    <nav id='nav-tabs'>
-                        <ul className="nav nav-pills justify-content-center">
-                            <li className="nav-item">
-                                <a className="nav-link"
-                                    aria-current="page"
-                                    href="#"
-                                    onClick={() => {
-                                        this.refreshSpeciesDisplay();
-                                        this.setActivePage('readAllSpecies');
-                                        this.setState({
-                                            showMdSearchFilter: true,
-                                            searchPrompt: ""
-                                        });
-                                    }}>
-                                    View All Species
-                                </a>
-                            </li>
-                            {/* <li className="nav-item">
+                        <nav id='nav-tabs'>
+                            <ul className="nav nav-pills justify-content-center">
+                                <li className="nav-item">
+                                    <a className="nav-link"
+                                        aria-current="page"
+                                        href="#"
+                                        onClick={() => {
+                                            this.refreshSpeciesDisplay();
+                                            this.setActivePage('readAllSpecies');
+                                            this.setState({
+                                                showMdSearchFilter: true,
+                                                searchPrompt: ""
+                                            });
+                                        }}>
+                                        View All Species
+                                    </a>
+                                </li>
+                                {/* <li className="nav-item">
                                 <a className="nav-link"
                                     href="#"
                                     onClick={() => {
@@ -600,59 +604,61 @@ export default class Landing extends React.Component {
                                     Orchid Distribution
                                 </a>
                             </li> */}
-                        </ul>
-                    </nav>
+                            </ul>
+                        </nav>
                     }
                     {/* SEARCH INPUT */}
-                    {this.state.dataLoaded && 
-                    <section id='search-bar' className="row border border-danger">
-                        <div className="col-2 d-none d-md-block"></div>
-                        <div className="px-3 col-12 col-md-8 white rounded-pill input-group border border-dark">
-                            <input type="search" 
+                    {this.state.dataLoaded &&
+                        <section id='search-bar' className="row border border-danger">
+                            <div className="col-2 d-none d-md-block"></div>
+                            <div className="px-3 col-12 col-md-8 white rounded-pill input-group border border-dark">
+                                <input type="search"
                                     name="searchPrompt"
                                     value={this.state.searchPrompt}
                                     onChange={this.updateFormField}
-                                    className="form-control border-0" 
-                                    placeholder="Search" 
-                                    // aria-label="Search" 
-                                    // aria-describedby="search-addon" 
-                                    />
-                            <button className="input-group-text border-0 btn mb-1 shadow-none" 
-                                    type="button" 
+                                    className="form-control border-0"
+                                    placeholder="Search"
+                                // aria-label="Search" 
+                                // aria-describedby="search-addon" 
+                                />
+                                <button className="input-group-text border-0 btn mb-1 shadow-none"
+                                    type="button"
                                     id="search-addon"
-                                    onClick={() => {this.getSearchResults();
-                                                    this.setActivePage("readAllSpecies")
-                                                }}
-                                    >
-                                <BsSearch/>
-                            </button>
-                        </div>
-                        <div className="col-2 d-none d-md-block"></div>
+                                    onClick={() => {
+                                        this.getSearchResults();
+                                        this.setActivePage("readAllSpecies")
+                                    }}
+                                >
+                                    <BsSearch />
+                                </button>
+                            </div>
+                            <div className="col-2 d-none d-md-block"></div>
 
-                    </section>
+                        </section>
                     }
                     {/* FILTER FOR >=MD */}
                     {this.state.dataLoaded &&
-                    <section id='search-filter-md' className=" px-2 d-none d-md-block mt-3">
-                      
+                        <section id='search-filter-md' className=" px-2 d-none d-md-block mt-3">
+
                             {this.showMdSearchFilter()}
-            
-                    </section>
+
+                        </section>
                     }
                     {/* render SPA pages */}
-                    <main id='main-content' className="mt-3 mx-1 mx-md-2 py-3 px-1 px-md-3">
+                    {/*  */}
+                    <main id='main-content' className="mt-3 mx-1 mx-md-2">
                         {this.renderPage()}
                     </main>
                     {/* FOOTER */}
                     <footer id='footer' className='container mt-3 pt-3 px-3'>
-                        <Footer/>
+                        <Footer />
                     </footer>
                 </div>
-                <button id='scroll-to-top-btn' 
-                        className="btn rounded-circle shadow-none border border-dark"
-                        onClick={() => scrollToTop()}
-                        >
-                    <GrLinkTop/>
+                <button id='scroll-to-top-btn'
+                    className="btn rounded-circle shadow border border-dark"
+                    onClick={() => scrollToTop()}
+                >
+                    <GrLinkTop />
                 </button>
             </React.Fragment>
         )

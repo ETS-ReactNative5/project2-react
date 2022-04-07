@@ -8,7 +8,7 @@ export default class ReadAllSpecies extends Component {
     return (
       <React.Fragment>
         <div>
-          <div className='d-flex flex-column align-items-center me-2'>
+          <div className='d-flex flex-column align-items-center me-2 mt-3'>
             <a  className='align-self-end me-2 style-links'
                 onClick={() => this.props.setActivePage('createSpecies')}>
               Help us expand our collection
@@ -20,7 +20,7 @@ export default class ReadAllSpecies extends Component {
             
           </div>
           
-          <div className='row d-flex'>
+          <div className='row px-2'>
           
             {this.props.species.map(
               eachItem => 
@@ -36,6 +36,7 @@ export default class ReadAllSpecies extends Component {
                               checkApiUserFavourite={this.props.checkApiUserFavourite}
                               userFavouriteIds={this.props.userFavouriteIds}
                               loggedIn={this.props.loggedIn}
+                              refreshSpeciesDisplay={this.props.refreshSpeciesDisplay}
                               />
                 </div>
               </React.Fragment>

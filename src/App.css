@@ -1,4 +1,15 @@
-#components-wrapper{
+@font-face {
+    src: url(local-data/fonts/abigate.otf);
+    font-family: abigate;
+
+    src: url(local-data/fonts/OregonLightRegular.ttf);
+    font-family: OregonLightRegular;
+
+    src: url(local-data/fonts/OregonMedium.ttf);
+    font-family: OregonMedium;
+}
+
+#components-wrapper {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -6,7 +17,7 @@
     background-color: #F5F5F5;
 }
 
-#scroll-to-top-btn{
+#scroll-to-top-btn {
     position: fixed;
     bottom: 3%;
     right: 10%;
@@ -14,21 +25,54 @@
     background-color: rgba(154, 219, 154, 0.56);
 }
 
-#navbar #nav-tabs #search-bar #search-filter-md #footer{
+#navbar #nav-tabs #search-bar #search-filter-md #footer {
     flex-shrink: 0;
 }
 
-#main-content{
+#main-content {
     flex-grow: 1;
     background-color: #C8CECB;
     border-radius: 1rem;
 }
 
-#carouselExampleFade{
+#carouselExampleFade {
     border-radius: 1rem;
     overflow: hidden;
-    object-fit: cover
+    object-fit: cover;
+    /* position:relative; */
 }
+
+.carousel-inner{
+    position:relative;
+}
+
+#text-wrapper{
+    position: absolute;
+    padding: 0.8rem;
+    width: 60%;
+    top:18%;
+    left: 10%;
+    z-index: 1;
+    border: 1px solid #C8CECB
+}
+
+#main-content h1{
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    color: white;
+    font-size: 3rem;
+    letter-spacing: .2rem;
+}
+
+#main-content h3{
+    font-family: OregonMedium;
+    font-size: 1rem;
+    /* font-weight: 300; */
+    color: white;
+    letter-spacing: .2rem;
+    /* text-align: center; */
+}
+
 
 .carousel-item img {
     width: 100vw;
@@ -37,41 +81,45 @@
     object-position: 50% 50%;
 }
 
-#xs-sm-search-filter{
+#xs-sm-search-filter {
     width: 80vw;
 }
 
 /* not working */
-#collapse-search-filter{
-    border-radius: 1rem!important;
+#collapse-search-filter {
+    border-radius: 1rem !important;
 }
 
-#collapse-search-body{
+#collapse-search-body {
     background-color: #E5E4EB;
 }
 
-.white{
+.border-search {
+    border-radius: 1rem !important;
+}
+
+.white {
     background-color: white;
 }
 
-.rounded{
-    border-radius: 1rem!important
+.rounded {
+    border-radius: 1rem !important
 }
 
 /* .gradient{
     background: linear-gradient(180deg, rgba(10,10,44,1) 0%, rgba(255,255,255,1) 0%, rgba(163,204,181,1) 100%, rgba(0,212,255,1) 100%);
 } */
 
-.gradient{
-    background: linear-gradient(145deg, rgba(10,10,44,1) 0%, rgba(255,255,255,1) 0%, rgba(184,221,200,1) 100%, rgba(0,212,255,1) 100%);
+.gradient {
+    background: linear-gradient(145deg, rgba(10, 10, 44, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(184, 221, 200, 1) 100%, rgba(0, 212, 255, 1) 100%);
 }
 
-.style-links{
+.style-links {
     text-decoration: none;
     color: black;
 }
 
-.style-links:hover{
+.style-links:hover {
     cursor: pointer;
     color: black;
     text-decoration: underline;
@@ -90,20 +138,20 @@
     height: 4rem;
   } */
 
-  /* Species Card */
+/* Species Card */
 
 .species-card a {
     text-decoration: none;
     color: black;
 }
 
-.species-card a:hover{
+.species-card a:hover {
     cursor: pointer;
-    color:black;
+    color: black;
     text-decoration: underline;
 }
 
-.to-italicise{
+.to-italicise {
     font-style: italic
 }
 
@@ -112,37 +160,80 @@
     position: relative;
 }
 
-.card-wrapper > img{
+.card-wrapper>img {
     position: absolute;
     transition: transform 200ms;
 }
 
-.card-wrapper:hover > img {
+.card-wrapper:hover>img {
     transform: scale(1.05);
 }
 
 /* Footer */
 
-#footer, ul > li {
+#footer,
+ul>li {
     list-style: none;
 }
 
-#footer, ul>li>a{
+#footer,
+ul>li>a {
     text-decoration: none;
     color: black
 }
 
-#footer > a:hover {
+#footer>a:hover {
     cursor: pointer;
 }
 
-#footer{
-    background-color:#E5E4EB;
+#footer {
+    background-color: #E5E4EB;
     border-radius: 1rem;
 }
 
 @media screen and (min-width: 768px) {
     .carousel-item img {
         height: 70vh
+    }
+    #text-wrapper{
+        top:25%;
+        left: 10%;
+        padding: 1rem;
+        width: 50%;
+    }
+    #main-content h1{
+        font-size: 5rem;
+        letter-spacing: .2rem;
+        margin-left: 0rem;
+    }
+    
+    #main-content h3{
+        font-family: OregonMedium;
+        font-size: 1.5rem;
+        font-weight: 300;
+        color: white;
+        letter-spacing: .2rem;
+    }
+}
+
+@media screen and (min-width: 992px){
+    #text-wrapper{
+        top:20%;
+        left: 10%;
+        width: 40%;
+    }
+    #main-content h3{
+        line-height: 1.4;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    #text-wrapper{
+        top:20%;
+        left: 10%;
+        width: 30%;
+    }
+    #main-content h3{
+        line-height: 1.4;
     }
 }

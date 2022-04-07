@@ -8,11 +8,15 @@ import FactsModal from './FactsModal';
 
 
 export default class SpeciesCard extends Component {
+
+    BASE_API_URL = "http://localhost:8888"
+
     state = {
         activeDistribution: "",
         activeConservation: "",
         favourited: false,
-        instructionMsg:""
+        instructionMsg:"",
+        deleteSpeciesMsg: ""
     }
 
     // BASE_API_URL = "http://localhost:8888"
@@ -102,9 +106,46 @@ export default class SpeciesCard extends Component {
         })
     }
 
+    deleteApiSpecies  = async(speciesId) => {
+        try{
+            // let results = 
+            await axios.delete(this.BASE_API_URL + '/orchid_species/' + speciesId)
+            // this.setState({
+            //     deleteSpeciesMsg: results.data.message
+            // })
+            
+            // setTimeout(() => {
+            //     this.setState({
+            //         deleteSpeciesMsg: ""
+            //     });
+            // }, 4000)
+
+            // setTimeout(() => {
+            //     this.setState({
+            //         handleModalClose: ""
+            //     })
+            // }, 2000)
+
+            setTimeout(() => {
+                this.props.refreshSpeciesDisplay();
+                this.props.setActivePage('main')
+            }, 1000)
+        }catch(e){
+            console.log(e.response.data)
+        }
+        // let results = await axios.delete(this.BASE_API_URL + '/orchid_species/' + speciesId)
+        //             .then((res)=> {
+        //                 if(res.status === 200) {
+        //                     console.log(results.data.message)
+        //                     // this.setState({
+        //                     //     deleteSpeciesMsg: "You "
+        //                     // })
+        //                 }
+        //             })
+    }
+
     componentDidUpdate(prevProps){
         if(prevProps.userFavouriteIds !== this.props.userFavouriteIds){
-            console.log('componenddidupdate')
             return this.checkFavourited()
         }
     }
@@ -194,6 +235,8 @@ export default class SpeciesCard extends Component {
                                 instructionMsg={this.state.instructionMsg}
                                 setInstructions={this.setInstructions}
                                 clearInstructions={this.clearInstructions}
+                                deleteApiSpecies={this.deleteApiSpecies}
+                                deleteSpeciesMsg={this.state.deleteSpeciesMsg}
                             />
                             <FactsModal eachItem={this.props.eachItem}
                             />

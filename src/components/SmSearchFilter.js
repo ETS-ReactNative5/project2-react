@@ -25,15 +25,16 @@ export default class SmSearchFilter extends Component {
             <div className="offcanvas-body">
 
                 <label>Region:</label>
-                <select className='form-select mb-3'
+                <select className='form-select mb-3 btn-group'
                         name="distributionFilter" 
                         value={this.props.distributionFilter} 
                         onChange={this.props.updateFormField}>
                     {this.renderDropdown(this.props.distributionOptions)}    
                 </select>
-
+                
+                
                 <label>Conservation Status:</label>
-                <select className='form-select mb-3'
+                <select className='form-select mb-3 btn-group'
                         name="conservationFilter" 
                         value={this.props.conservationFilter} 
                         onChange={this.props.updateFormField}>
@@ -60,7 +61,7 @@ export default class SmSearchFilter extends Component {
                 )}
 
                 <label>Number of facts added:</label>
-                <select className='form-select mb-3'
+                <select className='form-select mb-3 btn-group'
                         name="factsFilter" 
                         value={this.props.factsFilter} 
                         onChange={this.props.updateFormField}

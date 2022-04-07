@@ -2,6 +2,7 @@ import React from 'react'
 import { AiFillEdit } from 'react-icons/ai'
 import { BsSuitHeart } from 'react-icons/bs'
 import { BsSuitHeartFill } from 'react-icons/bs'
+import { RiDeleteBinFill } from 'react-icons/ri'
 
 
 
@@ -28,7 +29,7 @@ function SpeciesModal(props) {
                                 data-bs-dismiss="modal"
                                 aria-label="Close"
                                 onClick={() => props.clearInstructions()}
-                                >
+                            >
                             </button>
                         </div>
                         <div className="modal-body">
@@ -92,10 +93,11 @@ function SpeciesModal(props) {
                                 </tbody>
                             </table>
                             <p>{props.instructionMsg}</p>
+                            {/* <p>{props.deleteSpeciesMsg}</p> */}
                         </div>
                         <div className="modal-footer">
                             <button type="button"
-                                className="btn"
+                                className="btn shadow-none"
                                 data-bs-dismiss="modal"
                                 onClick={
                                     () => {
@@ -105,11 +107,10 @@ function SpeciesModal(props) {
                                     }
                                 }
                             >
-                                <AiFillEdit/>
+                                <AiFillEdit />
                             </button>
                             <button type="button"
-                                className="btn"
-                                // data-bs-dismiss="modal"
+                                className="btn shadow-none"
                                 onClick={
                                     () => {
                                         props.setInstructions()
@@ -118,8 +119,58 @@ function SpeciesModal(props) {
                                     }
                                 }
                             >
-                                {props.favourited === true ? <BsSuitHeartFill color='red'/> : <BsSuitHeart/>}
+                                {props.favourited === true ? <BsSuitHeartFill size={25} color='red' /> : <BsSuitHeart size={25} />}
                             </button>
+
+
+                            <button type="button"
+                                className="btn"
+                                data-bs-toggle="collapse"
+                                data-bs-target={"#collapse" + props.eachItem._id}
+                                aria-expanded="false"
+                                aria-controls={"collapse" + props.eachItem._id}
+                                onClick={
+                                    () => {
+                                        props.clearInstructions();
+                                    }
+                                }
+                            >
+                                <RiDeleteBinFill />
+                            </button>
+                            {/* { this.state.confirmDelete?  */}
+                            <div className="collapse" id={"collapse" + props.eachItem._id}>
+                                <div className="card card-body">
+                                    Are you sure you wish to delete this species from The Daily Orchid's database?
+                                </div>
+                                <div className='row mt-2'>
+                                    <div className='col-6 d-flex'>
+                                        <button className='btn ms-auto shadow-none'
+                                            data-bs-toggle="collapse"
+                                            data-bs-target={"#collapse" + props.eachItem._id}
+                                            aria-expanded="false"
+                                            aria-controls={"collapse" + props.eachItem._id}
+                                        >
+                                            Go back
+                                        </button>
+                                    </div>
+                                    <div className='col-6 d-flex'>
+                                        <button className='btn me-auto shadow-none'
+                                                data-bs-dismiss="modal"
+                                                // data-bs-toggle="collapse"
+                                                // data-bs-target={"#collapse" + props.eachItem._id}
+                                                // aria-expanded="false"
+                                                // aria-controls={"collapse" + props.eachItem._id}
+                                        onClick={() => {props.deleteApiSpecies(props.eachItem._id)}}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div> 
+                            {/* : null } */}
+
+
+
                         </div>
                     </div>
                 </div>
