@@ -78,11 +78,14 @@ export default class FactsModal extends Component {
                     >
                 </textarea>
                 
-                <button onClick={() => this.apiFactsPost()}
-                        className="btn btn-primary"
-                >
-                    Add to collection
-                </button>
+                <div className='d-flex'>
+                    <button onClick={() => this.apiFactsPost()}
+                            className="btn btn-primary mt-3 shadow-none ms-auto"
+                    >
+                        Add to collection
+                    </button>
+                </div>
+                
             </React.Fragment>
             )
     }
@@ -97,7 +100,7 @@ export default class FactsModal extends Component {
 
     renderUpdateFact = (f) => {
         return <React.Fragment key={f._id}>
-            <div className='row border border-success'>
+            <div className='row '>
                 <div className='col-9'>
                     <input className="form-control" 
                             type="text" 
@@ -129,7 +132,7 @@ export default class FactsModal extends Component {
 
     renderReadFacts = (f) => {
         return <React.Fragment key={f._id}>
-            <div className='row border border-danger'>
+            <div className='row'>
                 <div className='col-9'>
                     <li className="list-group-item">{f.fact}</li>
                     <div className="collapse" id={'collapseExample' + f._id}>
@@ -251,9 +254,9 @@ export default class FactsModal extends Component {
 
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                
                                 <button type="button" 
-                                        className="btn btn-secondary"
+                                        className="btn btn-secondary shadow-none"
                                         onClick={() => {
                                             this.setState({
                                                 action: 'addingNewFact'

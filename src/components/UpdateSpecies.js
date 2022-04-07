@@ -251,7 +251,6 @@ export default class UpdateSpecies extends Component {
 
     return (
       <React.Fragment>
-        <div>UpdateSpecies</div>
         <SpeciesForm 
           orchidColours = {this.props.orchidColours}
           orchidScentsOptions = {this.props.orchidScentsOptions}

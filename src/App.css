@@ -1,10 +1,148 @@
-#speciesCardImage{
-    border-radius: 1rem;
-    background-position: center;
-    background-size:cover;
-    background-repeat: no-repeat;
+#components-wrapper{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: #F5F5F5;
 }
-/* SpeciesCard */
-.toItalicise{
+
+#scroll-to-top-btn{
+    position: fixed;
+    bottom: 3%;
+    right: 10%;
+    z-index: 1;
+    background-color: rgba(154, 219, 154, 0.56);
+}
+
+#navbar #nav-tabs #search-bar #search-filter-md #footer{
+    flex-shrink: 0;
+}
+
+#main-content{
+    flex-grow: 1;
+    background-color: #C8CECB;
+    border-radius: 1rem;
+}
+
+#carouselExampleFade{
+    border-radius: 1rem;
+    overflow: hidden;
+    object-fit: cover
+}
+
+.carousel-item img {
+    width: 100vw;
+    height: 50vh;
+    object-fit: cover;
+    object-position: 50% 50%;
+}
+
+#xs-sm-search-filter{
+    width: 80vw;
+}
+
+/* not working */
+#collapse-search-filter{
+    border-radius: 1rem!important;
+}
+
+#collapse-search-body{
+    background-color: #E5E4EB;
+}
+
+.white{
+    background-color: white;
+}
+
+.rounded{
+    border-radius: 1rem!important
+}
+
+/* .gradient{
+    background: linear-gradient(180deg, rgba(10,10,44,1) 0%, rgba(255,255,255,1) 0%, rgba(163,204,181,1) 100%, rgba(0,212,255,1) 100%);
+} */
+
+.gradient{
+    background: linear-gradient(145deg, rgba(10,10,44,1) 0%, rgba(255,255,255,1) 0%, rgba(184,221,200,1) 100%, rgba(0,212,255,1) 100%);
+}
+
+.style-links{
+    text-decoration: none;
+    color: black;
+}
+
+.style-links:hover{
+    cursor: pointer;
+    color: black;
+    text-decoration: underline;
+}
+
+/* .react-icons{
+    height: em;
+
+} */
+/* 
+    .changeColor {
+    color: black;
+  }
+  .changeColor:hover {
+    color: white;
+    height: 4rem;
+  } */
+
+  /* Species Card */
+
+.species-card a {
+    text-decoration: none;
+    color: black;
+}
+
+.species-card a:hover{
+    cursor: pointer;
+    color:black;
+    text-decoration: underline;
+}
+
+.to-italicise{
     font-style: italic
+}
+
+.card-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+.card-wrapper > img{
+    position: absolute;
+    transition: transform 200ms;
+}
+
+.card-wrapper:hover > img {
+    transform: scale(1.05);
+}
+
+/* Footer */
+
+#footer, ul > li {
+    list-style: none;
+}
+
+#footer, ul>li>a{
+    text-decoration: none;
+    color: black
+}
+
+#footer > a:hover {
+    cursor: pointer;
+}
+
+#footer{
+    background-color:#E5E4EB;
+    border-radius: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+    .carousel-item img {
+        height: 70vh
+    }
 }

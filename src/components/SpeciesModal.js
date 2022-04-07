@@ -118,7 +118,7 @@ function SpeciesModal(props) {
                                     }
                                 }
                             >
-                                {props.favourited === true ? <BsSuitHeartFill/> : <BsSuitHeart/>}
+                                {props.favourited === true ? <BsSuitHeartFill color='red'/> : <BsSuitHeart/>}
                             </button>
                         </div>
                     </div>

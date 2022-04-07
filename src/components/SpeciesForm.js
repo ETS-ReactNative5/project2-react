@@ -8,13 +8,13 @@ function SpeciesForm(props) {
 //distributionOptions, conservationOptions, renderDropdown, postApi
   return (
     <React.Fragment>
-        <div id="postSpeciesForm" className="row border border-secondary">
+        <div id="postSpeciesForm" className="row">
             {/* <h2>{props.message}</h2> */}
-            <div className="col col-1 col-sm-2 border border-primary"></div>
-            <div className="col col-md-8 border border-warning">
+            <div className="col col-1 col-sm-2"></div>
+            <div className="col col-md-8">
                 <div className='row'>
-                    <h2>{props.message}</h2>
-                    <label>Common Name: </label>
+                    <h2 className='pb-2'>{props.message}</h2>
+                    <label className='pb-2'>Common Name: </label>
                     <input className="form-control" 
                             type="text" 
                             placeholder="Default input"
@@ -25,7 +25,7 @@ function SpeciesForm(props) {
                     <p>{props.commonNameErr}</p>
                 </div>
                 <div className='row'>
-                    <label>Official Name: </label>
+                    <label className='pb-2'>Official Name: </label>
                     <input className="form-control" 
                             type="text" 
                             placeholder="Default input"
@@ -36,7 +36,7 @@ function SpeciesForm(props) {
                     <p>{props.officialNameErr}</p>
                 </div>
                 <div className='row'>
-                    <label>Genus: </label>
+                    <label className='pb-2'>Genus: </label>
                     <input className="form-control" 
                             type="text" 
                             placeholder="Default input"
@@ -47,8 +47,8 @@ function SpeciesForm(props) {
                     <p>{props.genusErr}</p>
                 </div>
                 <div className='row'>
-                    <label>First Parent: </label>
-                    <input className="form-control" 
+                    <label className='pb-2'>First Parent: </label>
+                    <input className="form-control mb-3" 
                             type="text" 
                             placeholder="Default input"
                             value={props.parent1}
@@ -57,8 +57,8 @@ function SpeciesForm(props) {
                     />
                 </div>
                 <div className='row'>
-                    <label>Second Parent: </label>
-                    <input className="form-control" 
+                    <label className='pb-2'>Second Parent: </label>
+                    <input className="form-control mb-3" 
                             type="text" 
                             placeholder="Default input"
                             value={props.parent2}
@@ -67,8 +67,8 @@ function SpeciesForm(props) {
                     />
                 </div>
                 <div className='row'>
-                    <label>Name of orchid's originator:</label>
-                    <input className="form-control" 
+                    <label className='pb-2'>Name of orchid's originator:</label>
+                    <input className="form-control mb-3" 
                             type="text" 
                             placeholder="Default input"
                             value={props.creatorName}
@@ -77,7 +77,7 @@ function SpeciesForm(props) {
                     />
                 </div>
                 <div className='row'>
-                    <label>Year of creation:</label>
+                    <label className='pb-2'>Year of creation:</label>
                     {/* <DatePicker
                         selected={props.creationYear}
                         onChange={props.updateFormField}
@@ -85,7 +85,7 @@ function SpeciesForm(props) {
                         showYearPicker
                         dateFormat="yyyy"
                     /> */}
-                    <input className="form-control" 
+                    <input  className="form-control mb-3" 
                             type="text" 
                             placeholder="YYYY"
                             value={props.creationYear}
@@ -94,8 +94,8 @@ function SpeciesForm(props) {
                     />
                 </div>
                 <div className='row'>
-                    <label>Colours:</label>
-                    <div className="form-control">
+                    <label className='pb-2'>Colours:</label>
+                    <div className="form-control mb-3">
                     {props.orchidColours.map(
                         eachColour => 
                             <div key={eachColour.value} className='form-check form-check-inline'>
@@ -113,8 +113,8 @@ function SpeciesForm(props) {
                     </div>
                 </div>
                 <div className='row'>
-                    <label>Petals Pattern:</label>
-                    <div className="form-control">
+                    <label className='pb-2'>Petals Pattern:</label>
+                    <div className="form-control mb-3">
                     {props.orchidPetalPatternOptions.map(
                         eachPattern => 
                         <div key={eachPattern.value} className='form-check form-check-inline'>
@@ -132,8 +132,8 @@ function SpeciesForm(props) {
                     </div>
                 </div>
                 <div className='row'>
-                    <label>Scents:</label>
-                    <div className="form-control">
+                    <label className='pb-2'>Scents:</label>
+                    <div className="form-control mb-3">
                     {props.orchidScentsOptions.map(
                         eachScent => 
                         <div key={eachScent.value} className='form-check form-check-inline'>
@@ -151,8 +151,8 @@ function SpeciesForm(props) {
                     </div>
                 </div>
                 <div className='row'>
-                    <label>Floral Grouping:</label>
-                    <div className='form-control'>
+                    <label className='pb-2'>Floral Grouping:</label>
+                    <div className='form-control mb-3 '>
                         <div className="form-check form-check-inline">
                             <input className="form-check-input" 
                                     type="radio" 
@@ -176,7 +176,7 @@ function SpeciesForm(props) {
                     </div>
                 </div>
                 <div className='row'>
-                    <label>Upload an image url: </label>
+                    <label className='pb-2'>Upload an image url: </label>
                     <input className="form-control" 
                             type="text" 
                             placeholder="Default input"
@@ -197,7 +197,7 @@ function SpeciesForm(props) {
                     <p>{props.distributionErr}</p>
                 </div>
                 <div className='row'>
-                    <label>Conservation Status:</label>
+                    <label className='pb-2'>Conservation Status:</label>
                     <select className='form-select'
                             name="conservationStatus" 
                             value={props.conservationStatus} 
@@ -218,7 +218,7 @@ function SpeciesForm(props) {
                 </div>
                 
             </div>
-            <div className="col col-1 col-sm-2 border border-primary"></div>
+            <div className="col col-1 col-sm-2"></div>
 
 
         </div>

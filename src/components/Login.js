@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class Login extends Component {
     render() {
         return <React.Fragment>
-        <div className="mb-3">
+        <div className="mb-3 d-flex flex-column mx-1">
           <label htmlFor="exampleFormControlInput1" 
                   className="form-label"
                   >
@@ -19,7 +19,7 @@ export default class Login extends Component {
                     onChange={this.props.updateFormField}
             />
 
-            <button className='btn btn-primary'
+            <button className='btn btn-primary mt-3 align-self-end'
                     onClick={() => {
                       
                       this.props.getApiUserEmail()

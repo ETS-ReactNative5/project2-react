@@ -108,14 +108,14 @@ export default class ReadUserProfile extends Component {
   }
 
   renderEmail() {
-    return <div className='d-flex border border-danger border-3'>
+    return <div className='d-flex white rounded mx-3 py-3 ps-3 pe-1 border border-dark'>
       <div className='row'>
         <div className='align-self-center'>Hello, {this.props.userEmail}</div>
         <div className="collapse" id="collapseExample">
-          <div className="card card-body">
+          <div className="card card-body mt-3">
             Are you sure you wish to delete your account? You will lose all of your saved favourites.
           </div>
-          <div className='row'>
+          <div className='row mt-2'>
             <div className='col-6 d-flex'>
                 <button className='btn ms-auto'
                         data-bs-toggle="collapse" 
@@ -187,7 +187,7 @@ export default class ReadUserProfile extends Component {
           </div>
           <div className='col col-2'></div>
         </div> */}
-        <div className='border border-primary border-3'>
+        <div className=''>
           {this.renderContent()}
           <p>{this.props.editEmailMsg}</p>
         </div>
@@ -196,7 +196,7 @@ export default class ReadUserProfile extends Component {
             {this.props.userFavouriteSpecies.map(
               eachItem => 
               <React.Fragment key={eachItem._id}>
-                <div className='col col-10 col-sm-8 col-md-6 col-lg-4 col-xl-3 border border-danger mx-auto'>
+                <div className='col col-10 col-sm-8 col-md-6 col-lg-4 col-xl-3 mx-auto'>
                 <SpeciesCard  eachItem={eachItem}
                               distributionOptions={this.props.distributionOptions}
                               conservationOptions={this.props.conservationOptions}

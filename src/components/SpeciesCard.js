@@ -66,10 +66,10 @@ export default class SpeciesCard extends Component {
         let output = ""
         if(givenName.trim().split(' ').length === 2 ){
             let [word1, word2] = givenName.trim().split(' ')
-            output = <React.Fragment><span className='toItalicise'>{word1 + " " + word2}</span></React.Fragment>
+            output = <React.Fragment><span className='to-italicise'>{word1 + " " + word2}</span></React.Fragment>
         } else{
             let [word1,...rest] = givenName.trim().split(' ')
-            output= <React.Fragment><span className='toItalicise'>{word1 + " "}</span>{rest.join(' ')}</React.Fragment>
+            output= <React.Fragment><span className='to-italicise'>{word1 + " "}</span>{rest.join(' ')}</React.Fragment>
         }
         return output
     }
@@ -119,68 +119,86 @@ export default class SpeciesCard extends Component {
         return (
             <React.Fragment key={this.props.eachItem._id}>
                 
-                <div className='card'
+                <div className='card gradient shadow species-card'
                     style={{
                         height: "50vh",
                         margin: "1rem auto",
                         borderRadius: "1rem",
-                        boxSizing: "border-box"
-
+                        boxSizing: "border-box",
+                        borderColor: "#557360"
                     }}
                 >
-                    <img className="card-img-top"
-                        src={this.props.eachItem.imageUrl}
-                        alt={this.props.eachItem.officialName}
+                    <div className='card-wrapper m-2'
                         style={{
-                            width: "95%",
-                            height: "70%",
-                            margin: "0.5rem auto 0",
-                            objectFit: "cover",
                             borderTopRightRadius: "1rem",
                             borderTopLeftRadius: "1rem",
-                        }}
-                    />
-                    <div className="card-body">
-                        {/* <h6>{this.props.eachItem.officialName}</h6> */}
-                        <h6>{this.checkWordCount(this.props.eachItem.officialName)}</h6>
-
-                        <p>Native to {this.matchName(this.props.eachItem.distribution)}</p>
-                        <div className='row'>
-                            <div className='col-6'>
-                                <a
-                                    data-bs-toggle="modal"
-                                    data-bs-target={"#modal" + this.props.eachItem._id}
-                                    onClick={() => { this.correspondData(this.props.eachItem.distribution, this.props.eachItem.conservationStatus) }}
-                                >
-                                    About this species
-                                </a>
-                            </div>
-                            <div className='col-6'>
-                                <a
-                                    data-bs-toggle="modal"
-                                    data-bs-target={"#modal-facts" + this.props.eachItem._id}
-                                    // onClick={() => this.props.setActivePage('readFacts')}
-                                >
-                                    View facts
-                                </a>
-                            </div>
-                        </div>
-
-                        <SpeciesModal eachItem={this.props.eachItem}
-                            activeDistribution={this.state.activeDistribution}
-                            activeConservation={this.state.activeConservation}
-                            setActivePage={this.props.setActivePage}
-                            selectEdit={this.props.selectEdit}
-                            showMdSearchFilter = {this.props.showMdSearchFilter}
-                            checkApiUserFavourite={this.props.checkApiUserFavourite}
-                            favourited={this.state.favourited}
-                            instructionMsg={this.state.instructionMsg}
-                            setInstructions={this.setInstructions}
-                            clearInstructions={this.clearInstructions}
-                        />
-                        <FactsModal eachItem={this.props.eachItem}
+                            height: '100%'
+                        }}>
+                        <img className="card-img-top"
+                            src={this.props.eachItem.imageUrl}
+                            alt={this.props.eachItem.officialName}
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                                // margin: "1rem auto 0",
+                                objectFit: "cover",
+                                borderTopRightRadius: "1rem",
+                                borderTopLeftRadius: "1rem",
+                            }}
                         />
                     </div>
+                            
+                        
+                        <div className="card-body"
+                            style={{
+                                backgroundColor:'white',
+                                borderBottomLeftRadius: "1rem",
+                                borderBottomRightRadius: "1rem"
+                            }} 
+                                >
+                            {/* <h6>{this.props.eachItem.officialName}</h6> */}
+                            <h6>{this.checkWordCount(this.props.eachItem.officialName)}</h6>
+
+                            <p>Native to {this.matchName(this.props.eachItem.distribution)}</p>
+                            <div className='row'>
+                                <div className='col-6 d-flex'>
+                                    <a
+                                        className='ms-auto'
+                                        data-bs-toggle="modal"
+                                        data-bs-target={"#modal" + this.props.eachItem._id}
+                                        onClick={() => { this.correspondData(this.props.eachItem.distribution, this.props.eachItem.conservationStatus) }}
+                                    >
+                                        About this species
+                                    </a>
+                                </div>
+                                <div className='col-6 d-flex'>
+                                    <a
+                                        className='me-auto'
+                                        data-bs-toggle="modal"
+                                        data-bs-target={"#modal-facts" + this.props.eachItem._id}
+                                        // onClick={() => this.props.setActivePage('readFacts')}
+                                    >
+                                        View facts
+                                    </a>
+                                </div>
+                            </div>
+
+                            <SpeciesModal eachItem={this.props.eachItem}
+                                activeDistribution={this.state.activeDistribution}
+                                activeConservation={this.state.activeConservation}
+                                setActivePage={this.props.setActivePage}
+                                selectEdit={this.props.selectEdit}
+                                showMdSearchFilter = {this.props.showMdSearchFilter}
+                                checkApiUserFavourite={this.props.checkApiUserFavourite}
+                                favourited={this.state.favourited}
+                                instructionMsg={this.state.instructionMsg}
+                                setInstructions={this.setInstructions}
+                                clearInstructions={this.clearInstructions}
+                            />
+                            <FactsModal eachItem={this.props.eachItem}
+                            />
+                        </div>
+                    
 
                 </div>
             </React.Fragment>

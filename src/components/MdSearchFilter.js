@@ -22,11 +22,25 @@ export default class MdSearchFilter extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className='row'>
+
+        <div className='d-flex mb-2'>
+          <a className="ms-auto style-links" 
+              data-bs-toggle="collapse" 
+              href="#collapse-search-filter" 
+              role="button" 
+              aria-expanded="false" 
+              aria-controls="collapse-search-filter">
+            Advanced Search
+          </a>
+        </div>
+
+        <div className="collapse" id="collapse-search-filter">
+          <div className="card card-body" id='collapse-search-body'>
+          <div className='row rounded'>
           <div className='col-1 col-lg-2 d-none d-md-block'></div>
           <div className='col'>
-            <div className='row border border-danger'>
-                <div className='col col-md-6 border border-warning'>
+            <div className='row'>
+                <div className='col col-md-6'>
                   <label>Region:</label>
                           <select className='form-select'
                                   name="distributionFilter" 
@@ -35,7 +49,7 @@ export default class MdSearchFilter extends Component {
                               {this.renderDropdown(this.props.distributionOptions)}    
                           </select>
                 </div>
-                <div className='col col-md-6 border border-warning'>
+                <div className='col col-md-6'>
                   <label>Conservation Status:</label>
                       <select className='form-select'
                               name="conservationFilter" 
@@ -45,7 +59,7 @@ export default class MdSearchFilter extends Component {
                       </select>
                 </div>
             </div>
-            <div className='row border border-primary border-3'>
+            <div className='row mt-3'>
               <div className='col col-md-2'>
                 <label>Colours:</label>
                 </div>
@@ -70,7 +84,7 @@ export default class MdSearchFilter extends Component {
               </div>
               <div className='col col-md-2 my-auto'></div>
             </div>
-            <div className='row border border-primary border-3'>
+            <div className='row mt-2 mb-3'>
               <div className='col col-6 my-auto'>
                 <label>Number of facts added:</label>
                       <select className='form-select'
@@ -107,6 +121,11 @@ export default class MdSearchFilter extends Component {
             </div>
           <div className='col-1 col-lg-2 d-none d-md-block'></div>
         </div>
+          </div>
+        </div>
+
+        
+
       </React.Fragment>
       
     )

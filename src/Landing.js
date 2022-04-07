@@ -22,6 +22,10 @@ import Footer from './components/Footer'
 import { FaUserAlt } from 'react-icons/fa'
 import { BsSearch } from 'react-icons/bs'
 import { TiThMenu } from 'react-icons/ti'
+import { GrLinkTop } from 'react-icons/gr'
+
+import { scrollToTop } from "./utils";
+
 
 
 
@@ -422,14 +426,6 @@ export default class Landing extends React.Component {
         
     }
 
-    
-
-
-
-    // getApi = async () => {
-    //     let speciesResponse = await axios.get(this.BASE_API_URL + "/orchid_species");
-    // }
-
     async componentDidMount() {
         let speciesResponse = await axios.get(this.BASE_API_URL + "/orchid_species");
         let distributionResponse = await axios.get(this.BASE_API_URL + "/distribution");
@@ -452,108 +448,114 @@ export default class Landing extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div className="container-fluid border border-danger">
+                <div id='components-wrapper' className="container border border-danger">
                     {/* MAIN NAV BAR */}
-                    <ul className="nav d-flex border border-warning">
-                        <li className="nav-item me-auto">
-                            <a className="nav-link"
-                                aria-current="page"
-                            >
-                                Project 2
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <div className="dropdown">
+                    <nav id='navbar'>
+                        <ul className="nav d-flex pt-2">
+                            <li className="nav-item me-auto">
+                                <a className="nav-link"
+                                    aria-current="page"
+                                    onClick={() => this.setActivePage('main')}
+                                >
+                                    Project 2
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <div className="dropdown">
+                                    <button className="btn" 
+                                            type="button" 
+                                            id="dropdownMenu2" 
+                                            data-bs-toggle="dropdown" 
+                                            aria-expanded="false"
+                                            >
+
+                                        <FaUserAlt className="react-icons" size={20} />
+
+                                    </button>
+                                    <ul className="dropdown-menu" 
+                                        aria-labelledby="dropdownMenu2">
+
+                                        {!this.state.loggedIn && <li>
+                                            <button 
+                                                className="dropdown-item" 
+                                                type="button"
+                                                onClick = {() => {
+                                                    this.setActivePage('createUserProfile');
+                                                    this.setState({
+                                                        showMdSearchFilter: false,
+                                                        registrationMsg: ""
+                                                    });
+                                                }}
+                                                >
+                                                    Create Account
+                                            </button> 
+                                        </li>}
+
+                                        {!this.state.loggedIn && <li>
+                                            <button 
+                                                className="dropdown-item" 
+                                                type="button"
+                                                onClick = {() => {
+                                                    this.setActivePage('login');
+                                                    this.setState({
+                                                        showMdSearchFilter: false,
+                                                        loginMsg:""
+                                                    });
+                                                }}
+                                                >
+                                                    Login
+                                            </button> 
+                                        </li>}
+
+                                        {this.state.loggedIn && <li>
+                                            <button 
+                                                className="dropdown-item" 
+                                                type="button"
+                                                onClick = {() => {
+                                                    this.setActivePage('readUserProfile');
+                                                    this.setState({
+                                                        showMdSearchFilter: false
+                                                    });
+                                                }}
+                                                >
+                                                    View Favourites
+                                            </button>
+                                        </li>}
+
+                                        {this.state.loggedIn && <li>
+                                            <button 
+                                                className="dropdown-item" 
+                                                type="button"
+                                                onClick = {() => {
+                                                    this.setActivePage('main');
+                                                    this.setState({
+                                                        showMdSearchFilter: true,
+                                                        currentUserId: "",
+                                                        loggedIn:false,
+                                                        userEmail: "",
+                                                        userFavouriteIds: [],
+                                                        userFavouriteSpecies: []
+                                                    });
+                                                }}
+                                                >
+                                                    Log out
+                                            </button>
+                                        </li>}
+                                    </ul>
+                                </div>
+                            </li>
+                            <li className="nav-item d-md-none">
                                 <button className="btn" 
                                         type="button" 
-                                        id="dropdownMenu2" 
-                                        data-bs-toggle="dropdown" 
-                                        aria-expanded="false">
-                                    <FaUserAlt/>
+                                        data-bs-toggle="offcanvas" 
+                                        data-bs-target="#xs-sm-search-filter" 
+                                        aria-controls="offcanvasWithBothOptions"
+                                        >
+                                            <TiThMenu/>
                                 </button>
-                                <ul className="dropdown-menu" 
-                                    aria-labelledby="dropdownMenu2">
-
-                                    {!this.state.loggedIn && <li>
-                                        <button 
-                                            className="dropdown-item" 
-                                            type="button"
-                                            onClick = {() => {
-                                                this.setActivePage('createUserProfile');
-                                                this.setState({
-                                                    showMdSearchFilter: false,
-                                                    registrationMsg: ""
-                                                });
-                                            }}
-                                            >
-                                                Create Account
-                                        </button> 
-                                    </li>}
-
-                                    {!this.state.loggedIn && <li>
-                                        <button 
-                                            className="dropdown-item" 
-                                            type="button"
-                                            onClick = {() => {
-                                                this.setActivePage('login');
-                                                this.setState({
-                                                    showMdSearchFilter: false,
-                                                    loginMsg:""
-                                                });
-                                            }}
-                                            >
-                                                Login
-                                        </button> 
-                                    </li>}
-
-                                    {this.state.loggedIn && <li>
-                                        <button 
-                                            className="dropdown-item" 
-                                            type="button"
-                                            onClick = {() => {
-                                                this.setActivePage('readUserProfile');
-                                                this.setState({
-                                                    showMdSearchFilter: false
-                                                });
-                                            }}
-                                            >
-                                                View Favourites
-                                        </button>
-                                    </li>}
-
-                                    {this.state.loggedIn && <li>
-                                        <button 
-                                            className="dropdown-item" 
-                                            type="button"
-                                            onClick = {() => {
-                                                this.setActivePage('main');
-                                                this.setState({
-                                                    showMdSearchFilter: true,
-                                                    currentUserId: "",
-                                                    loggedIn:false,
-                                                    userEmail: "",
-                                                    userFavouriteIds: [],
-                                                    userFavouriteSpecies: []
-                                                });
-                                            }}
-                                            >
-                                                Log out
-                                        </button>
-                                    </li>}
-                                </ul>
-                            </div>
-                        </li>
-                        <li className="nav-item d-md-none">
-                            <button className="btn" 
-                                    type="button" 
-                                    data-bs-toggle="offcanvas" 
-                                    data-bs-target="#XsSmSearchFilter" 
-                                    aria-controls="offcanvasWithBothOptions"
-                                    >
-                                        <TiThMenu/>
-                            </button>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </nav>
                     {/* OFFCANVAS FILTER FOR <MD */}
                     <SmSearchFilter  
                         distributionOptions = {this.state.distributionOptions}
@@ -569,70 +571,89 @@ export default class Landing extends React.Component {
                     />
                     {/* VIEW OPTIONS */}
                     {this.state.dataLoaded &&
-                    <ul className="nav nav-pills justify-content-center">
-                        <li className="nav-item">
-                            <a className="nav-link"
-                                aria-current="page"
-                                href="#"
-                                onClick={() => {
-                                    this.refreshSpeciesDisplay();
-                                    this.setActivePage('readAllSpecies');
-                                    this.setState({
-                                        showMdSearchFilter: true,
-                                        searchPrompt: ""
-                                    });
-                                }}>
-                                View Species
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link"
-                                href="#"
-                                onClick={() => {
-                                    this.setActivePage('readAllDistribution');
-                                    this.setState({
-                                        showMdSearchFilter: true
-                                    });
-                                }}>
-                                Orchid Distribution
-                            </a>
-                        </li>
-                    </ul>
+                    <nav id='nav-tabs'>
+                        <ul className="nav nav-pills justify-content-center">
+                            <li className="nav-item">
+                                <a className="nav-link"
+                                    aria-current="page"
+                                    href="#"
+                                    onClick={() => {
+                                        this.refreshSpeciesDisplay();
+                                        this.setActivePage('readAllSpecies');
+                                        this.setState({
+                                            showMdSearchFilter: true,
+                                            searchPrompt: ""
+                                        });
+                                    }}>
+                                    View All Species
+                                </a>
+                            </li>
+                            {/* <li className="nav-item">
+                                <a className="nav-link"
+                                    href="#"
+                                    onClick={() => {
+                                        this.setActivePage('readAllDistribution');
+                                        this.setState({
+                                            showMdSearchFilter: true
+                                        });
+                                    }}>
+                                    Orchid Distribution
+                                </a>
+                            </li> */}
+                        </ul>
+                    </nav>
                     }
                     {/* SEARCH INPUT */}
                     {this.state.dataLoaded && 
-                    <div className="input-group border border-dark rounded-3">
-                        <input type="search" 
-                                name="searchPrompt"
-                                value={this.state.searchPrompt}
-                                onChange={this.updateFormField}
-                                className="form-control border-0" 
-                                placeholder="Search" 
-                                // aria-label="Search" 
-                                // aria-describedby="search-addon" 
-                                />
-                        <button className="input-group-text border-0 btn " 
-                                type="button" 
-                                id="search-addon"
-                                onClick={() => {this.getSearchResults();
-                                                this.setActivePage("readAllSpecies")}}
-                                >
-                            <BsSearch/>
-                        </button>
-                    </div>
+                    <section id='search-bar' className="row border border-danger">
+                        <div className="col-2 d-none d-md-block"></div>
+                        <div className="px-3 col-12 col-md-8 white rounded-pill input-group border border-dark">
+                            <input type="search" 
+                                    name="searchPrompt"
+                                    value={this.state.searchPrompt}
+                                    onChange={this.updateFormField}
+                                    className="form-control border-0" 
+                                    placeholder="Search" 
+                                    // aria-label="Search" 
+                                    // aria-describedby="search-addon" 
+                                    />
+                            <button className="input-group-text border-0 btn mb-1 shadow-none" 
+                                    type="button" 
+                                    id="search-addon"
+                                    onClick={() => {this.getSearchResults();
+                                                    this.setActivePage("readAllSpecies")
+                                                }}
+                                    >
+                                <BsSearch/>
+                            </button>
+                        </div>
+                        <div className="col-2 d-none d-md-block"></div>
+
+                    </section>
                     }
                     {/* FILTER FOR >=MD */}
                     {this.state.dataLoaded &&
-                    <div className="d-none d-md-block border border-primary">
-                        {this.showMdSearchFilter()}
-                    </div>
+                    <section id='search-filter-md' className=" px-2 d-none d-md-block mt-3">
+                      
+                            {this.showMdSearchFilter()}
+            
+                    </section>
                     }
-                    <div className="border border-success">
+                    {/* render SPA pages */}
+                    <main id='main-content' className="mt-3 mx-1 mx-md-2 py-3 px-1 px-md-3">
                         {this.renderPage()}
-                    </div>
-                    {/* FOOTER GOES HERE */}
-                    <Footer/>
+                    </main>
+                    {/* FOOTER */}
+                    <footer id='footer' className='container mt-3 pt-3 px-3'>
+                        <Footer/>
+                    </footer>
                 </div>
+                <button id='scroll-to-top-btn' 
+                        className="btn rounded-circle shadow-none border border-dark"
+                        onClick={() => scrollToTop()}
+                        >
+                    <GrLinkTop/>
+                </button>
             </React.Fragment>
         )
     }
