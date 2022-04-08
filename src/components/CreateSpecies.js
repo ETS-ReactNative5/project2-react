@@ -38,7 +38,17 @@ export default class CreateSpecies extends Component {
     distributionErr:"",
     conservationStatusErr:"",
 
-    submitMsg:""
+    submitMsg:"",
+
+    xCommonName: "",
+    xOfficialName: "",
+    xGenus: "",
+    xColours: "",
+    xPetalPattern: "",
+    xScents: "",
+    xImageUrl: "",
+    xDistribution: "",
+    xConservationStatus: ""
   }
 
   updateFormField = (e) => {
@@ -88,7 +98,17 @@ export default class CreateSpecies extends Component {
       imageUrlErr:"",
       distributionErr:"",
       conservationStatusErr:"",
-      submitMsg:""
+      submitMsg:"",
+      xCommonName: "",
+      xOfficialName: "",
+      xGenus: "",
+      xColours: "",
+      xPetalPattern: "",
+      xScents: "",
+      xImageUrl: "",
+      xDistribution: "",
+      xConservationStatus: ""
+
     })
 
     let errorTracker = false
@@ -96,57 +116,66 @@ export default class CreateSpecies extends Component {
     if(!this.state.commonName){
       errorTracker = true
       this.setState({
-        commonNameErr: "Please provide the common name of this species"
+        commonNameErr: "Please provide the common name of this species",
+        xCommonName: "red-border"
       })
     } else if (this.state.commonName.length < 3){
       errorTracker=true
       this.setState({
-        commonNameErr: "Please enter a name longer than 2 characters"
+        commonNameErr: "Please enter a name longer than 2 characters",
+        xCommonName: "red-border"
       })
     }
 
     if(!this.state.officialName){
       errorTracker = true
       this.setState({
-        officialNameErr: "Please provide the common name of this species"
+        officialNameErr: "Please provide the common name of this species",
+        xOfficialName: "red-border"
       })
     } else if (this.state.officialName.length < 5){
       errorTracker=true
       this.setState({
-        officialNameErr: "Please enter a name longer than 4 characters"
+        officialNameErr: "Please enter a name longer than 4 characters",
+        xOfficialName: "red-border"
       })
     }
 
     if(!this.state.genus){
       errorTracker = true
       this.setState({
-        genusErr: "Please provide the common name of this species"
+        genusErr: "Please provide the common name of this species",
+        xGenus: "red-border"
       })
     } else if (this.state.genus.length < 3){
       errorTracker=true
       this.setState({
-        genusErr: "Please enter a name longer than 2 characters"
+        genusErr: "Please enter a name longer than 2 characters",
+        xGenus: "red-border"
       })
     }
 
     if(this.state.colours.length === 0){
       errorTracker = true
       this.setState({
-        coloursErr: "Please select at least one colour"
+        coloursErr: "Please select at least one colour",
+        xColours: "red-border"
       })
     }
 
     if(!this.state.petalPattern){
       errorTracker = true
       this.setState({
-        petalPatternErr: "Please select the closest matching pattern"
+        petalPatternErr: "Please select the closest matching pattern",
+        xPetalPattern: "red-border"
       })
     }
 
     if(this.state.scents.length === 0){
       errorTracker = true
       this.setState({
-        scentsErr: "Please select at least one scent"
+        scentsErr: "Please select at least one scent",
+        xScents: "red-border"
       })
     }
 
@@ -155,26 +184,30 @@ export default class CreateSpecies extends Component {
     if(!this.state.imageUrl){
       errorTracker=true
       this.setState({
-        imageUrlErr:"Please provide an image via URL"
+        imageUrlErr:"Please provide an image via URL",
+        xImageUrl: "red-border"
       })
     } else if( !this.state.imageUrl.match(imgUrl) ){
       errorTracker=true
       this.setState({
-        imageUrlErr:"Please provide a valid URL"
+        imageUrlErr:"Please provide a valid URL",
+        xImageUrl: "red-border"
       })
     }
 
     if(!this.state.distribution){
       errorTracker=true
       this.setState({
-        distributionErr:"Please select where this species is native to"
+        distributionErr:"Please select where this species is native to",
+        xDistribution: "red-border"
       })
     }
 
     if(!this.state.conservationStatus){
       errorTracker=true
       this.setState({
-        conservationStatusErr:"Please select the conservation status of this species"
+        conservationStatusErr:"Please select the conservation status of this species",
+        xConservationStatus : 'red-border'
       })
     }
 
@@ -214,9 +247,12 @@ export default class CreateSpecies extends Component {
       conservationStatus:this.state.conservationStatus
     }).catch( e => {console.log(e.response.data)})
       
-    await setTimeout(this.props.refreshSpeciesDisplay(), 2000);
 
-    this.props.setActivePage('readAllSpecies');
+    await setTimeout(() => {this.props.refreshSpeciesDisplay();
+      this.props.setActivePage('readAllSpecies');}, 3000);
+    // await setTimeout(this.props.refreshSpeciesDisplay(), 2000);
+
+    // this.props.setActivePage('readAllSpecies');
     // .catch( e => {
     //   this.setState({
     //     errorMsg: e.response.data.message
@@ -270,6 +306,16 @@ export default class CreateSpecies extends Component {
           conservationStatusErr={this.state.conservationStatusErr}
 
           submitMsg={this.state.submitMsg}
+          
+          xCommonName={this.state.xCommonName}
+          xOfficialName={this.state.xOfficialName}
+          xGenus={this.state.xGenus}
+          xColours={this.state.xColours}
+          xPetalPattern={this.state.xPetalPattern}
+          xScents={this.state.xScents}
+          xImageUrl={this.state.xImageUrl}
+          xDistribution={this.state.xDistribution}
+          xConservationStatus={this.state.xConservationStatus}
           
           
         />

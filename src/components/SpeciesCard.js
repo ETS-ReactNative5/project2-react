@@ -84,7 +84,6 @@ export default class SpeciesCard extends Component {
         if(this.props.userFavouriteIds.includes(this.props.eachItem._id)){
             this.setState({
                 favourited:true
-                
             })
         } else {
             this.setState({
@@ -95,6 +94,7 @@ export default class SpeciesCard extends Component {
     }
 
     setInstructions = () => {
+        console.log('testing instructions')
         this.setState({
             instructionMsg: (this.props.loggedIn) ? "" :"Please create an account to favourite a species" 
         })
@@ -146,6 +146,7 @@ export default class SpeciesCard extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps.userFavouriteIds !== this.props.userFavouriteIds){
+            console.log('CDU')
             return this.checkFavourited()
         }
     }

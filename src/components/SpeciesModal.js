@@ -107,7 +107,7 @@ function SpeciesModal(props) {
                                     }
                                 }
                             >
-                                <AiFillEdit />
+                                <AiFillEdit size={25}/>
                             </button>
                             <button type="button"
                                 className="btn shadow-none"
@@ -122,7 +122,6 @@ function SpeciesModal(props) {
                                 {props.favourited === true ? <BsSuitHeartFill size={25} color='red' /> : <BsSuitHeart size={25} />}
                             </button>
 
-
                             <button type="button"
                                 className="btn"
                                 data-bs-toggle="collapse"
@@ -135,7 +134,7 @@ function SpeciesModal(props) {
                                     }
                                 }
                             >
-                                <RiDeleteBinFill />
+                                <RiDeleteBinFill size={25}/>
                             </button>
                             {/* { this.state.confirmDelete?  */}
                             <div className="collapse" id={"collapse" + props.eachItem._id}>

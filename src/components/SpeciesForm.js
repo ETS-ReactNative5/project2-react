@@ -8,14 +8,14 @@ function SpeciesForm(props) {
 //distributionOptions, conservationOptions, renderDropdown, postApi
   return (
     <React.Fragment>
-        <div id="postSpeciesForm" className="row">
+        <div id="postSpeciesForm" className="row mt-3 mb-5">
             {/* <h2>{props.message}</h2> */}
             <div className="col col-1 col-sm-2"></div>
             <div className="col col-md-8">
                 <div className='row'>
                     <h2 className='pb-2'>{props.message}</h2>
                     <label className='pb-2'>Common Name: </label>
-                    <input className="form-control" 
+                    <input className={"form-control " + props.xCommonName}
                             type="text" 
                             placeholder="Default input"
                             value={props.commonName}
@@ -26,7 +26,7 @@ function SpeciesForm(props) {
                 </div>
                 <div className='row'>
                     <label className='pb-2'>Official Name: </label>
-                    <input className="form-control" 
+                    <input className={"form-control " + props.xOfficialName}
                             type="text" 
                             placeholder="Default input"
                             value={props.officialName}
@@ -37,7 +37,7 @@ function SpeciesForm(props) {
                 </div>
                 <div className='row'>
                     <label className='pb-2'>Genus: </label>
-                    <input className="form-control" 
+                    <input className={"form-control " + props.xGenus}
                             type="text" 
                             placeholder="Default input"
                             value={props.genus}
@@ -95,7 +95,7 @@ function SpeciesForm(props) {
                 </div>
                 <div className='row'>
                     <label className='pb-2'>Colours:</label>
-                    <div className="form-control mb-3">
+                    <div className={"form-control mb-3 " + props.xColours}>
                     {props.orchidColours.map(
                         eachColour => 
                             <div key={eachColour.value} className='form-check form-check-inline'>
@@ -114,7 +114,7 @@ function SpeciesForm(props) {
                 </div>
                 <div className='row'>
                     <label className='pb-2'>Petals Pattern:</label>
-                    <div className="form-control mb-3">
+                    <div className={"form-control mb-3 " + props.xPetalPattern}>
                     {props.orchidPetalPatternOptions.map(
                         eachPattern => 
                         <div key={eachPattern.value} className='form-check form-check-inline'>
@@ -133,7 +133,7 @@ function SpeciesForm(props) {
                 </div>
                 <div className='row'>
                     <label className='pb-2'>Scents:</label>
-                    <div className="form-control mb-3">
+                    <div className={"form-control mb-3 " + props.xScents}>
                     {props.orchidScentsOptions.map(
                         eachScent => 
                         <div key={eachScent.value} className='form-check form-check-inline'>
@@ -177,7 +177,7 @@ function SpeciesForm(props) {
                 </div>
                 <div className='row'>
                     <label className='pb-2'>Upload an image url: </label>
-                    <input className="form-control" 
+                    <input className={"form-control " + props.xImageUrl}
                             type="text" 
                             placeholder="Default input"
                             value={props.imageUrl}
@@ -187,8 +187,8 @@ function SpeciesForm(props) {
                     <p>{props.imageUrlErr}</p>
                 </div>
                 <div className='row'>
-                    <label>Region:</label>
-                    <select className='form-select'
+                    <label className='pb-2'>Region:</label>
+                    <select className={'form-select ' + props.xDistribution}
                             name="distribution" 
                             value={props.distribution} 
                             onChange={props.updateFormField}>
@@ -198,7 +198,7 @@ function SpeciesForm(props) {
                 </div>
                 <div className='row'>
                     <label className='pb-2'>Conservation Status:</label>
-                    <select className='form-select'
+                    <select className={'form-select ' + props.xConservationStatus}
                             name="conservationStatus" 
                             value={props.conservationStatus} 
                             onChange={props.updateFormField}>

@@ -88,11 +88,11 @@ export default class ReadUserProfile extends Component {
             />
     <label htmlFor="floatingInput">New email address</label>
     <button className='btn'
-            onClick={async () => {
-              await this.props.putApiUserEmail();
-              this.setState({
-                action: "readingEmail"
-              });
+            onClick={() => {
+              this.props.putApiUserEmail();
+              // this.setState({
+              //   action: "readingEmail"
+              // });
               // setTimeout(this.readEmail, 3000)
             }}
             >
@@ -176,52 +176,54 @@ export default class ReadUserProfile extends Component {
 
     // dont need this if validation because users can't even see this page without creating an account/logging in first?
     // needs validation if favourites == 0
-    if(this.props.currentUserId){
-      // if (this.state.loaded) {
-        return <React.Fragment>
-        {/* <div className = 'row'>
-          <div className='col col-2'></div>
-          <div className='col-8 border border-primary border-3'>
-            {this.renderContent()}
-          </div>
-          <div className='col col-2'></div>
-        </div> */}
+        if(this.props.userFavouriteSpecies.length > 0){
+          return <React.Fragment>
+
         <div className=''>
           {this.renderContent()}
           <p>{this.props.editEmailMsg}</p>
         </div>
 
         <div className='row px-2'>
-            {this.props.userFavouriteSpecies.map(
-              eachItem => 
-              <React.Fragment key={eachItem._id}>
-                <div className='col col-10 col-sm-8 col-md-6 col-lg-4 col-xl-3 mx-auto'>
-                <SpeciesCard  eachItem={eachItem}
-                              distributionOptions={this.props.distributionOptions}
-                              conservationOptions={this.props.conservationOptions}
-                              // selectActiveDisplay={this.props.selectActiveDisplay}
-                              setActivePage={this.props.setActivePage}
-                              selectEdit = {this.props.selectEdit}
-                              showMdSearchFilter={this.props.showMdSearchFilter}
-                              checkApiUserFavourite={this.props.checkApiUserFavourite}
-                              userFavouriteIds={this.props.userFavouriteIds}
-                              loggedIn={this.props.loggedIn}
-                              />
-                </div>
-              </React.Fragment>
-            )}
+          {this.props.userFavouriteSpecies.map(
+            eachItem => 
+            <React.Fragment key={eachItem._id}>
+              <div className='col col-10 col-sm-8 col-md-6 col-lg-4 col-xl-3 mx-auto'>
+              <SpeciesCard  eachItem={eachItem}
+                            distributionOptions={this.props.distributionOptions}
+                            conservationOptions={this.props.conservationOptions}
+                            // selectActiveDisplay={this.props.selectActiveDisplay}
+                            setActivePage={this.props.setActivePage}
+                            selectEdit = {this.props.selectEdit}
+                            showMdSearchFilter={this.props.showMdSearchFilter}
+                            checkApiUserFavourite={this.props.checkApiUserFavourite}
+                            userFavouriteIds={this.props.userFavouriteIds}
+                            loggedIn={this.props.loggedIn}
+                            />
+              </div>
+            </React.Fragment>
+          )}
         </div>
-
-
         </React.Fragment>;
-    // } else {
+        } else{
+          return <React.Fragment>
+            <div className=''>
+          {this.renderContent()}
+          <p>{this.props.editEmailMsg}</p>
+        </div>
+        
+            <div>
+              You have not added any favourites.
+            </div>
+          </React.Fragment>
+        }
+      // if (this.state.loaded) {
+            // } else {
     //     return <React.Fragment>
     //         Loading, please wait...
     //     </React.Fragment>
     //   }
-    } else{
-      return<>Please create an account to add favourites to your profile.</>
-    }
+  
 
 
     

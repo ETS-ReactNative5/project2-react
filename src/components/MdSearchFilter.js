@@ -19,6 +19,27 @@ export default class MdSearchFilter extends Component {
     return selectOptions
   }
 
+  addSelection = () => {
+    let newDistributionOptions = this.props.distributionOptions
+    console.log(newDistributionOptions)
+    
+    newDistributionOptions.unshift({
+      '_id': "noDistributionSelection",
+      'name': 'No Selection'
+    })
+    console.log(newDistributionOptions)
+    return newDistributionOptions
+  }
+
+  // componentDidMount() {
+  //   let newDistributionOptions = this.props.distributionOptions.unshift({
+  //     '_id': "noselection",
+  //     'name': 'No Selection'
+  //   })
+  //   console.log(newDistributionOptions)
+  //   return newDistributionOptions
+  // }
+
   render() {
     return (
       <React.Fragment>
@@ -46,7 +67,7 @@ export default class MdSearchFilter extends Component {
                       name="distributionFilter"
                       value={this.props.distributionFilter}
                       onChange={this.props.updateFormField}>
-                      {this.renderDropdown(this.props.distributionOptions)}
+                      {this.renderDropdown(this.props.distributionSelection)}
                     </select>
                   </div>
                   <div className='col col-md-6'>
@@ -55,7 +76,7 @@ export default class MdSearchFilter extends Component {
                       name="conservationFilter"
                       value={this.props.conservationFilter}
                       onChange={this.props.updateFormField}>
-                      {this.renderDropdown(this.props.conservationOptions)}
+                      {this.renderDropdown(this.props.conservationSelection)}
                     </select>
                   </div>
                 </div>

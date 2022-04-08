@@ -29,7 +29,7 @@ export default class SmSearchFilter extends Component {
                         name="distributionFilter" 
                         value={this.props.distributionFilter} 
                         onChange={this.props.updateFormField}>
-                    {this.renderDropdown(this.props.distributionOptions)}    
+                    {this.renderDropdown(this.props.distributionSelection)}    
                 </select>
                 
                 
@@ -38,7 +38,7 @@ export default class SmSearchFilter extends Component {
                         name="conservationFilter" 
                         value={this.props.conservationFilter} 
                         onChange={this.props.updateFormField}>
-                    {this.renderDropdown(this.props.conservationOptions)}    
+                    {this.renderDropdown(this.props.conservationSelection)}    
                 </select>
 
                 <label>Colours:</label>

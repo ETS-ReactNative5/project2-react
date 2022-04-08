@@ -1,6 +1,4 @@
 @font-face {
-    src: url(local-data/fonts/abigate.otf);
-    font-family: abigate;
 
     src: url(local-data/fonts/OregonLightRegular.ttf);
     font-family: OregonLightRegular;
@@ -104,6 +102,10 @@
 
 .rounded {
     border-radius: 1rem !important
+}
+
+.red-border{
+    border: 1px solid red!important;
 }
 
 /* .gradient{

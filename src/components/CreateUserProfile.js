@@ -22,10 +22,8 @@ export default class CreateUserProfile extends Component {
 
             <button className='btn mt-3 btn-primary align-self-end'
                     onClick={() => {
-                      
                       this.props.postApiUserEmail()
                       // this.setActivePage('readAllSpecies')
-
                     }}
             >
               Register

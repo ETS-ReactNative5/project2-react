@@ -42,7 +42,9 @@ export default class Landing extends React.Component {
         showMdSearchFilter: true,
         species: [],
         distributionOptions: [],
+        distributionSelection: [],
         conservationOptions: [],
+        conservationSelection: [],
         orchidColours: [],
         orchidScentsOptions: [],
         orchidPetalPatternOptions: [],
@@ -178,8 +180,8 @@ export default class Landing extends React.Component {
 
     showMdSearchFilter() {
         return this.state.showMdSearchFilter ? <MdSearchFilter
-            distributionOptions={this.state.distributionOptions}
-            conservationOptions={this.state.conservationOptions}
+            distributionSelection={this.state.distributionSelection}
+            conservationSelection={this.state.conservationSelection}
             orchidColours={this.state.orchidColours}
             updateFormField={this.updateFormField}
             distributionFilter={this.state.distributionFilter}
@@ -259,7 +261,6 @@ export default class Landing extends React.Component {
         this.setState({
             species: searchResponse.data
         })
-        console.log(this.state.species)
 
     }
 
@@ -274,19 +275,25 @@ export default class Landing extends React.Component {
     }
 
     postApiUserEmail = async () => {
-
-        this.setState({
-            registrationMsg: ""
-        })
-
-        let results = await axios.post(this.BASE_API_URL + '/users', {
-            userEmail: this.state.userEmail
-        }).catch((e) => {
+        try{
+            this.setState({
+                registrationMsg: ""
+            })
+    
+            let results = await axios.post(this.BASE_API_URL + '/users', {
+                userEmail: this.state.userEmail
+            })
+            this.setState({
+                currentUserId: results.data.insertedId,
+                registrationMsg: "Thanks for registering an account! You can now save favourites to your profile.",
+                loggedIn: true
+            })
+        }catch(e){
             console.log(e.response.data.message)
             this.setState({
                 registrationMsg: e.response.data.message
             });
-        })
+        }
         // .then(() => {
         //     this.setState({
         //         currentUserId: results.data.insertedId,
@@ -294,38 +301,45 @@ export default class Landing extends React.Component {
         //         loggedIn: true
         //     })
         // })
-
-        this.setState({
-            currentUserId: results.data.insertedId,
-            registrationMsg: "Thanks for registering an account! You can now save favourites to your profile.",
-            loggedIn: true
-        })
-
-
     }
 
     putApiUserEmail = async () => {
-        this.setState({
-            editEmailMsg: ""
-        })
-        await axios.put(this.BASE_API_URL + '/users/' + this.state.currentUserId, {
-            userEmail: this.state.userEmail
-        }).catch((e) => {
+        
+
+        try{
+
+            this.setState({
+                editEmailMsg: ""
+            })
+            
+            await axios.put(this.BASE_API_URL + '/users/' + this.state.currentUserId, {
+                userEmail: this.state.userEmail
+            })
+        } catch (e){
             this.setState({
                 editEmailMsg: e.response.data.message
             })
-        }).then((res) => {
-            if (res.status === 200) {
-                this.setState({
-                    editEmailMsg: "Your email has been changed"
-                })
-                setTimeout(() => {
-                    this.setState({
-                        editEmailMsg: ""
-                    })
-                }, 3000)
-            }
-        })
+        }
+        
+        
+        
+        // .catch((e) => {
+        //     this.setState({
+        //         editEmailMsg: e.response.data.message
+        //     })
+        // })
+        // .then((res) => {
+        //     if (res.status === 200) {
+        //         this.setState({
+        //             editEmailMsg: "Your email has been changed"
+        //         })
+        //         setTimeout(() => {
+        //             this.setState({
+        //                 editEmailMsg: ""
+        //             })
+        //         }, 3000)
+        //     }
+        // })
 
         // .then(() => {
         //     this.setState({
@@ -389,8 +403,9 @@ export default class Landing extends React.Component {
 
     checkApiUserFavourite = async (speciesId) => {
 
-        if (this.state.loggedIn) {
+        if (this.state.loggedIn === true) {
             if (this.state.userFavouriteIds.includes(speciesId)) {
+                console.log('testing delete')
                 await axios.delete(this.BASE_API_URL + '/users/' + this.state.currentUserId + '/favourites/' + speciesId)
             } else {
                 await axios.post(this.BASE_API_URL + '/users/' + this.state.currentUserId + '/favourites/' + speciesId, {
@@ -399,35 +414,36 @@ export default class Landing extends React.Component {
             }
             return this.getUserFavouriteIds();
         }
-
-
     }
 
     getUserFavouriteIds = async () => {
         if (this.state.currentUserId) {
             let userFavouritesResponse = await axios.get(this.BASE_API_URL + '/users/' + this.state.currentUserId)
-            this.setState({
-                userFavouriteIds: userFavouritesResponse.data.favourites
-            })
+
+            // if (userFavouritesResponse.data.favourites.length > 0){
+                this.setState({
+                    userFavouriteIds: userFavouritesResponse.data.favourites
+                })
+                return this.getUserFavouriteSpecies();
+            // }
         }
-        return this.getUserFavouriteSpecies();
+        
     }
 
     getUserFavouriteSpecies = async () => {
         let payload = {
             params: {}
         }
-
         // && this.state.userFavouriteIds.length > 0
         if (this.state.currentUserId) {
+
             payload.params.userFavouriteIds = this.state.userFavouriteIds
-            let userFavouritesResponse = await axios.get(this.BASE_API_URL + '/orchid_species', payload);
+            let userFavouritesResponse = await axios.get(this.BASE_API_URL + '/orchid_species/user_favourites', payload);
+            console.log(userFavouritesResponse.data)
             this.setState({
                 userFavouriteSpecies: userFavouritesResponse.data
             })
         }
-
-
     }
 
     async componentDidMount() {
@@ -438,10 +454,26 @@ export default class Landing extends React.Component {
         let scentsResponse = await axios.get('orchidScents.json');
         let petalPatternResponse = await axios.get('orchidPetalPattern.json');
 
+        let distributionSelection = distributionResponse.data.slice()
+
+        distributionSelection.unshift({
+            '_id':'noDistributionSelected',
+            'name': 'No selection'
+        })
+
+        let conservationSelection = conservationResponse.data.slice()
+
+        conservationSelection.unshift({
+            '_id':'noConservationSelected',
+            'name': 'No selection'
+        })
+
         this.setState({
             species: speciesResponse.data,
             distributionOptions: distributionResponse.data,
+            distributionSelection,
             conservationOptions: conservationResponse.data,
+            conservationSelection,
             orchidColours: coloursResponse.data,
             orchidScentsOptions: scentsResponse.data,
             orchidPetalPatternOptions: petalPatternResponse.data,
@@ -562,8 +594,8 @@ export default class Landing extends React.Component {
                     </nav>
                     {/* OFFCANVAS FILTER FOR <MD */}
                     <SmSearchFilter
-                        distributionOptions={this.state.distributionOptions}
-                        conservationOptions={this.state.conservationOptions}
+                        distributionSelection={this.state.distributionSelection}
+                        conservationSelection={this.state.conservationSelection}
                         orchidColours={this.state.orchidColours}
                         updateFormField={this.updateFormField}
                         distributionFilter={this.state.distributionFilter}
@@ -646,7 +678,7 @@ export default class Landing extends React.Component {
                     }
                     {/* render SPA pages */}
                     {/*  */}
-                    <main id='main-content' className="mt-3 mx-1 mx-md-2">
+                    <main id='main-content' className="mt-3 mx-1 mx-md-2 border border-danger">
                         {this.renderPage()}
                     </main>
                     {/* FOOTER */}
