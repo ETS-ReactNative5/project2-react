@@ -118,15 +118,29 @@ export default class MdSearchFilter extends Component {
                       <option key='3' value='factsGte3'>Three or more</option>
                     </select>
                   </div>
-                  <div className='col col-6 my-auto'>
-                    <button className="input-group-text border-0 mx-auto"
-                      id="search-addon"
+                  <div className='col col-6 d-flex align-items-end justify-content-center'>
+                    <button className="btn btn-primary me-3"
+                    style={{
+                      height: '80%'
+                    }}
+                      id="search-addon-md-1"
                       onClick={() => {
                         this.props.getSearchResults();
                         this.props.setActivePage("readAllSpecies")
                       }}
                     >
                       Apply filters
+                    </button>
+                    <button className="btn btn-primary"
+                      style={{
+                        height: '80%'
+                      }}
+                      id="search-addon-md-2"
+                      onClick={() => {
+                        this.props.resetFilters()
+                      }}
+                    >
+                      Reset filters
                     </button>
                   </div>
                 </div>

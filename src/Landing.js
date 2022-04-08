@@ -57,10 +57,7 @@ export default class Landing extends React.Component {
         colourFilter: [],
         factsFilter: "",
 
-        // activeObject: ""
         activeEditId: "",
-
-        // refreshSpeciesDisplay: false,
 
         userEmail: "",
         currentUserId: "",
@@ -72,6 +69,15 @@ export default class Landing extends React.Component {
         userFavouriteSpecies: [],
         instructions: ""
 
+    }
+
+    resetFilters = () => {
+        this.setState({
+            distributionFilter: "",
+            conservationFilter: "",
+            colourFilter: [],
+            factsFilter: ""
+        })
     }
 
     renderPage() {
@@ -191,6 +197,7 @@ export default class Landing extends React.Component {
             getSearchResults={this.getSearchResults}
             setActivePage={this.setActivePage}
             factsFilter={this.state.factsFilter}
+            resetFilters={this.resetFilters}
         /> : null
     }
 
@@ -604,6 +611,8 @@ export default class Landing extends React.Component {
                         updateCheckbox={this.updateCheckbox}
                         getSearchResults={this.getSearchResults}
                         setActivePage={this.setActivePage}
+                        factsFilter={this.state.factsFilter}
+                        resetFilters={this.resetFilters}
                     />
                     {/* VIEW OPTIONS */}
                     {this.state.dataLoaded &&

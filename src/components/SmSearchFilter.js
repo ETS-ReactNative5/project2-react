@@ -71,13 +71,21 @@ export default class SmSearchFilter extends Component {
                     <option key='3' value='factsGte3'>Three or more</option>
                 </select>
 
-                <button className="input-group-text border-0 ms-auto" 
-                    id="search-addon"
+                <button className="btn ms-auto me-3" 
+                    id="search-addon-xs-1"
                     onClick={() => {this.props.getSearchResults();
                                     this.props.setActivePage("readAllSpecies")}}
                     data-bs-dismiss="offcanvas"
                     >
                     Apply filters
+                </button>
+                <button className="btn"
+                      id="search-addon-xs-2"
+                      onClick={() => {
+                        this.props.resetFilters()
+                      }}
+                    >
+                      Reset filters
                 </button>
 
 
