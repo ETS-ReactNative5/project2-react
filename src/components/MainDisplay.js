@@ -6,7 +6,7 @@ function MainDisplay() {
       <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <img src={require('../local-data/images/vanda-orchid.jpg')} className="d-block w-100" alt="..." />
+            <img src={require('../local-data/images/p0.jpg')} className="d-block w-100" alt="..." />
           </div>
           <div className="carousel-item">
             <img src={require('../local-data/images/p1.jpg')} className="d-block w-100" alt="..." />

@@ -1,12 +1,18 @@
 import React from 'react'
 
+import { BsTwitter } from 'react-icons/bs'
+import { AiFillInstagram } from 'react-icons/ai'
+import { GrFacebook } from 'react-icons/gr'
+
+
+
 
 function Footer() {
-    return(
+    return (
         <React.Fragment>
 
-            <div className='row '>
-                <div className='col-12 col-md-6'>
+            <div className='row px-3'>
+                <div className='col-12 col-md-5'>
                     <h6>Other Orchid Databases</h6>
                     <ul>
                         <li>
@@ -19,6 +25,8 @@ function Footer() {
                             <a href="http://www.orchidspecies.com/" target="_blank">Internet Orchid Species Photo Encyclopedia</a>
                         </li>
                     </ul>
+                </div>
+                <div className='col-12 col-md-4'>
                     <h6>Orchid Forums</h6>
                     <ul>
                         <li>
@@ -32,8 +40,37 @@ function Footer() {
                         </li>
                     </ul>
                 </div>
-                <div className='col-12 col-md-6'>
+                <div className='col-12 col-md-3 d-flex flex-column'>
+
+                    <div>Connect with us</div>
+
+                    <div>
+                    <button className='btn shadow-none'>
+                        <a className='style-links'
+                            href="http://www.facebook.com/" target="_blank"
+                        >
+                            <GrFacebook color={'#157C43'}/>
+                        </a>
+                    </button>
+                    <button className='btn shadow-none'>
+                        <a className='style-links'
+                            href="http://www.twitter.com/" target="_blank"
+                        >
+                            <BsTwitter color={'#157C43'}/>
+                        </a>
+                    </button>
+                    <button className='btn shadow-none'>
+                        <a className='style-links'
+                            href="http://www.instagram.com/" target="_blank"
+                        >
+                            <AiFillInstagram fontSize={'1.3rem'} color={'#157C43'} />
+                        </a>
+                    </button>
+
+                    </div>
                     
+
+
                 </div>
 
             </div>

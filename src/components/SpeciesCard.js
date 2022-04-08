@@ -36,24 +36,10 @@ export default class SpeciesCard extends Component {
 
 
     correspondData(distributionId, conservationId) {
-
         let matchedDistribution = this.props.distributionOptions.filter(
             eachDistribution =>
                 distributionId === eachDistribution._id
         )
-
-        // for (let eachDistribution of this.props.distributionOptions) {
-        //     // console.log(eachDistribution)
-        //     console.log("....comparing...")
-        //     console.log(distributionId, eachDistribution._id)
-        //     if (distributionId === eachDistribution._id) {
-        //         this.setState({
-        //             activeDistribution: eachDistribution.name
-        //         })
-        //     }
-        // }
-
-        // console.log(matchedDistribution)
 
         let matchedConservation = this.props.conservationOptions.filter(
             eachConservation =>
@@ -238,6 +224,8 @@ export default class SpeciesCard extends Component {
                                 clearInstructions={this.clearInstructions}
                                 deleteApiSpecies={this.deleteApiSpecies}
                                 deleteSpeciesMsg={this.state.deleteSpeciesMsg}
+                                closeModal={this.props.closeModal}
+                                checkWordCount={this.checkWordCount}
                             />
                             <FactsModal eachItem={this.props.eachItem}
                             />

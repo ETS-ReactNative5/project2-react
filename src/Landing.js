@@ -491,21 +491,22 @@ export default class Landing extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div id='components-wrapper' className="container border border-danger">
+                <div id='components-wrapper' className="container ">
                     {/* MAIN NAV BAR */}
                     <nav id='navbar'>
                         <ul className="nav d-flex pt-2">
                             <li className="nav-item me-auto">
-                                <a className="nav-link"
+                                <a  id='main-logo'
+                                    className="nav-link border border-dark"
                                     aria-current="page"
                                     onClick={() => this.setActivePage('main')}
                                 >
-                                    Project 2
+                                    The Daily Orchid
                                 </a>
                             </li>
                             <li className="nav-item">
                                 <div className="dropdown">
-                                    <button className="btn"
+                                    <button className="btn shadow-none pt-2"
                                         type="button"
                                         id="dropdownMenu2"
                                         data-bs-toggle="dropdown"
@@ -588,13 +589,13 @@ export default class Landing extends React.Component {
                                 </div>
                             </li>
                             <li className="nav-item d-md-none">
-                                <button className="btn"
+                                <button className="btn shadow-none pt-2"
                                     type="button"
                                     data-bs-toggle="offcanvas"
                                     data-bs-target="#xs-sm-search-filter"
                                     aria-controls="offcanvasWithBothOptions"
                                 >
-                                    <TiThMenu />
+                                    <TiThMenu size={20}/>
                                 </button>
                             </li>
                         </ul>
@@ -650,7 +651,7 @@ export default class Landing extends React.Component {
                     }
                     {/* SEARCH INPUT */}
                     {this.state.dataLoaded &&
-                        <section id='search-bar' className="row border border-danger">
+                        <section id='search-bar' className="row ">
                             <div className="col-2 d-none d-md-block"></div>
                             <div className="px-3 col-12 col-md-8 white rounded-pill input-group border border-dark">
                                 <input type="search"
@@ -687,7 +688,7 @@ export default class Landing extends React.Component {
                     }
                     {/* render SPA pages */}
                     {/*  */}
-                    <main id='main-content' className="mt-3 mx-1 mx-md-2 border border-danger">
+                    <main id='main-content' className="mt-3 mx-1 mx-md-2 ">
                         {this.renderPage()}
                     </main>
                     {/* FOOTER */}

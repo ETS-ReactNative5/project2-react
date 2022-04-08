@@ -11,7 +11,7 @@ function SpeciesForm(props) {
         <div id="postSpeciesForm" className="row mt-3 mb-5">
             {/* <h2>{props.message}</h2> */}
             <div className="col col-1 col-sm-2"></div>
-            <div className="col col-md-8">
+            <div className="col col-md-8 col-lg-7 col-xl-6">
                 <div className='row'>
                     <h2 className='pb-2'>{props.message}</h2>
                     <label className='pb-2'>Common Name: </label>

@@ -1,7 +1,7 @@
 @font-face {
 
-    src: url(local-data/fonts/OregonLightRegular.ttf);
-    font-family: OregonLightRegular;
+    src: url(local-data/fonts/OregonBold.ttf);
+    font-family: OregonBold;
 
     src: url(local-data/fonts/OregonMedium.ttf);
     font-family: OregonMedium;
@@ -40,21 +40,21 @@
     /* position:relative; */
 }
 
-.carousel-inner{
-    position:relative;
+.carousel-inner {
+    position: relative;
 }
 
-#text-wrapper{
+#text-wrapper {
     position: absolute;
     padding: 0.8rem;
     width: 60%;
-    top:18%;
+    top: 18%;
     left: 10%;
     z-index: 1;
     border: 1px solid #C8CECB
 }
 
-#main-content h1{
+#main-content h1 {
     font-family: 'Playfair Display', serif;
     font-weight: 900;
     color: white;
@@ -62,7 +62,7 @@
     letter-spacing: .2rem;
 }
 
-#main-content h3{
+#main-content h3 {
     font-family: OregonMedium;
     font-size: 1rem;
     /* font-weight: 300; */
@@ -70,7 +70,6 @@
     letter-spacing: .2rem;
     /* text-align: center; */
 }
-
 
 .carousel-item img {
     width: 100vw;
@@ -83,9 +82,20 @@
     width: 80vw;
 }
 
-/* not working */
-#collapse-search-filter {
-    border-radius: 1rem !important;
+#main-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: #157C43
+}
+
+#main-logo:hover {
+    cursor: pointer;
+}
+
+#nav-tabs .nav-link {
+    font-family: OregonMedium;
+    letter-spacing: .1rem;
+    color: #157C43;
 }
 
 #collapse-search-body {
@@ -104,8 +114,12 @@
     border-radius: 1rem !important
 }
 
-.red-border{
-    border: 1px solid red!important;
+.red-border {
+    border: 1px solid red !important;
+}
+
+.background-image {
+    object-fit: cover;
 }
 
 /* .gradient{
@@ -125,6 +139,10 @@
     cursor: pointer;
     color: black;
     text-decoration: underline;
+}
+
+.ht-100 {
+    height: 100% important
 }
 
 /* .react-icons{
@@ -178,14 +196,22 @@ ul>li {
     list-style: none;
 }
 
-#footer,
-ul>li>a {
+#footer ul>li>a {
     text-decoration: none;
-    color: black
+    color: #157C43;
+    font-family: OregonMedium;
+    letter-spacing: 0.1rem;
 }
 
-#footer>a:hover {
+#footer h6 {
+    color: #157C43;
+    font-family: OregonBold;
+}
+
+#footer a:hover {
     cursor: pointer;
+    color: #157C43;
+    text-decoration: underline;
 }
 
 #footer {
@@ -197,19 +223,21 @@ ul>li>a {
     .carousel-item img {
         height: 70vh
     }
-    #text-wrapper{
-        top:25%;
+
+    #text-wrapper {
+        top: 25%;
         left: 10%;
         padding: 1rem;
         width: 50%;
     }
-    #main-content h1{
+
+    #main-content h1 {
         font-size: 5rem;
         letter-spacing: .2rem;
         margin-left: 0rem;
     }
-    
-    #main-content h3{
+
+    #main-content h3 {
         font-family: OregonMedium;
         font-size: 1.5rem;
         font-weight: 300;
@@ -218,24 +246,26 @@ ul>li>a {
     }
 }
 
-@media screen and (min-width: 992px){
-    #text-wrapper{
-        top:20%;
+@media screen and (min-width: 992px) {
+    #text-wrapper {
+        top: 20%;
         left: 10%;
         width: 40%;
     }
-    #main-content h3{
+
+    #main-content h3 {
         line-height: 1.4;
     }
 }
 
-@media screen and (min-width: 1200px){
-    #text-wrapper{
-        top:20%;
+@media screen and (min-width: 1200px) {
+    #text-wrapper {
+        top: 20%;
         left: 10%;
         width: 30%;
     }
-    #main-content h3{
+
+    #main-content h3 {
         line-height: 1.4;
     }
 }

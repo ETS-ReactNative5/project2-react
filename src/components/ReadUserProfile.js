@@ -17,7 +17,8 @@ export default class ReadUserProfile extends Component {
     // userFavouriteSpecies: [],
     // loaded: false
     // userFavouriteSpecies2:[]
-    action: "readingEmail"
+    action: "readingEmail",
+    closeModal: "modal"
   }
 
   // componentDidUpdate(prevState){
@@ -78,33 +79,41 @@ export default class ReadUserProfile extends Component {
   }
 
   beginEditEmail() {
-    return <div className="form-floating mb-3">
-    <input type="email" 
-            className="form-control" 
-            id="floatingInput" 
-            placeholder="name@example.com"
-            name='userEmail'
-            onChange={this.props.updateFormField}
-            />
-    <label htmlFor="floatingInput">New email address</label>
-    <button className='btn'
-            onClick={() => {
-              this.props.putApiUserEmail();
-              // this.setState({
-              //   action: "readingEmail"
-              // });
-              // setTimeout(this.readEmail, 3000)
-            }}
-            >
-              Submit
-    </button>
-    <button className='btn'
-            onClick={() => {this.setState({action: 'readingEmail'})}}
-            >
-              Cancel
-    </button>
-    
-  </div>
+    return <div className="form-floating d-flex flex-column m-3">
+      <input type="email"
+        className="form-control"
+        id="floatingInput"
+        placeholder="name@example.com"
+        name='userEmail'
+        onChange={this.props.updateFormField}
+      />
+      <label htmlFor="floatingInput">New email address</label>
+
+      <div className='btn-group mt-3 align-self-end'>
+        <button className='btn btn-primary me-3 shadow-none'
+                onClick={() => {
+                  this.props.putApiUserEmail();
+                  // this.setState({
+                  //   action: "readingEmail"
+                  // });
+                  // setTimeout(this.readEmail, 3000)
+                }}
+        >
+          Submit
+        </button>
+        <button className='btn btn-primary shadow-none'
+                onClick={() => { 
+                  this.setState({ action: 'readingEmail' }) 
+                }}
+        >
+          Cancel
+        </button>
+
+      </div>
+
+
+
+    </div>
   }
 
   renderEmail() {
@@ -117,57 +126,59 @@ export default class ReadUserProfile extends Component {
           </div>
           <div className='row mt-2'>
             <div className='col-6 d-flex'>
-                <button className='btn ms-auto'
-                        data-bs-toggle="collapse" 
-                        data-bs-target="#collapseExample"
-                        aria-expanded="false" 
-                        aria-controls="collapseExample"
-                >
-                    Go back
-                </button>
+              <button className='btn ms-auto'
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseExample"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                Go back
+              </button>
             </div>
             <div className='col-6 d-flex'>
-                <button className='btn me-auto'
-                        data-bs-toggle="collapse" 
-                        data-bs-target="#collapseExample"
-                        aria-expanded="false" 
-                        aria-controls="collapseExample"
-                        onClick={async() => {
-                          await this.props.deleteApiUserEmail()
-                          // this.props.setActivePage('main')
-                          setTimeout(() => this.props.setActivePage('main'), 3000)
-                        }}
-                >
-                    Delete
-                </button>
+              <button className='btn me-auto'
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseExample"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+                onClick={async () => {
+                  await this.props.deleteApiUserEmail()
+                  // this.props.setActivePage('main')
+                  setTimeout(() => this.props.setActivePage('main'), 3000)
+                }}
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>
-        </div>
-        <button className='btn ms-auto'
-                onClick={() => {this.setState({
-                  action: "editingEmail"
-                })}}
-                >
-                  <AiFillEdit  />
-        </button>
-        <button className='btn'
-                type="button" 
-                data-bs-toggle="collapse" 
-                data-bs-target="#collapseExample" 
-                aria-expanded="false" 
-                aria-controls="collapseExample"
-                // onClick={() => {this.props.deleteApiUserEmail()}}
-                >
-          <RiDeleteBinFill/>
-        </button>
       </div>
+      <button className='btn shadow-none ms-auto'
+        onClick={() => {
+          this.setState({
+            action: "editingEmail"
+          })
+        }}
+      >
+        <AiFillEdit />
+      </button>
+      <button className='btn shadow-none'
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseExample"
+        aria-expanded="false"
+        aria-controls="collapseExample"
+      // onClick={() => {this.props.deleteApiUserEmail()}}
+      >
+        <RiDeleteBinFill />
+      </button>
+    </div>
   }
 
   renderContent() {
-    if(this.state.action === 'editingEmail'){
+    if (this.state.action === 'editingEmail') {
       return this.beginEditEmail()
-    } else if(this.state.action === 'readingEmail'){
+    } else if (this.state.action === 'readingEmail') {
       return this.renderEmail()
     }
   }
@@ -176,8 +187,8 @@ export default class ReadUserProfile extends Component {
 
     // dont need this if validation because users can't even see this page without creating an account/logging in first?
     // needs validation if favourites == 0
-        if(this.props.userFavouriteSpecies.length > 0){
-          return <React.Fragment>
+    if (this.props.userFavouriteSpecies.length > 0) {
+      return <React.Fragment>
 
         <div className=''>
           {this.renderContent()}
@@ -186,50 +197,55 @@ export default class ReadUserProfile extends Component {
 
         <div className='row px-2'>
           {this.props.userFavouriteSpecies.map(
-            eachItem => 
-            <React.Fragment key={eachItem._id}>
-              <div className='col col-10 col-sm-8 col-md-6 col-lg-4 col-xl-3 mx-auto'>
-              <SpeciesCard  eachItem={eachItem}
-                            distributionOptions={this.props.distributionOptions}
-                            conservationOptions={this.props.conservationOptions}
-                            // selectActiveDisplay={this.props.selectActiveDisplay}
-                            setActivePage={this.props.setActivePage}
-                            selectEdit = {this.props.selectEdit}
-                            showMdSearchFilter={this.props.showMdSearchFilter}
-                            checkApiUserFavourite={this.props.checkApiUserFavourite}
-                            userFavouriteIds={this.props.userFavouriteIds}
-                            loggedIn={this.props.loggedIn}
-                            />
-              </div>
-            </React.Fragment>
+            eachItem =>
+              <React.Fragment key={eachItem._id}>
+                <div className='col col-10 col-sm-8 col-md-6 col-lg-4 col-xl-3 mx-auto'>
+                  <SpeciesCard eachItem={eachItem}
+                    distributionOptions={this.props.distributionOptions}
+                    conservationOptions={this.props.conservationOptions}
+                    // selectActiveDisplay={this.props.selectActiveDisplay}
+                    setActivePage={this.props.setActivePage}
+                    selectEdit={this.props.selectEdit}
+                    showMdSearchFilter={this.props.showMdSearchFilter}
+                    checkApiUserFavourite={this.props.checkApiUserFavourite}
+                    userFavouriteIds={this.props.userFavouriteIds}
+                    loggedIn={this.props.loggedIn}
+                    closeModal={this.state.closeModal}
+                  />
+                </div>
+              </React.Fragment>
           )}
         </div>
-        </React.Fragment>;
-        } else{
-          return <React.Fragment>
-            <div className=''>
-          {this.renderContent()}
-          <p>{this.props.editEmailMsg}</p>
+      </React.Fragment>;
+    } else {
+      return <React.Fragment>
+        <div className='px-2'>
+          <div>
+            {this.renderContent()}
+            <p>{this.props.editEmailMsg}</p>
+          </div>
+
+          <div className='px-3'>
+            You have not added any favourites.
+          </div>
+
         </div>
-        
-            <div>
-              You have not added any favourites.
-            </div>
-          </React.Fragment>
-        }
-      // if (this.state.loaded) {
-            // } else {
+
+      </React.Fragment>
+    }
+    // if (this.state.loaded) {
+    // } else {
     //     return <React.Fragment>
     //         Loading, please wait...
     //     </React.Fragment>
     //   }
-  
 
 
-    
 
-    
-    return 
+
+
+
+    return
     // (
     //   <div className='row'>
     //     {this.state.userFavourites.map(

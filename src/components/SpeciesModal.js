@@ -22,10 +22,10 @@ function SpeciesModal(props) {
                             <h5 className="modal-title"
                                 id="exampleModalLabel"
                             >
-                                {props.eachItem.officialName}
+                                {props.checkWordCount(props.eachItem.officialName)}
                             </h5>
                             <button type="button"
-                                className="btn-close"
+                                className="btn-close shadow-none"
                                 data-bs-dismiss="modal"
                                 aria-label="Close"
                                 onClick={() => props.clearInstructions()}
@@ -111,6 +111,7 @@ function SpeciesModal(props) {
                             </button>
                             <button type="button"
                                 className="btn shadow-none"
+                                data-bs-dismiss={props.closeModal}
                                 onClick={
                                     () => {
                                         props.setInstructions()

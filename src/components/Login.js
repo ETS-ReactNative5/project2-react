@@ -3,7 +3,9 @@ import React, { Component } from 'react'
 export default class Login extends Component {
     render() {
         return <React.Fragment>
-        <div className="mb-3 d-flex flex-column mx-1">
+          <div className='d-flex flex-column ht-100'
+                style={{height: '100%'}}>
+          <div className="my-3 mx-2 d-flex flex-column">
           <label htmlFor="exampleFormControlInput1" 
                   className="form-label"
                   >
@@ -32,7 +34,22 @@ export default class Login extends Component {
             <div>{this.props.loginMsg}</div>
 
           
-      </div>  
+        </div>
+        <div  className='flex-fill' 
+            style={{
+            textAlign: 'right',
+            overflow:'hidden'
+            }}
+            >
+          <img className='background-image ht-100 mx-auto' 
+                src={require('../local-data/images/orchid-vector.png')}/>
+        </div>
+
+
+
+
+          </div>
+        
         </React.Fragment>
     }
 }
