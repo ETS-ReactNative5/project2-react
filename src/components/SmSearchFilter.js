@@ -25,7 +25,7 @@ export default class SmSearchFilter extends Component {
             <div className="offcanvas-body">
 
                 <label>Region:</label>
-                <select className='form-select mb-3 btn-group'
+                <select className='form-select mb-3 btn-group shadow-none'
                         name="distributionFilter" 
                         value={this.props.distributionFilter} 
                         onChange={this.props.updateFormField}>
@@ -34,7 +34,7 @@ export default class SmSearchFilter extends Component {
                 
                 
                 <label>Conservation Status:</label>
-                <select className='form-select mb-3 btn-group'
+                <select className='form-select mb-3 btn-group shadow-none'
                         name="conservationFilter" 
                         value={this.props.conservationFilter} 
                         onChange={this.props.updateFormField}>
@@ -45,7 +45,7 @@ export default class SmSearchFilter extends Component {
                 {this.props.orchidColours.map( eachColour => 
                     <React.Fragment key={eachColour.value}>
                         <div className="form-check mb-1">
-                            <input className="form-check-input" 
+                            <input className="form-check-input shadow-none" 
                                     type="checkbox" 
                                     value={eachColour.value}
                                     name="colourFilter"
@@ -60,8 +60,8 @@ export default class SmSearchFilter extends Component {
                     </React.Fragment>
                 )}
 
-                <label>Number of facts added:</label>
-                <select className='form-select mb-3 btn-group'
+                <label className='mt-3'>Number of facts added:</label>
+                <select className='form-select mb-3 btn-group shadow-none'
                         name="factsFilter" 
                         value={this.props.factsFilter} 
                         onChange={this.props.updateFormField}
@@ -71,7 +71,7 @@ export default class SmSearchFilter extends Component {
                     <option key='3' value='factsGte3'>Three or more</option>
                 </select>
 
-                <button className="btn ms-auto me-3" 
+                <button className="btn ms-auto me-3 style-btn" 
                     id="search-addon-xs-1"
                     onClick={() => {this.props.getSearchResults();
                                     this.props.setActivePage("readAllSpecies")}}
@@ -79,7 +79,7 @@ export default class SmSearchFilter extends Component {
                     >
                     Apply filters
                 </button>
-                <button className="btn"
+                <button className="btn style-btn"
                       id="search-addon-xs-2"
                       onClick={() => {
                         this.props.resetFilters()

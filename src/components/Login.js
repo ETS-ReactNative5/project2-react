@@ -7,13 +7,13 @@ export default class Login extends Component {
                 style={{height: '100%'}}>
           <div className="my-3 mx-2 d-flex flex-column">
           <label htmlFor="exampleFormControlInput1" 
-                  className="form-label"
+                  className="form-label style-text"
                   >
                     Enter your email to login:
           </label>
 
             <input type="email" 
-                    className="form-control" 
+                    className="form-control shadow-none" 
                     id="exampleFormControlInput1" 
                     placeholder="name@example.com"
                     name='userEmail'
@@ -21,7 +21,7 @@ export default class Login extends Component {
                     onChange={this.props.updateFormField}
             />
 
-            <button className='btn btn-primary mt-3 align-self-end'
+            <button className='btn style-btn mt-3 align-self-end'
                     onClick={() => {
                       
                       this.props.getApiUserEmail()
@@ -31,7 +31,7 @@ export default class Login extends Component {
             >
               Login
             </button>
-            <div>{this.props.loginMsg}</div>
+            <div className='style-text'>{this.props.loginMsg}</div>
 
           
         </div>

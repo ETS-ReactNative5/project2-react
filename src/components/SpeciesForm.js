@@ -8,8 +8,7 @@ function SpeciesForm(props) {
 //distributionOptions, conservationOptions, renderDropdown, postApi
   return (
     <React.Fragment>
-        <div id="postSpeciesForm" className="row mt-3 mb-5">
-            {/* <h2>{props.message}</h2> */}
+        <div className="species-form row mt-3 mb-5">
             <div className="col col-1 col-sm-2"></div>
             <div className="col col-md-8 col-lg-7 col-xl-6">
                 <div className='row'>
@@ -208,7 +207,7 @@ function SpeciesForm(props) {
                 </div>
                 <div className='row'>
                     <p>{props.submitMsg}</p>
-                    <button className='btn btn-primary'
+                    <button className='btn style-btn'
                             onClick={() => {props.apiMethod()
                                             // props.refreshSpeciesDisplay()
                                             }}

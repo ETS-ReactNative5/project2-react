@@ -13,7 +13,7 @@ function Footer() {
 
             <div className='row px-3'>
                 <div className='col-12 col-md-5'>
-                    <h6>Other Orchid Databases</h6>
+                    <h6>Orchid Registries</h6>
                     <ul>
                         <li>
                             <a href="https://www.aos.org/about-us/orchid-conservation/plants-database.aspx" target="_blank">American Orchid Society</a>
@@ -42,7 +42,7 @@ function Footer() {
                 </div>
                 <div className='col-12 col-md-3 d-flex flex-column'>
 
-                    <div>Connect with us</div>
+                    <h6>Connect</h6>
 
                     <div>
                     <button className='btn shadow-none'>

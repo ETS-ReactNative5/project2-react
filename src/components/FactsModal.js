@@ -79,12 +79,20 @@ export default class FactsModal extends Component {
                 </textarea>
                 
                 <div className='d-flex'>
+                    <button className='btn style-btn mt-3 shadow-none ms-auto me-2'
+                            onClick={() => this.setState({action: "readingFacts"})}>
+                        Back
+                    </button>
                     <button onClick={() => this.apiFactsPost()}
-                            className="btn btn-primary mt-3 shadow-none ms-auto"
+                            className="btn style-btn mt-3 shadow-none me-auto"
                     >
                         Add to collection
                     </button>
+                    
+
                 </div>
+
+                    
                 
             </React.Fragment>
             )
@@ -111,13 +119,13 @@ export default class FactsModal extends Component {
                     />
                 </div>
                 <div className='col-1'>
-                    <button className='btn'
+                    <button className='btn shadow-none'
                             onClick={this.apiFactsPut}>
                         <TiTick/>
                     </button>
                 </div>
                 <div className='col-1'>
-                    <button className='btn'
+                    <button className='btn shadow-none'
                             onClick={() => {this.setState({
                                 factIdBeingEdited: "",
                                 factToChange: ""
@@ -139,22 +147,22 @@ export default class FactsModal extends Component {
                         <div className="card card-body">
                             Are you sure you wish to delete the above fact?
                         </div>
-                        <div className='row'>
+                        <div className='row my-2'>
                             <div className='col-6 d-flex'>
-                                <button className='btn ms-auto'
+                                <button className='btn style-btn ms-auto shadow-none '
                                         onClick={() => {this.apiFactsDelete(f._id)}}
                                 >
-                                    <TiTick/>
+                                    Delete
                                 </button>
                             </div>
                             <div className='col-6 d-flex'>
-                                <button className='btn me-auto'
+                                <button className='btn style-btn me-auto shadow-none '
                                         data-bs-toggle="collapse" 
                                         data-bs-target={"#collapseExample" + f._id} 
                                         aria-expanded="false" 
                                         aria-controls="collapseExample"
                                 >
-                                    <MdCancel/>
+                                    Back
                                 </button>
                             </div>
                         </div>
@@ -162,14 +170,14 @@ export default class FactsModal extends Component {
                     
                 </div>
                 <div className='col-1'>
-                    <button className='btn'
+                    <button className='btn shadow-none '
                             onClick={() => {this.editFact(f._id)}}
                             >
                         <AiFillEdit  />
                     </button>
                 </div>
                 <div className='col-1'>
-                    <button className='btn'
+                    <button className='btn shadow-none '
                             type="button" 
                             data-bs-toggle="collapse" 
                             data-bs-target={"#collapseExample" + f._id} 
@@ -234,7 +242,7 @@ export default class FactsModal extends Component {
                                 >
                                     {this.props.eachItem.officialName}
                                 </h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" className="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
                                 <div className = 'row'>
@@ -256,7 +264,7 @@ export default class FactsModal extends Component {
                             <div className="modal-footer">
                                 
                                 <button type="button" 
-                                        className="btn btn-secondary shadow-none"
+                                        className="btn style-btn shadow-none"
                                         onClick={() => {
                                             this.setState({
                                                 action: 'addingNewFact'

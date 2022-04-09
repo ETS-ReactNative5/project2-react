@@ -22,7 +22,7 @@ import Footer from './components/Footer'
 import { FaUserAlt } from 'react-icons/fa'
 import { BsSearch } from 'react-icons/bs'
 import { TiThMenu } from 'react-icons/ti'
-import { GrLinkTop } from 'react-icons/gr'
+import { BiArrowToTop } from 'react-icons/bi'
 
 import { scrollToTop } from "./utils";
 
@@ -157,6 +157,7 @@ export default class Landing extends React.Component {
                     userFavouriteSpecies={this.state.userFavouriteSpecies}
                     checkApiUserFavourite={this.checkApiUserFavourite}
                     loggedIn={this.state.loggedIn}
+                    clearEmailErr={this.clearEmailErr}
                 />
                 break;
             case "login":
@@ -227,17 +228,6 @@ export default class Landing extends React.Component {
             params: {}
         }
 
-        // let searchConditions = [this.state.searchPrompt, this.state.distributionFilter, this.state.conservationFilter]
-
-        // searchConditions.map(
-        //     condition => {
-        //         if(condition){
-        //         payload.params[condition] = condition
-        //     }
-        //     return payload
-        // }
-        // )
-
         if (this.state.searchPrompt) {
             payload.params.searchPrompt = this.state.searchPrompt
         }
@@ -268,7 +258,6 @@ export default class Landing extends React.Component {
         this.setState({
             species: searchResponse.data
         })
-
     }
 
     refreshSpeciesDisplay = async () => {
@@ -279,6 +268,12 @@ export default class Landing extends React.Component {
             activeEditId: ""
         })
         console.log('ending refreshSpeciesDisplay')
+    }
+
+    clearEmailErr = () => {
+        this.setState({
+            editEmailMsg:""
+        })
     }
 
     postApiUserEmail = async () => {
@@ -295,6 +290,7 @@ export default class Landing extends React.Component {
                 registrationMsg: "Thanks for registering an account! You can now save favourites to your profile.",
                 loggedIn: true
             })
+
         }catch(e){
             console.log(e.response.data.message)
             this.setState({
@@ -311,54 +307,29 @@ export default class Landing extends React.Component {
     }
 
     putApiUserEmail = async () => {
-        
-
         try{
-
             this.setState({
                 editEmailMsg: ""
             })
-            
             await axios.put(this.BASE_API_URL + '/users/' + this.state.currentUserId, {
-                userEmail: this.state.userEmail
+                userEmail: this.state.userEmail,
             })
+
+            this.setState({
+                editEmailMsg: "Your email has been changed"
+            })
+
+            setTimeout(() => {
+                            this.setState({
+                                editEmailMsg: ""
+                            })
+                        }, 5000)
+            
         } catch (e){
             this.setState({
                 editEmailMsg: e.response.data.message
             })
         }
-        
-        
-        
-        // .catch((e) => {
-        //     this.setState({
-        //         editEmailMsg: e.response.data.message
-        //     })
-        // })
-        // .then((res) => {
-        //     if (res.status === 200) {
-        //         this.setState({
-        //             editEmailMsg: "Your email has been changed"
-        //         })
-        //         setTimeout(() => {
-        //             this.setState({
-        //                 editEmailMsg: ""
-        //             })
-        //         }, 3000)
-        //     }
-        // })
-
-        // .then(() => {
-        //     this.setState({
-        //         editEmailMsg: "Your email has been changed"
-        //     })
-
-        //     setTimeout(() => {
-        //         this.setState({
-        //             editEmailMsg: ""
-        //         })
-        //     }, 3000)
-        // });
 
     }
 
@@ -513,7 +484,7 @@ export default class Landing extends React.Component {
                                         aria-expanded="false"
                                     >
 
-                                        <FaUserAlt className="react-icons" size={20} />
+                                        <FaUserAlt size={20}  color={'#157C43'}/>
 
                                     </button>
                                     <ul className="dropdown-menu"
@@ -521,7 +492,7 @@ export default class Landing extends React.Component {
 
                                         {!this.state.loggedIn && <li>
                                             <button
-                                                className="dropdown-item"
+                                                className="dropdown-item style-text"
                                                 type="button"
                                                 onClick={() => {
                                                     this.setActivePage('createUserProfile');
@@ -537,7 +508,7 @@ export default class Landing extends React.Component {
 
                                         {!this.state.loggedIn && <li>
                                             <button
-                                                className="dropdown-item"
+                                                className="dropdown-item style-text"
                                                 type="button"
                                                 onClick={() => {
                                                     this.setActivePage('login');
@@ -553,7 +524,7 @@ export default class Landing extends React.Component {
 
                                         {this.state.loggedIn && <li>
                                             <button
-                                                className="dropdown-item"
+                                                className="dropdown-item style-text"
                                                 type="button"
                                                 onClick={() => {
                                                     this.setActivePage('readUserProfile');
@@ -568,7 +539,7 @@ export default class Landing extends React.Component {
 
                                         {this.state.loggedIn && <li>
                                             <button
-                                                className="dropdown-item"
+                                                className="dropdown-item style-text"
                                                 type="button"
                                                 onClick={() => {
                                                     this.setActivePage('main');
@@ -595,7 +566,7 @@ export default class Landing extends React.Component {
                                     data-bs-target="#xs-sm-search-filter"
                                     aria-controls="offcanvasWithBothOptions"
                                 >
-                                    <TiThMenu size={20}/>
+                                    <TiThMenu size={20}  color={'#157C43'}/>
                                 </button>
                             </li>
                         </ul>
@@ -653,12 +624,12 @@ export default class Landing extends React.Component {
                     {this.state.dataLoaded &&
                         <section id='search-bar' className="row ">
                             <div className="col-2 d-none d-md-block"></div>
-                            <div className="px-3 col-12 col-md-8 white rounded-pill input-group border border-dark">
+                            <div className="px-3 col-12 col-md-8 white rounded-pill input-group shadow-sm border border-dark">
                                 <input type="search"
                                     name="searchPrompt"
                                     value={this.state.searchPrompt}
                                     onChange={this.updateFormField}
-                                    className="form-control border-0"
+                                    className="form-control border-0 style-text shadow-none"
                                     placeholder="Search"
                                 // aria-label="Search" 
                                 // aria-describedby="search-addon" 
@@ -687,12 +658,11 @@ export default class Landing extends React.Component {
                         </section>
                     }
                     {/* render SPA pages */}
-                    {/*  */}
-                    <main id='main-content' className="mt-3 mx-1 mx-md-2 ">
+                    <main id='main-content' className="mt-3 mx-1 mx-md-2 shadow">
                         {this.renderPage()}
                     </main>
                     {/* FOOTER */}
-                    <footer id='footer' className='container mt-3 pt-3 px-3'>
+                    <footer id='footer' className='container my-3 pt-3 px-3 shadow-sm'>
                         <Footer />
                     </footer>
                 </div>
@@ -700,7 +670,7 @@ export default class Landing extends React.Component {
                     className="btn rounded-circle shadow border border-dark"
                     onClick={() => scrollToTop()}
                 >
-                    <GrLinkTop />
+                    <BiArrowToTop size= {25}/>
                 </button>
             </React.Fragment>
         )

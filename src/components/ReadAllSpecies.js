@@ -14,7 +14,7 @@ export default class ReadAllSpecies extends Component {
               Help us expand our collection
             </a>
             
-            <div className=' mt-3 me-2 text-muted'>
+            <div className=' mt-3 me-2 text-muted style-text'>
               Displaying {this.props.species.length} results
             </div>
             

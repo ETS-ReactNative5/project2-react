@@ -8,13 +8,13 @@ export default class CreateUserProfile extends Component {
                 style={{height: '100%'}}>
         <div className="my-3 d-flex flex-column mx-2">
           <label htmlFor="exampleFormControlInput1" 
-                  className="form-label"
+                  className="form-label style-text"
                   >
                     Enter your email:
           </label>
 
             <input type="email" 
-                    className="form-control" 
+                    className="form-control shadow-none" 
                     id="exampleFormControlInput1" 
                     placeholder="name@example.com"
                     name='userEmail'
@@ -22,7 +22,7 @@ export default class CreateUserProfile extends Component {
                     onChange={this.props.updateFormField}
             />
 
-            <button className='btn mt-3 btn-primary align-self-end'
+            <button className='btn mt-3 style-btn align-self-end'
                     onClick={() => {
                       this.props.postApiUserEmail()
                       // this.setActivePage('readAllSpecies')

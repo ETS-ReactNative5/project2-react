@@ -20,7 +20,8 @@
     bottom: 3%;
     right: 10%;
     z-index: 1;
-    background-color: rgba(154, 219, 154, 0.56);
+    background-color: rgba(31, 102, 18, 0.56);
+    /* rgba(154, 219, 154, 0.56); */
 }
 
 #navbar #nav-tabs #search-bar #search-filter-md #footer {
@@ -102,8 +103,47 @@
     background-color: #E5E4EB;
 }
 
+#collapse-search-body, #collapse-search-body select, #collapse-search-body select > option {
+    font-family: OregonMedium;
+    letter-spacing: 0.1rem!important;
+}
+
+#xs-sm-search-filter{
+    background-color: #E5E4EB;
+    font-family: OregonMedium;
+    letter-spacing: 0.1rem!important;
+}
+
+#xs-sm-search-filter h5{
+    font-size: 1.5rem;
+}
+
+
+
 .border-search {
     border-radius: 1rem !important;
+}
+
+.species-form h2 {
+    font-family: 'Spectral', serif;
+    font-weight: 700;
+}
+
+.species-form label, .species-form p {
+    font-family: 'Spectral', serif;
+}
+
+.species-form input {
+    font-family: OregonMedium;
+    letter-spacing: .1rem;
+}
+
+input:checked{
+    background-color: #537EE0!important;
+}
+
+.form-check-input:hover, .form-select:hover{
+    cursor: pointer;
 }
 
 .white {
@@ -133,12 +173,32 @@
 .style-links {
     text-decoration: none;
     color: black;
+    font-family: OregonMedium;
+    letter-spacing: 0.1rem;
 }
 
 .style-links:hover {
     cursor: pointer;
     color: black;
     text-decoration: underline;
+}
+
+.style-text{
+    font-family: OregonMedium;
+    letter-spacing: 0.1rem;
+}
+
+.style-btn{
+
+    /* 535CE0
+    #537EE0 */
+    background-color: #537EE0!important;
+    color: white !important;
+    border-radius: 1rem!important;
+    font-family: OregonMedium;
+    letter-spacing: 0.1rem;
+    padding-top: 0.5rem!important;
+    padding-bottom: 0.5rem!important;
 }
 
 .ht-100 {
@@ -171,7 +231,22 @@
     text-decoration: underline;
 }
 
+.species-card {
+    font-family: 'Spectral', serif;
+    font-weight: 500;
+}
+
+.species-card p {
+    font-size: 1rem;
+}
+
+.species-card h6 {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
 .to-italicise {
+    
     font-style: italic
 }
 
@@ -205,7 +280,8 @@ ul>li {
 
 #footer h6 {
     color: #157C43;
-    font-family: OregonBold;
+    font-family: 'Spectral', serif;
+    font-size: 1.5rem;
 }
 
 #footer a:hover {
@@ -255,6 +331,30 @@ ul>li {
 
     #main-content h3 {
         line-height: 1.4;
+    }
+
+    #main-logo{
+        font-size: 2rem;
+    }
+
+    #nav-tabs .nav-link{
+        font-size: 1.5rem;
+    }
+
+    .species-form label, .species-form p, .species-form input, .species-form select{
+        font-size: 1.2rem!important;
+    }
+
+    .style-links {
+        font-size: 1.4rem;
+    }
+
+    .style-text {
+        font-size: 1.2rem;
+    }
+
+    #footer ul>li>a{
+        font-size: 1.2rem;
     }
 }
 

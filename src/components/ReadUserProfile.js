@@ -89,21 +89,21 @@ export default class ReadUserProfile extends Component {
       />
       <label htmlFor="floatingInput">New email address</label>
 
-      <div className='btn-group mt-3 align-self-end'>
-        <button className='btn btn-primary me-3 shadow-none'
-                onClick={() => {
-                  this.props.putApiUserEmail();
-                  // this.setState({
-                  //   action: "readingEmail"
-                  // });
-                  // setTimeout(this.readEmail, 3000)
+      <div className='mt-3 align-self-end'>
+        <button className='btn style-btn me-3 shadow-none'
+                onClick={async() => {
+                  await this.props.putApiUserEmail();
+                  this.setState({
+                    action: "readingEmail"
+                  });
                 }}
         >
           Submit
         </button>
-        <button className='btn btn-primary shadow-none'
+        <button className='btn style-btn shadow-none'
                 onClick={() => { 
-                  this.setState({ action: 'readingEmail' }) 
+                  this.props.clearEmailErr();
+                  this.setState({ action: 'readingEmail' })
                 }}
         >
           Cancel
@@ -119,24 +119,24 @@ export default class ReadUserProfile extends Component {
   renderEmail() {
     return <div className='d-flex white rounded m-3 py-3 ps-3 pe-1 border border-dark'>
       <div className='row'>
-        <div className='align-self-center'>Hello, {this.props.userEmail}</div>
+        <div className='align-self-center style-text'>Hello, {this.props.userEmail}</div>
         <div className="collapse" id="collapseExample">
-          <div className="card card-body mt-3">
+          <div className="card card-body mt-3 style-text">
             Are you sure you wish to delete your account? You will lose all of your saved favourites.
           </div>
           <div className='row mt-2'>
             <div className='col-6 d-flex'>
-              <button className='btn ms-auto'
+              <button className='ms-auto btn style-btn px-4'
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseExample"
                 aria-expanded="false"
                 aria-controls="collapseExample"
               >
-                Go back
+                Back
               </button>
             </div>
-            <div className='col-6 d-flex'>
-              <button className='btn me-auto'
+            <div className='col-6'>
+              <button className='btn style-btn'
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseExample"
                 aria-expanded="false"
@@ -190,9 +190,9 @@ export default class ReadUserProfile extends Component {
     if (this.props.userFavouriteSpecies.length > 0) {
       return <React.Fragment>
 
-        <div className=''>
+        <div className='style-text'>
           {this.renderContent()}
-          <p>{this.props.editEmailMsg}</p>
+          <p >{this.props.editEmailMsg}</p>
         </div>
 
         <div className='row px-2'>
@@ -219,10 +219,10 @@ export default class ReadUserProfile extends Component {
       </React.Fragment>;
     } else {
       return <React.Fragment>
-        <div className='px-2'>
+        <div className='px-2 style-text mb-3'>
           <div>
             {this.renderContent()}
-            <p>{this.props.editEmailMsg}</p>
+            <p className='px-3'>{this.props.editEmailMsg}</p>
           </div>
 
           <div className='px-3'>
