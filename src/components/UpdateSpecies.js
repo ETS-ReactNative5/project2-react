@@ -6,7 +6,7 @@ import SpeciesForm from './SpeciesForm';
 
 export default class UpdateSpecies extends Component {
   
-  BASE_API_URL = "http://localhost:8888"
+  BASE_API_URL = "https://tgc16-p2-api.herokuapp.com"
 
   state = {
 
@@ -321,7 +321,7 @@ export default class UpdateSpecies extends Component {
           conservationStatusErr={this.state.conservationStatusErr}
 
           submitMsg={this.state.submitMsg}
-          
+
           xCommonName={this.state.xCommonName}
           xOfficialName={this.state.xOfficialName}
           xGenus={this.state.xGenus}

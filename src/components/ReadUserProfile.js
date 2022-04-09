@@ -10,8 +10,6 @@ import { RiDeleteBinFill } from 'react-icons/ri'
 
 export default class ReadUserProfile extends Component {
 
-  BASE_API_URL = "http://localhost:8888"
-
   state = {
     // userFavouriteIds: [],
     // userFavouriteSpecies: [],

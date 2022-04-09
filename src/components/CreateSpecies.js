@@ -4,7 +4,7 @@ import SpeciesForm from './SpeciesForm';
 
 export default class CreateSpecies extends Component {
 
-  BASE_API_URL = "http://localhost:8888"
+  BASE_API_URL = "https://tgc16-p2-api.herokuapp.com"
 
   //props: setActivePage, orchidColours, orchidScentsOptions, orchidPetalPatternOptions.
   //distribution, conservation
@@ -306,7 +306,7 @@ export default class CreateSpecies extends Component {
           conservationStatusErr={this.state.conservationStatusErr}
 
           submitMsg={this.state.submitMsg}
-          
+
           xCommonName={this.state.xCommonName}
           xOfficialName={this.state.xOfficialName}
           xGenus={this.state.xGenus}

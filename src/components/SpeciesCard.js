@@ -9,7 +9,7 @@ import FactsModal from './FactsModal';
 
 export default class SpeciesCard extends Component {
 
-    BASE_API_URL = "http://localhost:8888"
+    BASE_API_URL = "https://tgc16-p2-api.herokuapp.com"
 
     state = {
         activeDistribution: "",
@@ -18,13 +18,6 @@ export default class SpeciesCard extends Component {
         instructionMsg:"",
         deleteSpeciesMsg: ""
     }
-
-    // BASE_API_URL = "http://localhost:8888"
-
-    // async componentDidMount() {
-    //     let response = await axios.get(this.BASE_API_URL + "/distribution/" + this.props.eachItem._id);
-    //     console.log(response.data)
-    // }
 
     matchName = (distributionId) => {
         let matchedDistribution = this.props.distributionOptions.filter(
@@ -65,8 +58,7 @@ export default class SpeciesCard extends Component {
     }
 
     checkFavourited() {
-        // return console.log('here')
-    // if(this.props.userFavouriteIds.length > 0){
+
         if(this.props.userFavouriteIds.includes(this.props.eachItem._id)){
             this.setState({
                 favourited:true
@@ -76,7 +68,6 @@ export default class SpeciesCard extends Component {
                 favourited: false
             })
         }
-    // }
     }
 
     setInstructions = () => {
@@ -142,8 +133,6 @@ export default class SpeciesCard extends Component {
     }
 
     render() {
-        // {this.checkFavourited()}
-        // console.log(this.props.eachItem)
         return (
             <React.Fragment key={this.props.eachItem._id}>
                 
@@ -184,7 +173,6 @@ export default class SpeciesCard extends Component {
                                 borderBottomRightRadius: "1rem"
                             }} 
                                 >
-                            {/* <h6>{this.props.eachItem.officialName}</h6> */}
                             <h6>{this.checkWordCount(this.props.eachItem.officialName)}</h6>
 
                             <p>Native to {this.matchName(this.props.eachItem.distribution)}</p>
@@ -204,7 +192,6 @@ export default class SpeciesCard extends Component {
                                         className='me-auto'
                                         data-bs-toggle="modal"
                                         data-bs-target={"#modal-facts" + this.props.eachItem._id}
-                                        // onClick={() => this.props.setActivePage('readFacts')}
                                     >
                                         View facts
                                     </a>
@@ -230,8 +217,6 @@ export default class SpeciesCard extends Component {
                             <FactsModal eachItem={this.props.eachItem}
                             />
                         </div>
-                    
-
                 </div>
             </React.Fragment>
         )

@@ -32,7 +32,7 @@ import { scrollToTop } from "./utils";
 
 
 export default class Landing extends React.Component {
-    BASE_API_URL = "http://localhost:8888"
+    BASE_API_URL = "https://tgc16-p2-api.herokuapp.com"
 
     state = {
 
@@ -329,8 +329,13 @@ export default class Landing extends React.Component {
             this.setState({
                 editEmailMsg: e.response.data.message
             })
-        }
 
+            setTimeout(() => {
+                this.setState({
+                    editEmailMsg: ""
+                })
+            }, 5000)
+        }
     }
 
     

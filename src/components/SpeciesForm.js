@@ -1,6 +1,4 @@
 import React from 'react'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
 
 function SpeciesForm(props) {
 
@@ -77,13 +75,6 @@ function SpeciesForm(props) {
                 </div>
                 <div className='row'>
                     <label className='pb-2'>Year of creation:</label>
-                    {/* <DatePicker
-                        selected={props.creationYear}
-                        onChange={props.updateFormField}
-                        name='creationYear'
-                        showYearPicker
-                        dateFormat="yyyy"
-                    /> */}
                     <input  className="form-control mb-3" 
                             type="text" 
                             placeholder="YYYY"

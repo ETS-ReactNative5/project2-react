@@ -23,7 +23,7 @@ export default class FactsModal extends Component {
         })
     }
 
-    BASE_API_URL = "http://localhost:8888"
+    BASE_API_URL = "https://tgc16-p2-api.herokuapp.com"
 
     apiFactsPost = async () => { 
         await axios.post(this.BASE_API_URL + '/orchid_species/' + this.props.eachItem._id + '/facts',{
