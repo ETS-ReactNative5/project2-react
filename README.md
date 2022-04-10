@@ -1,5 +1,8 @@
 # The Daily Orchid - Frontend
 
+<img src='./public/TDO_responsive.jpg' style='display:block'/>
+<br>
+
 [Trent Global College](https://www.trentglobal.edu.sg/)
  * Software Development BootCamp
  * Diploma in Web Application Development
@@ -15,7 +18,7 @@ Backend repository is [here](https://github.com/caracara6/project2).
 The Daily Orchid is a mobile-responsive lightweight orchid database single page application platform for users to discover orchid species and add favourites to their account, and for orchid-growers to share their own hybrids with the world.
 
 **Justification for the App**
-This web app is akin to a mini-Wiki, a lightweight platform with information presented in easy-to-digest nuggets. The features are also self-explanatory and simple-to-use. This makes it easy for users to share information with others. Anyone is able to post and edit, stoking the community spirit of sharing and learning.
+This web app is akin to a mini-Wikipedia, a lightweight platform with information presented in easy-to-digest nuggets. The features are also self-explanatory and simple-to-use. This makes it easy for users to share information with others. Anyone is able to post and edit, stoking the community spirit of sharing and learning.
 
 ## UI/UX
 
