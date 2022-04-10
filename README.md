@@ -12,7 +12,7 @@ Backend repository is [here](https://github.com/caracara6/project2).
 ## Summary
 
 **Context**
-The Daily Orchid is a mobile-responsive lightweight orchid database platform for users to discover orchid species and add favourites to their account, and for orchid-growers to share their own hybrids with the world.
+The Daily Orchid is a mobile-responsive lightweight orchid database single page application platform for users to discover orchid species and add favourites to their account, and for orchid-growers to share their own hybrids with the world.
 
 **Justification for the App**
 This web app is akin to a mini-Wiki, a lightweight platform with information presented in easy-to-digest nuggets. The features are also self-explanatory and simple-to-use. This makes it easy for users to share information with others. Anyone is able to post and edit, stoking the community spirit of sharing and learning.
@@ -176,6 +176,8 @@ Users viewing their saved favourites | Users can click on the user icon on the m
     * Icons used are taken from this library
 
 ## Deployment
+
+* Deployment instructions for Netlify can be found [here](https://www.netlify.com/blog/2016/07/22/deploy-react-apps-in-less-than-30-seconds/).
 
 ## Acknowledgements
 
