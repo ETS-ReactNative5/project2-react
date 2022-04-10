@@ -1,8 +1,4 @@
 @font-face {
-
-    src: url(local-data/fonts/OregonBold.ttf);
-    font-family: OregonBold;
-
     src: url(local-data/fonts/OregonMedium.ttf);
     font-family: OregonMedium;
 }
@@ -38,7 +34,6 @@
     border-radius: 1rem;
     overflow: hidden;
     object-fit: cover;
-    /* position:relative; */
 }
 
 .carousel-inner {
@@ -66,10 +61,8 @@
 #main-content h3 {
     font-family: OregonMedium;
     font-size: 1rem;
-    /* font-weight: 300; */
     color: white;
     letter-spacing: .2rem;
-    /* text-align: center; */
 }
 
 .carousel-item img {
@@ -81,6 +74,7 @@
 
 #xs-sm-search-filter {
     width: 80vw;
+    overflow: hidden;
 }
 
 #main-logo {
@@ -112,13 +106,23 @@
     background-color: #E5E4EB;
     font-family: OregonMedium;
     letter-spacing: 0.1rem!important;
+    font-size: 1.2rem;
+}
+
+#xs-sm-search-filter .form-select {
+    color: greenyellow;
+    font-size: 1.2rem;
+}
+
+#xs-sm-search-filter .form-select > option {
+    color: red;
+    font-size: 1.2rem;
+    width: 100%;
 }
 
 #xs-sm-search-filter h5{
     font-size: 1.5rem;
 }
-
-
 
 .border-search {
     border-radius: 1rem !important;
@@ -162,10 +166,6 @@ input:checked{
     object-fit: cover;
 }
 
-/* .gradient{
-    background: linear-gradient(180deg, rgba(10,10,44,1) 0%, rgba(255,255,255,1) 0%, rgba(163,204,181,1) 100%, rgba(0,212,255,1) 100%);
-} */
-
 .gradient {
     background: linear-gradient(145deg, rgba(10, 10, 44, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(184, 221, 200, 1) 100%, rgba(0, 212, 255, 1) 100%);
 }
@@ -189,9 +189,6 @@ input:checked{
 }
 
 .style-btn{
-
-    /* 535CE0
-    #537EE0 */
     background-color: #537EE0!important;
     color: white !important;
     border-radius: 1rem!important;
@@ -246,7 +243,6 @@ input:checked{
 }
 
 .to-italicise {
-    
     font-style: italic
 }
 

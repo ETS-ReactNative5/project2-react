@@ -124,7 +124,7 @@ function SpeciesModal(props) {
                             </button>
 
                             <button type="button"
-                                className="btn"
+                                className="btn shadow-none"
                                 data-bs-toggle="collapse"
                                 data-bs-target={"#collapse" + props.eachItem._id}
                                 aria-expanded="false"
@@ -144,7 +144,7 @@ function SpeciesModal(props) {
                                 </div>
                                 <div className='row mt-2'>
                                     <div className='col-6 d-flex'>
-                                        <button className='btn ms-auto shadow-none'
+                                        <button className='btn ms-auto shadow-none style-btn'
                                             data-bs-toggle="collapse"
                                             data-bs-target={"#collapse" + props.eachItem._id}
                                             aria-expanded="false"
@@ -154,7 +154,7 @@ function SpeciesModal(props) {
                                         </button>
                                     </div>
                                     <div className='col-6 d-flex'>
-                                        <button className='btn me-auto shadow-none'
+                                        <button className='btn me-auto shadow-none style-btn'
                                                 data-bs-dismiss="modal"
                                                 // data-bs-toggle="collapse"
                                                 // data-bs-target={"#collapse" + props.eachItem._id}

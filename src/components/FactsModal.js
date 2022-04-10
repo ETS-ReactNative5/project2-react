@@ -9,7 +9,6 @@ export default class FactsModal extends Component {
 
     state = {
         action: "readingFacts",
-        // refreshFacts: false,
         facts: this.props.eachItem.facts,
         newFact: "",
         factIdBeingEdited: "",
@@ -32,10 +31,7 @@ export default class FactsModal extends Component {
         this.setState({
             newFact: ""
         })
-        console.log('done posting fact to ' + this.props.eachItem.officialName)
-        // this.setState({
-        //     refreshFacts: true
-        // })
+
         return this.refreshFacts();
     }
 
@@ -56,8 +52,6 @@ export default class FactsModal extends Component {
     }
 
     refreshFacts = async () => {
-        console.log('refreshingFacts')
-        // if(this.state.refreshFacts === true){
             let factsResponse = await axios.get(this.BASE_API_URL + '/orchid_species/' + this.props.eachItem._id + '/facts')
             this.setState({
                 facts: factsResponse.data.facts,
@@ -88,12 +82,7 @@ export default class FactsModal extends Component {
                     >
                         Add to collection
                     </button>
-                    
-
                 </div>
-
-                    
-                
             </React.Fragment>
             )
     }
@@ -187,12 +176,8 @@ export default class FactsModal extends Component {
                             >
                         <RiDeleteBinFill />
                     </button>
-                    
                 </div>
-
-
             </div>
-            
         </React.Fragment>
     }
 
@@ -206,11 +191,7 @@ export default class FactsModal extends Component {
                             {factsJSXs.push(this.renderReadFacts(f))}
                         </ul>
                     } else {
-                        // return <ul className="list-group">
-                            // {
                                 factsJSXs.push(this.renderUpdateFact(f))
-                            // }
-                        // </ul>
                     }
                 }
             )
@@ -251,18 +232,8 @@ export default class FactsModal extends Component {
                                     </div>
 
                                 </div>
-                                
-                                
-
-
-
-
-
-
-
                             </div>
                             <div className="modal-footer">
-                                
                                 <button type="button" 
                                         className="btn style-btn shadow-none"
                                         onClick={() => {
@@ -278,10 +249,7 @@ export default class FactsModal extends Component {
                     </div>
                 </div>
             </React.Fragment>
-
-
         )
     }
-
 }
 

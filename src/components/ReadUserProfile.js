@@ -106,11 +106,7 @@ export default class ReadUserProfile extends Component {
         >
           Cancel
         </button>
-
       </div>
-
-
-
     </div>
   }
 
@@ -141,7 +137,6 @@ export default class ReadUserProfile extends Component {
                 aria-controls="collapseExample"
                 onClick={async () => {
                   await this.props.deleteApiUserEmail()
-                  // this.props.setActivePage('main')
                   setTimeout(() => this.props.setActivePage('main'), 3000)
                 }}
               >
@@ -166,7 +161,6 @@ export default class ReadUserProfile extends Component {
         data-bs-target="#collapseExample"
         aria-expanded="false"
         aria-controls="collapseExample"
-      // onClick={() => {this.props.deleteApiUserEmail()}}
       >
         <RiDeleteBinFill />
       </button>
@@ -183,8 +177,6 @@ export default class ReadUserProfile extends Component {
 
   render() {
 
-    // dont need this if validation because users can't even see this page without creating an account/logging in first?
-    // needs validation if favourites == 0
     if (this.props.userFavouriteSpecies.length > 0) {
       return <React.Fragment>
 
@@ -231,38 +223,5 @@ export default class ReadUserProfile extends Component {
 
       </React.Fragment>
     }
-    // if (this.state.loaded) {
-    // } else {
-    //     return <React.Fragment>
-    //         Loading, please wait...
-    //     </React.Fragment>
-    //   }
-
-
-
-
-
-
-    return
-    // (
-    //   <div className='row'>
-    //     {this.state.userFavourites.map(
-    //         eachItem => 
-    //         <React.Fragment key={eachItem._id}>
-    //           <div className='col col-10 col-sm-8 col-md-6 col-lg-4 col-xl-3 border border-danger mx-auto'>
-    //           <SpeciesCard  eachItem={eachItem}
-    //                         distributionOptions={this.props.distributionOptions}
-    //                         conservationOptions={this.props.conservationOptions}
-    //                         // selectActiveDisplay={this.props.selectActiveDisplay}
-    //                         setActivePage={this.props.setActivePage}
-    //                         selectEdit = {this.props.selectEdit}
-    //                         showMdSearchFilter={this.props.showMdSearchFilter}
-    //                         // postApiUserFavourite={this.props.postApiUserFavourite}
-    //                         />
-    //           </div>
-    //         </React.Fragment>
-    //       )}
-    //   </div>
-    // )
   }
 }

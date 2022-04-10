@@ -97,8 +97,6 @@ export default class Landing extends React.Component {
                     userFavouriteIds={this.state.userFavouriteIds}
                     loggedIn={this.state.loggedIn}
                     refreshSpeciesDisplay={this.refreshSpeciesDisplay}
-                // selectActiveDisplay={this.selectActiveDisplay}
-                // renderModal={this.renderModal}
                 />
                 break;
             case "createSpecies":
@@ -166,7 +164,6 @@ export default class Landing extends React.Component {
                     userEmail={this.state.userEmail}
                     getApiUserEmail={this.getApiUserEmail}
                     loginMsg={this.state.loginMsg}
-
                 />
             default:
                 break;
@@ -252,7 +249,7 @@ export default class Landing extends React.Component {
             }
         }
 
-        console.log(payload)
+        // console.log(payload)
 
         let searchResponse = await axios.get(this.BASE_API_URL + "/orchid_species", payload);
         this.setState({
@@ -261,13 +258,13 @@ export default class Landing extends React.Component {
     }
 
     refreshSpeciesDisplay = async () => {
-        console.log('starting refreshSpeciesDisplay')
-        let speciesResponse = await axios.get("http://localhost:8888/orchid_species");
+        // console.log('starting refreshSpeciesDisplay')
+        let speciesResponse = await axios.get(this.BASE_API_URL + "/orchid_species");
         this.setState({
             species: speciesResponse.data,
             activeEditId: ""
         })
-        console.log('ending refreshSpeciesDisplay')
+        // console.log('ending refreshSpeciesDisplay')
     }
 
     clearEmailErr = () => {
@@ -297,13 +294,6 @@ export default class Landing extends React.Component {
                 registrationMsg: e.response.data.message
             });
         }
-        // .then(() => {
-        //     this.setState({
-        //         currentUserId: results.data.insertedId,
-        //         registrationMsg:"Thanks for registering an account! You can now save favourites to your profile.",
-        //         loggedIn: true
-        //     })
-        // })
     }
 
     putApiUserEmail = async () => {
@@ -417,7 +407,7 @@ export default class Landing extends React.Component {
         let payload = {
             params: {}
         }
-        // && this.state.userFavouriteIds.length > 0
+        
         if (this.state.currentUserId) {
 
             payload.params.userFavouriteIds = this.state.userFavouriteIds

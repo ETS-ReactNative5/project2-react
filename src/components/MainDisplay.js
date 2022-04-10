@@ -41,11 +41,7 @@ function MainDisplay() {
           <h3>Lightweight Orchid Database</h3>
       </div> */}
       </div>
-
-      
-
     </React.Fragment>
-
   )
 }
 
