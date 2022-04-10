@@ -23,6 +23,12 @@ function MainDisplay() {
           <div className="carousel-item">
             <img src={require('../local-data/images/p5.jpg')} className="d-block w-100" alt="..." />
           </div>
+          <div className="carousel-item">
+            <img src={require('../local-data/images/p6.jpg')} className="d-block w-100" alt="..." />
+          </div>
+          <div className="carousel-item">
+            <img src={require('../local-data/images/p7.jpg')} className="d-block w-100" alt="..." />
+          </div>
           <div id='text-wrapper'>
           <h1>The Daily Orchid</h1>
           <h3>Lightweight Orchid Database</h3>
