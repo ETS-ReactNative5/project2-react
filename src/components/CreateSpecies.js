@@ -230,6 +230,12 @@ export default class CreateSpecies extends Component {
       })
     }
 
+    // let arrayParents = [];
+    // if(this.state.parent1) {
+    //   arrayParents.push(this.state.parent1)
+    // }
+    // if 
+
     await axios.post(this.BASE_API_URL + '/orchid_species', {
       commonName: this.state.commonName,
       officialName: this.state.officialName,

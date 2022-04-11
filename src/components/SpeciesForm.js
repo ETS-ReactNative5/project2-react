@@ -14,7 +14,7 @@ function SpeciesForm(props) {
                     <label className='pb-2'>Common Name: </label>
                     <input className={"form-control " + props.xCommonName}
                             type="text" 
-                            placeholder="Default input"
+                            // placeholder="Default input"
                             value={props.commonName}
                             name="commonName"
                             onChange={props.updateFormField}
@@ -25,7 +25,7 @@ function SpeciesForm(props) {
                     <label className='pb-2'>Official Name: </label>
                     <input className={"form-control " + props.xOfficialName}
                             type="text" 
-                            placeholder="Default input"
+                            // placeholder="Default input"
                             value={props.officialName}
                             name="officialName"
                             onChange={props.updateFormField}
@@ -36,7 +36,7 @@ function SpeciesForm(props) {
                     <label className='pb-2'>Genus: </label>
                     <input className={"form-control " + props.xGenus}
                             type="text" 
-                            placeholder="Default input"
+                            // placeholder="Default input"
                             value={props.genus}
                             name="genus"
                             onChange={props.updateFormField}
@@ -47,7 +47,7 @@ function SpeciesForm(props) {
                     <label className='pb-2'>First Parent: </label>
                     <input className="form-control mb-3" 
                             type="text" 
-                            placeholder="Default input"
+                            // placeholder="Default input"
                             value={props.parent1}
                             name="parent1"
                             onChange={props.updateFormField}
@@ -57,7 +57,7 @@ function SpeciesForm(props) {
                     <label className='pb-2'>Second Parent: </label>
                     <input className="form-control mb-3" 
                             type="text" 
-                            placeholder="Default input"
+                            // placeholder="Default input"
                             value={props.parent2}
                             name="parent2"
                             onChange={props.updateFormField}
@@ -67,7 +67,7 @@ function SpeciesForm(props) {
                     <label className='pb-2'>Name of orchid's originator:</label>
                     <input className="form-control mb-3" 
                             type="text" 
-                            placeholder="Default input"
+                            // placeholder="Default input"
                             value={props.creatorName}
                             name="creatorName"
                             onChange={props.updateFormField}
@@ -169,7 +169,7 @@ function SpeciesForm(props) {
                     <label className='pb-2'>Upload an image url: </label>
                     <input className={"form-control " + props.xImageUrl}
                             type="text" 
-                            placeholder="Default input"
+                            // placeholder="Default input"
                             value={props.imageUrl}
                             name="imageUrl"
                             onChange={props.updateFormField}

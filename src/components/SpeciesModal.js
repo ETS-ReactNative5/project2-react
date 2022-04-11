@@ -56,7 +56,8 @@ function SpeciesModal(props) {
                                     </tr>
                                     <tr>
                                         <th scope="row">Hybrid Parents</th>
-                                        <td colSpan="2">{props.eachItem.hybridParents[0]}, {props.eachItem.hybridParents[1]}</td>
+                                        {/* <td colSpan="2">{props.eachItem.hybridParents[0]} {props.eachItem.hybridParents[1]}</td> */}
+                                        <td>{props.eachItem.hybridParents.length > 0 ? props.eachItem.hybridParents[0] + ', ' + props.eachItem.hybridParents[1] : "Unknown"}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Genus</th>
@@ -64,7 +65,8 @@ function SpeciesModal(props) {
                                     </tr>
                                     <tr>
                                         <th scope="row">Creation/Discovery</th>
-                                        <td>{props.eachItem.creation.creatorName}, in {props.eachItem.creation.creationYear}</td>
+                                        {/* <td>{props.eachItem.creation.creatorName} {props.eachItem.creation.creationYear}</td> */}
+                                        <td>{props.eachItem.creation.creatorName && props.eachItem.creation.creationYear ? props.eachItem.creation.creatorName + ', in ' + props.eachItem.creation.creationYear : "Unknown"}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Colours</th>
